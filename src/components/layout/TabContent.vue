@@ -1,5 +1,5 @@
 <script setup>
-import { currentSubtab } from '@/core/tabs';
+import { currentSubtab } from '@/ui/tabs/state';
 </script>
 
 <template>

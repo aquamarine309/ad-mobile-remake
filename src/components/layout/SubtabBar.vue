@@ -1,5 +1,5 @@
 <script setup>
-import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/core/tabs';
+import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
 </script>
 
 <template>

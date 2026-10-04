@@ -1,5 +1,5 @@
 <script setup>
-import { FAB_BUTTONS } from '@/core/secret-formula/fab-buttons';
+import { FAB_BUTTONS } from '@/ui/fab-buttons';
 import { onUnmounted } from 'vue';
 import { computed } from "vue";
 

@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue';
-import { TABS } from './secret-formula';
+import { TABS } from './config';
 
 export const currentTabKey = ref('dimensions');
 export const currentSubtabKey = ref('antimatter');

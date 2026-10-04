@@ -1,5 +1,5 @@
 <script setup>
-import { visibleTabs, currentTabKey } from "@/core/tabs";
+import { visibleTabs, currentTabKey } from "@/ui/tabs/state";
 </script>
 
 <template>

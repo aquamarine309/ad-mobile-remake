@@ -5,7 +5,7 @@ import { GameSpeed } from './time/game-speed';
 import { GameLoop } from './game-loop';
 import { AntimatterDimension } from './dimensions/antimatter-dimension';
 import { Currency } from './currency';
-import { save, load, hardReset } from './storage';
+import { save, load, hardReset } from './storage/save';
 
 export function exposeDevTools() {
   if (!import.meta.env.DEV) return;

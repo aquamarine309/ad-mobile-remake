@@ -1,5 +1,5 @@
-import { Decimal } from '../decimal';
-import { player, createInitialPlayer } from '../state/player';
+import { Decimal } from '@/core/decimal';
+import { player, createInitialPlayer } from '@/core/state/player';
 import { serialize, deserialize } from './serialize';
 
 const SAVE_KEY = 'ad-save';

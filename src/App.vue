@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { GameLoop } from '@/core/game-loop';
+import { GameLoop } from '@/core/loop/game-loop';
 import { load, save } from '@/core/storage/save';
 import AppBar from './components/layout/AppBar';
 import GameHeader from './components/layout/GameHeader';

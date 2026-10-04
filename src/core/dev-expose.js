@@ -2,7 +2,7 @@ import { player } from './state/player';
 import { D, Decimal } from './decimal';
 import { DeltaTime } from './time/delta-time';
 import { GameSpeed } from './time/game-speed';
-import { GameLoop } from './game-loop';
+import { GameLoop } from './loop/game-loop';
 import { AntimatterDimension } from './dimensions/antimatter-dimension';
 import { Currency } from './currency';
 import { save, load, hardReset } from './storage/save';

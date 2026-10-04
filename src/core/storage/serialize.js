@@ -1,4 +1,4 @@
-import { D, Decimal } from '../decimal';
+import { D, Decimal } from '@/core/decimal';
 
 export function serialize(value) {
   if (value instanceof Decimal) return { __d: value.toString() };

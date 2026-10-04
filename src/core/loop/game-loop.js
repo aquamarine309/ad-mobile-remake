@@ -1,9 +1,9 @@
 import { ref } from 'vue';
-import { player } from './state/player';
-import { AntimatterDimensions } from './dimensions/antimatter-dimension';
-import { D } from './decimal';
-import { DeltaTime } from './time/delta-time';
-import { GameSpeed } from './time/game-speed';
+import { player } from '@/core/state/player';
+import { AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
+import { D } from '@/core/decimal';
+import { DeltaTime } from '@/core/time/delta-time';
+import { GameSpeed } from '@/core/time/game-speed';
 
 const MAX_REAL_DIFF_MS = 8.64e7;
 const HIBERNATION_THRESHOLD_MS = 60000;

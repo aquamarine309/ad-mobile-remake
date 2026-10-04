@@ -1,10 +1,10 @@
 .nav-bar {
   display: flex;
   background: var(--color-nav-bg);
+  pointer-events: auto;
 }
 
 .nav-bar__btn {
-  flex: 1;
   font-family: inherit;
   font-weight: bold;
   color: var(--color-nav-inactive);

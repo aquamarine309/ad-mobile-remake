@@ -3,12 +3,12 @@ import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
 </script>
 
 <template>
-  <nav class="subtab-bar">
+  <nav class="nav-bar subtab-bar">
     <button
       v-for="s in visibleSubtabs"
       :key="s.key"
-      class="subtab-bar__btn"
-      :class="{ 'subtab-bar__btn--active': currentSubtabKey === s.key }"
+      class="nav-bar__btn subtab-bar__btn"
+      :class="{ 'nav-bar__btn--active': currentSubtabKey === s.key }"
       @click="showSubtab(s.key)"
     >
       {{ s.name }}
@@ -16,29 +16,15 @@ import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
   </nav>
 </template>
 
-<style>
+<style scoped>
 .subtab-bar {
-  display: flex;
-  background: #008577;
   height: 4.5rem;
-  pointer-events: auto;
 }
 
 .subtab-bar__btn {
   flex: 1;
-  font-family: inherit;
   font-size: 1.2rem;
-  font-weight: bold;
   letter-spacing: 0.1em;
   padding: 0.7rem 0.2rem;
-  color: #a0ffffff;
-  background: transparent;
-  border: none;
-  transition-duration: 0.15s;
-}
-
-.subtab-bar__btn--active {
-  color: #ffffff;
-  box-shadow: inset 0 -0.3rem 0 #e91e63;
 }
 </style>

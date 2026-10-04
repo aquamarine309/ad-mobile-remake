@@ -162,13 +162,15 @@ ad.events.logic.on(ad.events.GAME_EVENT.GALAXY_RESET_AFTER, () => console.log('g
 - [x] Save and offline progress
 - [x] Event hub
 - [x] Time system (real / game split)
+- [x] Options page
 - [x] Directory layering (core / ui / game)
+- [x] CSS variables (styles/variables.css)
+- [x] Safe area support (notch, bottom bar)
 
 ### In Progress / TODO
 
 - [ ] Achievements
 - [ ] News ticker
-- [ ] Options page
 - [ ] Big Crunch entry
 - [ ] Infinity content
 

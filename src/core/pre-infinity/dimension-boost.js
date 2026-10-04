@@ -3,6 +3,7 @@ import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 import { formatInt, formatX } from '@/core/format';
 import { Tickspeed } from "./tickspeed";
+import { dispatch, GAME_EVENT } from '@/core/events';
 
 class DimBoostRequirement {
   constructor(tier, amount) {
@@ -108,9 +109,13 @@ export const DimBoost = {
 };
 
 export function softReset(bulk) {
+  dispatch(GAME_EVENT.DIMBOOST_BEFORE, bulk);
+
   player.dimensionBoosts = player.dimensionBoosts.add(bulk);
   AntimatterDimensions.reset();
   Tickspeed.reset();
   player.antimatter = D(10);
   player.sacrificed = D(0);
+
+  dispatch(GAME_EVENT.DIMBOOST_AFTER, bulk);
 }

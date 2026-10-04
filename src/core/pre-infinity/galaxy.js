@@ -1,7 +1,7 @@
-// core/galaxy.js
 import { D } from '@/core/decimal';
 import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
+import { dispatch, GAME_EVENT } from '@/core/events';
 
 export const GALAXY_TYPE = {
   NORMAL: 0,
@@ -142,11 +142,15 @@ export const Galaxy = {
   },
 
   reset() {
+    dispatch(GAME_EVENT.GALAXY_RESET_BEFORE);
+  
     player.galaxies = player.galaxies.add(1);
     player.dimensionBoosts = D(0);
     player.sacrificed = D(0);
     player.tickspeed.bought = D(0);
     AntimatterDimensions.reset();
     player.antimatter = D(10);
+  
+    dispatch(GAME_EVENT.GALAXY_RESET_AFTER);
   },
 };

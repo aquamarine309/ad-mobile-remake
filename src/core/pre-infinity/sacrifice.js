@@ -3,6 +3,7 @@ import { player } from '@/core/state/player';
 import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
 import { DimBoost } from './dimension-boost';
 import { formatX, formatInt } from "@/core/format";
+import { dispatch, GAME_EVENT } from '@/core/events';
 
 export const Sacrifice = {
   get isVisible() {
@@ -48,10 +49,15 @@ export const Sacrifice = {
 
   sacrifice() {
     if (!this.canSacrifice) return false;
+  
+    dispatch(GAME_EVENT.SACRIFICE_RESET_BEFORE);
+  
     player.sacrificed = player.sacrificed.add(AntimatterDimension(1).amount);
     for (let tier = 1; tier <= 7; tier++) {
       AntimatterDimension(tier).amount = D(0);
     }
+  
+    dispatch(GAME_EVENT.SACRIFICE_RESET_AFTER);
     return true;
   },
 };

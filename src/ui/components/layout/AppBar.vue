@@ -1,5 +1,5 @@
 <script setup>
-// 现在空壳。之后放 drawer 按钮和 news ticker。
+// Stub for now. Drawer button and news ticker will be added here later.
 </script>
 
 <template>

@@ -45,4 +45,7 @@
   /* border radius */
   --radius-sm: 0.4rem;
   --radius-md: 0.6rem;
+  
+  /* Layout */
+--appbar-height: 4.8rem;
 }

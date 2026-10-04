@@ -18,7 +18,8 @@ import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
 
 <style scoped>
 .subtab-bar {
-  height: 4.5rem;
+  min-height: 4.5rem;
+  padding-bottom: var(--safe-bottom);
 }
 
 .subtab-bar__btn {

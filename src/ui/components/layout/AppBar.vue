@@ -15,8 +15,8 @@
 .app-bar {
   display: flex;
   align-items: center;
-  height: 4.8rem;
-  padding: 0 1rem;
+  min-height: var(--appbar-height);
+  padding: var(--safe-top) var(--gap-md) 0;
   background: var(--color-teal);
   color: var(--color-text-light);
 }

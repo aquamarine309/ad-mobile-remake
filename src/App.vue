@@ -70,7 +70,7 @@ onUnmounted(() => {
 
 .app__content {
   height: 100%;
-  padding-top: 4.8rem;
+  padding-top: calc(var(--appbar-height) + var(--safe-top));
   padding-bottom: calc(var(--bottom-nav-height, 9rem) + var(--fab-clearance, 5rem));
   overflow-y: auto;
   overscroll-behavior: contain;

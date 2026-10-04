@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import { GameLoop } from '@/core/loop/game-loop';
+import { simulateTime } from '@/core/loop/simulate-time';
 import { load, save } from '@/core/storage/save';
 import AppBar from './components/layout/AppBar';
 import GameHeader from './components/layout/GameHeader';
@@ -28,9 +29,7 @@ function onBeforeUnload() { save(); }
 onMounted(() => {
   const offlineMs = load();
   if (offlineMs > 10000) {
-    GameLoop.simulateTime(offlineMs / 1000, {
-      fast: offlineMs < 50000,
-    });
+    simulateTime(offlineMs / 1000, { fast: offlineMs < 50000 });
   }
   dispatch(GAME_EVENT.GAME_LOAD);
   GameLoop.start();

@@ -1,9 +1,7 @@
 import { ref } from 'vue';
 import { player } from '@/core/state/player';
-import { AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
-import { D } from '@/core/decimal';
-import { DeltaTime } from '@/core/time/delta-time';
-import { GameSpeed } from '@/core/time/game-speed';
+import { tick } from './tick';
+import { simulateTime } from './simulate-time';
 
 const MAX_REAL_DIFF_MS = 8.64e7;
 const HIBERNATION_THRESHOLD_MS = 60000;
@@ -30,38 +28,15 @@ export const GameLoop = {
     player.lastUpdate = now;
 
     if (realDiff > HIBERNATION_THRESHOLD_MS) {
-      this.simulateTime(realDiff / 1000, { real: true });
+      simulateTime(realDiff / 1000, { real: true });
       return;
     }
 
     this.update(realDiff);
   },
 
-  maxOfflineTicks(simulatedMs, defaultTicks = player.options.offlineTicks) {
-    const tickLimit = Math.min(Math.floor(simulatedMs / 33), 1e6);
-    return Math.min(defaultTicks, tickLimit);
-  },
-
-  simulateTime(seconds, { real = false, fast = false } = {}) {
-    if (seconds <= 0) return;
-
-    let ticks = Math.floor(seconds * 20);
-    const maxTicks = this.maxOfflineTicks(seconds * 1000);
-
-    if (ticks > maxTicks && !fast) ticks = maxTicks;
-    else if (ticks > 50 && !real && fast) ticks = 50;
-
-    let remainingRealSeconds = seconds;
-    for (let i = ticks; i > 0; i--) {
-      const diffSeconds = remainingRealSeconds / i;
-      this.update(1000 * diffSeconds);
-      remainingRealSeconds -= diffSeconds;
-    }
-  },
-
   update(realDiff) {
-    DeltaTime.update(realDiff, GameSpeed.total);
-    AntimatterDimensions.tick(DeltaTime.game);
+    tick(realDiff);
     this.tick.value++;
   },
 };

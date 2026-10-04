@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
-import { D } from './decimal';
-import { range } from './utils';
+import { D } from '@/core/decimal';
+import { range } from '@/core/utils';
 
 export function createInitialPlayer() {
   return {

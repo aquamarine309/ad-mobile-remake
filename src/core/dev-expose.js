@@ -1,4 +1,4 @@
-import { player } from './player';
+import { player } from './state/player';
 import { D, Decimal } from './decimal';
 import { DeltaTime } from './time/delta-time';
 import { GameSpeed } from './time/game-speed';

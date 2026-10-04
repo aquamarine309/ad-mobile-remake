@@ -1,5 +1,5 @@
 import { D } from '@/core/decimal';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 import { formatInt, formatX } from '@/core/format';
 import { Tickspeed } from "./tickspeed";

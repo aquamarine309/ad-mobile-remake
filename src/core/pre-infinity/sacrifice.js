@@ -1,5 +1,5 @@
 import { D } from '@/core/decimal';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
 import { DimBoost } from './dimension-boost';
 import { formatX, formatInt } from "@/core/format";

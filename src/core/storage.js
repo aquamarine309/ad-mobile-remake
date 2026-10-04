@@ -1,5 +1,5 @@
 import { D, Decimal } from './decimal';
-import { player, createInitialPlayer } from './player';
+import { player, createInitialPlayer } from './state/player';
 
 const SAVE_KEY = 'ad-save';
 

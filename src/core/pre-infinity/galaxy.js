@@ -1,6 +1,6 @@
 // core/galaxy.js
 import { D } from '@/core/decimal';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 
 export const GALAXY_TYPE = {

@@ -1,5 +1,5 @@
 import { D, Decimal } from '@/core/decimal';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 import { Currency } from '@/core/currency';
 import { ExponentialCostScaling } from '@/core/math';
 import { Galaxy } from "./galaxy";

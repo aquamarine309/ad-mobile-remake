@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { player } from './player';
+import { player } from './state/player';
 import { AntimatterDimensions } from './dimensions/antimatter-dimension';
 import { D } from './decimal';
 import { DeltaTime } from './time/delta-time';

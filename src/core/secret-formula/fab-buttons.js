@@ -2,7 +2,7 @@ import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { Tickspeed } from "@/core/pre-infinity/tickspeed";
 import { DimBoost } from '@/core/pre-infinity/dimension-boost';
 import { Galaxy } from '@/core/pre-infinity/galaxy';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 
 function maxAll() {
   for (let tier = 1; tier <= 8; tier++) {

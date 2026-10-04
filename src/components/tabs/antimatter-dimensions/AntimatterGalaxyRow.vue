@@ -1,7 +1,7 @@
 <script setup>
 import { Galaxy } from '@/core/pre-infinity/galaxy';
 import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
-import { player } from '@/core/player';
+import { player } from '@/core/state/player';
 import { formatInt } from '@/core/format';
 import { computed } from "vue";
 

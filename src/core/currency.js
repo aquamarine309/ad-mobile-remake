@@ -1,4 +1,4 @@
-import { player } from "./player";
+import { player } from "./state/player";
 import { D } from "./decimal";
 
 class CurrencyState {

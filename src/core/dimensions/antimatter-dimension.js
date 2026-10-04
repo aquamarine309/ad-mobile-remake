@@ -1,5 +1,5 @@
 import { DimensionState } from "./dimension";
-import { player } from "@/core/player";
+import { player } from "@/core/state/player";
 import { ExponentialCostScaling } from "@/core/math";
 import { Decimal, D } from "@/core/decimal";
 import { Currency } from "@/core/currency";

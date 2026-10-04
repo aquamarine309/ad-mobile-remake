@@ -1,4 +1,4 @@
-import AntimatterDimensionsTab from "@/components/tabs/antimatter-dimensions/AntimatterDimensionsTab"
+import AntimatterDimensionsTab from "@/ui/components/tabs/antimatter-dimensions/AntimatterDimensionsTab"
 
 export const TABS = [
   {

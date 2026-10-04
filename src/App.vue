@@ -1,12 +1,12 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import { initGame, stopGame } from '@/game/init';
-import AppBar from './components/layout/AppBar';
-import GameHeader from './components/layout/GameHeader';
-import TabContent from './components/layout/TabContent';
-import TabBar from './components/layout/TabBar';
-import SubtabBar from './components/layout/SubtabBar';
-import FabRow from './components/layout/FabRow';
+import AppBar from './ui/components/layout/AppBar';
+import GameHeader from './ui/components/layout/GameHeader';
+import TabContent from './ui/components/layout/TabContent';
+import TabBar from './ui/components/layout/TabBar';
+import SubtabBar from './ui/components/layout/SubtabBar';
+import FabRow from './ui/components/layout/FabRow';
 
 const bottomRef = ref(null);
 let observer = null;

@@ -32,7 +32,7 @@ const perSecond = computed(() =>
 
 .header__sub {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-muted);
   margin-top: 0.2rem;
 }
 </style>

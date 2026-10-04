@@ -57,7 +57,7 @@ onUnmounted(() => {
   height: 100dvh;
   margin: 0 auto;
   overflow: hidden;
-  background: #fff;
+  background: var(--color-bg);
 }
 
 .app__appbar {

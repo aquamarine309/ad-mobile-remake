@@ -82,7 +82,7 @@ onUnmounted(() => {
   font-family: inherit;
   font-size: 1.6rem;
   font-weight: bold;
-  color: #000;
+  color: var(--color-text);
   background: #C5DCD9;
   border: none;
   border-radius: 50%;

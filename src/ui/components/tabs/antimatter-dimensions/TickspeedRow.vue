@@ -45,7 +45,7 @@ function buyMax() { Tickspeed.buyMax(); }
 .tickspeed__label,
 .tickspeed__amount {
   font-size: 1.2rem;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .tickspeed__buttons {
@@ -59,16 +59,16 @@ function buyMax() { Tickspeed.buyMax(); }
   font-size: 1.2rem;
   min-width: 12rem;
   padding: 0.5rem 1rem;
-  color: #000;
-  background: #f6f6f6;
-  border: 0.1rem solid #127a20;
+  color: var(--color-text);
+  background: var(--color-btn-bg);
+  border: 0.1rem solid var(--color-good);
   border-radius: 0.4rem;
   cursor: pointer;
 }
 
 .tickspeed__btn:disabled {
-  background: #e3e3e3;
-  border-color: #b82b3f;
+  background: var(--color-btn-bg-disabled);
+  border-color: var(--color-bad);
   cursor: default;
 }
 </style>

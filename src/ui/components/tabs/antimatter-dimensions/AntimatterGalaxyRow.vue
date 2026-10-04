@@ -47,7 +47,7 @@ function buy() { Galaxy.buy(); }
 
 .galaxy__req {
   font-size: 1rem;
-  color: #666;
+  color: var(--color-text-muted);
   text-align: center;
 }
 
@@ -63,16 +63,16 @@ function buy() { Galaxy.buy(); }
   line-height: 1.3;
   text-align: center;
   padding: 0.5rem;
-  color: #000;
-  background: #f6f6f6;
-  border: 0.1rem solid #127a20;
+  color: var(--color-text);
+  background: var(--color-btn-bg);
+  border: 0.1rem solid var(--color-good);
   border-radius: 0.4rem;
   cursor: pointer;
 }
 
 .galaxy__btn:disabled {
-  background: #e3e3e3;
-  border-color: #b82b3f;
+  background: var(--color-btn-bg-disabled);
+  border-color: var(--color-bad);
   cursor: default;
 }
 </style>

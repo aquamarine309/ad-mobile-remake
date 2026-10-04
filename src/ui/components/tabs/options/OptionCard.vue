@@ -30,20 +30,20 @@ defineEmits(['click']);
   padding: 0.5rem 0.3rem;
   font-family: inherit;
   font-size: 1.2rem;
-  color: #000;
-  background: #f6f6f6;
-  border: 0.1rem solid #127a20;
+  color: var(--color-text);
+  background: var(--color-btn-bg);
+  border: 0.1rem solid var(--color-good);
   border-radius: 0.4rem;
   cursor: pointer;
   text-align: center;
 }
 
 .option-card:active {
-  background: #8bc599;
+  background: var(--color-good-light);
 }
 
 .option-card--danger {
-  border-color: #b82b3f;
+  border-color: var(--color-bad);
 }
 
 .option-card__label {
@@ -52,7 +52,7 @@ defineEmits(['click']);
 
 .option-card__value {
   font-size: 1rem;
-  color: #666;
+  color: var(--color-text-muted);
   line-height: 1.2;
 }
 </style>

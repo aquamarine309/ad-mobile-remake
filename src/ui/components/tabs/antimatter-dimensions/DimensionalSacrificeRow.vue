@@ -44,21 +44,21 @@ function sacrifice() { Sacrifice.sacrifice(); }
   height: 3rem;
   font-family: inherit;
   font-size: 1.2rem;
-  color: #000;
-  background: #f6f6f6;
-  border: 0.1rem solid #127a20;
+  color: var(--color-text);
+  background: var(--color-btn-bg);
+  border: 0.1rem solid var(--color-good);
   border-radius: 0.4rem;
   cursor: pointer;
 }
 
 .sacrifice__btn:disabled {
-  background: #e3e3e3;
-  border-color: #b82b3f;
+  background: var(--color-btn-bg-disabled);
+  border-color: var(--color-bad);
   cursor: default;
 }
 
 .sacrifice__total {
   font-size: 1.1rem;
-  color: #666;
+  color: var(--color-text-muted);
 }
 </style>

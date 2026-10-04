@@ -17,8 +17,8 @@
   align-items: center;
   height: 4.8rem;
   padding: 0 1rem;
-  background: #008577;
-  color: #fff;
+  background: var(--color-teal);
+  color: var(--color-text-light);
 }
 
 .app-bar__drawer-btn {
@@ -35,7 +35,7 @@
 .app-bar__drawer-btn > span {
   display: block;
   height: 0.2rem;
-  background: #fff;
+  background: var(--color-bg);
   border-radius: 0.1rem;
 }
 

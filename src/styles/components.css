@@ -1,0 +1,19 @@
+.nav-bar {
+  display: flex;
+  background: var(--color-nav-bg);
+}
+
+.nav-bar__btn {
+  flex: 1;
+  font-family: inherit;
+  font-weight: bold;
+  color: var(--color-nav-inactive);
+  background: transparent;
+  border: none;
+  transition-duration: 0.15s;
+}
+
+.nav-bar__btn--active {
+  color: var(--color-nav-active);
+  box-shadow: inset 0 -0.3rem 0 var(--color-nav-underline);
+}

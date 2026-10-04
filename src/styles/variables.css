@@ -1,0 +1,45 @@
+:root {
+  --color-text: #000;
+  --color-text-muted: #666;
+  --color-bg: #fff;
+
+  --color-teal: #008577;
+  --color-teal-dark: #00574b;
+  --color-good: #127a20;
+  --color-good-light: #8bc599;
+  --color-bad: #b82b3f;
+  --color-btn-bg: #f6f6f6;
+  --color-btn-bg-disabled: #e3e3e3;
+
+  /* resource colors */
+  --color-antimatter: #2196f3;
+  --color-infinity: #ef9000;
+  --color-eternity: #a331d0;
+  --color-reality: #1bc01e;
+
+  /* nav bar */
+  --color-nav-bg: var(--color-teal);
+  --color-nav-inactive: rgba(255, 255, 255, 0.6);
+  --color-nav-active: #ffffff;
+  --color-nav-underline: #e91e63;
+
+  /* z-index layer */
+  --z-content: 1;
+  --z-nav: 10;
+  --z-fab: 20;
+  --z-modal: 100;
+
+  /* safe zone */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* gaps */
+  --gap-xs: 0.3rem;
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
+  --gap-lg: 1.5rem;
+
+  /* border radius */
+  --radius-sm: 0.4rem;
+  --radius-md: 0.6rem;
+}

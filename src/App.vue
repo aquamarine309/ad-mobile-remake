@@ -82,5 +82,6 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   z-index: 10;
+  pointer-events: none;
 }
 </style>

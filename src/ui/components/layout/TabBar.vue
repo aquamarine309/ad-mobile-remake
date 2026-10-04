@@ -23,6 +23,7 @@ import { visibleTabs, currentTabKey } from "@/ui/tabs/state";
   overflow-y: hidden;
   background: #008577;
   scrollbar-width: none;
+  pointer-events: auto;
 }
 
 .tab-bar::-webkit-scrollbar {

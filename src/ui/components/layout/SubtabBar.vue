@@ -21,6 +21,7 @@ import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
   display: flex;
   background: #008577;
   height: 4.5rem;
+  pointer-events: auto;
 }
 
 .subtab-bar__btn {

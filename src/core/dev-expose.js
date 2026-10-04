@@ -1,0 +1,24 @@
+import { player } from './player';
+import { D, Decimal } from './decimal';
+import { DeltaTime } from './time/delta-time';
+import { GameSpeed } from './time/game-speed';
+import { GameLoop } from './game-loop';
+import { AntimatterDimension } from './dimensions/antimatter-dimension';
+import { Currency } from './currency';
+import { save, load, hardReset } from './storage';
+
+export function exposeDevTools() {
+  if (!import.meta.env.DEV) return;
+
+  window.ad = {
+    player,
+    D, Decimal,
+    DeltaTime, GameSpeed, GameLoop,
+    AntimatterDimension, Currency,
+    save, load, hardReset,
+  };
+
+  window.ad.setAM = (v) => { player.antimatter = D(v); };
+  window.ad.setD8 = (v) => { AntimatterDimension(8).amount = D(v); };
+  window.ad.reset = () => hardReset();
+}

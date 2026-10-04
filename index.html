@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ad</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      window.errorMessages = [];
+      window.addEventListener("error", function(e) {
+        const errorMessage = `${e.message}\n(at: ${e.filename}:${e.lineno}:${e.colno})`;
+        setTimeout(() => alert(errorMessage), 1000);
+        window.errorMessages.push(errorMessage);
+      });
+    </script>
+  </body>
+</html>

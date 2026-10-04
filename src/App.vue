@@ -1,19 +1,15 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { GameLoop } from '@/core/loop/game-loop';
-import { simulateTime } from '@/core/loop/simulate-time';
-import { load, save } from '@/core/storage/save';
+import { initGame, stopGame } from '@/game/init';
 import AppBar from './components/layout/AppBar';
 import GameHeader from './components/layout/GameHeader';
 import TabContent from './components/layout/TabContent';
 import TabBar from './components/layout/TabBar';
 import SubtabBar from './components/layout/SubtabBar';
 import FabRow from './components/layout/FabRow';
-import { dispatch, GAME_EVENT } from '@/core/events';
 
 const bottomRef = ref(null);
 let observer = null;
-let autosaveTimer = null;
 
 function updateHeights() {
   if (bottomRef.value) {
@@ -24,17 +20,8 @@ function updateHeights() {
   }
 }
 
-function onBeforeUnload() { save(); }
-
 onMounted(() => {
-  const offlineMs = load();
-  if (offlineMs > 10000) {
-    simulateTime(offlineMs / 1000, { fast: offlineMs < 50000 });
-  }
-  dispatch(GAME_EVENT.GAME_LOAD);
-  GameLoop.start();
-  autosaveTimer = setInterval(save, 30000);
-  window.addEventListener('beforeunload', onBeforeUnload);
+  initGame();
 
   observer = new ResizeObserver(updateHeights);
   if (bottomRef.value) observer.observe(bottomRef.value);
@@ -42,11 +29,8 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  GameLoop.stop();
-  if (autosaveTimer) clearInterval(autosaveTimer);
-  window.removeEventListener('beforeunload', onBeforeUnload);
+  stopGame();
   if (observer) observer.disconnect();
-  save();
 });
 </script>
 

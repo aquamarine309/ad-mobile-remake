@@ -2,6 +2,7 @@ import { GameLoop } from '@/core/loop/game-loop';
 import { simulateTime } from '@/core/loop/simulate-time';
 import { load, save } from '@/core/storage/save';
 import { dispatch, GAME_EVENT } from '@/core/events';
+import { player } from "@/core/state/player";
 
 const AUTOSAVE_INTERVAL_MS = 30000;
 
@@ -11,7 +12,7 @@ let beforeUnloadHandler = null;
 export function initGame() {
   const offlineMs = load();
 
-  if (offlineMs > 10000) {
+  if (player.options.offlineProgress && offlineMs > 10000) {
     simulateTime(offlineMs / 1000, { fast: offlineMs < 50000 });
   }
 

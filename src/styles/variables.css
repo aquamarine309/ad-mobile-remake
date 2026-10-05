@@ -47,5 +47,11 @@
   --radius-md: 0.6rem;
   
   /* Layout */
---appbar-height: 4.8rem;
+  --appbar-height: 4.8rem;
+  
+  --color-achievement-unlocked: #6ad477;
+  --color-achievement-locked: #c3c3c3;
+  --color-achievement-secret-locked: #878787;
+  --color-tooltip-bg: #e0e0e0;
+  --color-tooltip-overlay: rgba(0, 0, 0, 0.6);
 }

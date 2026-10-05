@@ -6,6 +6,7 @@ import { Currency } from "@/core/currency";
 import { Tickspeed } from "@/core/pre-infinity/tickspeed";
 import { DimBoost } from "@/core/pre-infinity/dimension-boost";
 import { Sacrifice } from "@/core/pre-infinity/sacrifice";
+import { Achievement, NormalAchievements } from '@/core/achievements';
 
 const BASE_COSTS = [10, 100, 1e4, 1e6, 1e9, 1e13, 1e18, 1e24];
 const BASE_COST_MULTIPLIERS = [1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15];
@@ -149,6 +150,7 @@ class AntimatterDimensionState extends DimensionState {
   get multiplier() {
     let mult = D(2).pow(this.bought.div(10).floor());
     mult = mult.times(DimBoost.multiplierToNDTier(this.tier));
+    mult = mult.times(NormalAchievements.multiplier);
     if (this.tier === 8) {
       mult = mult.times(Sacrifice.totalBoost);
     }
@@ -171,6 +173,7 @@ class AntimatterDimensionState extends DimensionState {
     this.currencyAmount = this.currencyAmount.minus(this.cost);
     this.bought = this.bought.add(1);
     this.amount = this.amount.add(1);
+    AntimatterDimensions.onBuyDimension(this.tier);
     return true;
   }
   
@@ -180,6 +183,7 @@ class AntimatterDimensionState extends DimensionState {
     this.currencyAmount = this.currencyAmount.minus(this.cost.times(amount));
     this.bought = this.bought.add(amount);
     this.amount = this.amount.add(amount);
+    AntimatterDimensions.onBuyDimension(this.tier);
     return true;
   }
 
@@ -201,6 +205,7 @@ class AntimatterDimensionState extends DimensionState {
     this.bought = this.bought.add(groupsToBuy.times(10));
     this.amount = this.amount.add(groupsToBuy.times(10));
     this.currencyAmount = this.currencyAmount.sub(Decimal.pow10(maxBought.logPrice));
+    AntimatterDimensions.onBuyDimension(this.tier);
   
     return true;
   }
@@ -210,6 +215,10 @@ export const AntimatterDimension = AntimatterDimensionState.createAccessor();
 
 export const AntimatterDimensions = {
   all: AntimatterDimension.index.slice(1),
+  
+  onBuyDimension(tier) {
+    Achievement(tier + 10).unlock();
+  },
   
   tick(diff) {
     for (let tier = 8; tier >= 2; tier--) {

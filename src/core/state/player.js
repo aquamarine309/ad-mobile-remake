@@ -1,6 +1,6 @@
 import { reactive } from 'vue';
 import { D } from '@/core/decimal';
-import { range } from '@/core/utils';
+import { range, repeat } from '@/core/utils';
 
 export function createInitialPlayer() {
   return {
@@ -14,6 +14,10 @@ export function createInitialPlayer() {
     tickspeed: {
       bought: D(0),
       gained: D(0),
+    },
+    achievements: {
+      normal: repeat(0, 17),
+      secret: repeat(0, 4),
     },
     dimensionBoosts: D(0),
     galaxies: D(0),

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
-import { initGame, stopGame } from '@/game/init';
+import { stopGame } from '@/game/init';
 import AppBar from './ui/components/layout/AppBar';
 import GameHeader from './ui/components/layout/GameHeader';
 import TabContent from './ui/components/layout/TabContent';
@@ -21,8 +21,6 @@ function updateHeights() {
 }
 
 onMounted(() => {
-  initGame();
-
   observer = new ResizeObserver(updateHeights);
   if (bottomRef.value) observer.observe(bottomRef.value);
   updateHeights();

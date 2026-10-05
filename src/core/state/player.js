@@ -32,3 +32,15 @@ export function createInitialPlayer() {
 }
 
 export const player = reactive(createInitialPlayer());
+
+import { Lazy } from '@/core/lazy';
+
+/**
+ * Replace all fields of `player` with the given object.
+ * Invalidates all Lazy caches, since they may depend on any field.
+ */
+export function applyPlayer(fresh) {
+  for (const k of Object.keys(player)) delete player[k];
+  Object.assign(player, fresh);
+  Lazy.invalidateAll();
+}

@@ -35,5 +35,4 @@ export function stopGame() {
     window.removeEventListener('beforeunload', beforeUnloadHandler);
     beforeUnloadHandler = null;
   }
-  save();
 }

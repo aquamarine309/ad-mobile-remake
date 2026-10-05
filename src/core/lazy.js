@@ -4,6 +4,13 @@ export class Lazy {
   constructor(getValue) {
     this._getValue = getValue;
     this._value = undefined;
+    Lazy._registry.push(this);
+  }
+
+  static _registry = [];
+
+  static invalidateAll() {
+    for (const lazy of Lazy._registry) lazy._value = undefined;
   }
 
   get value() {

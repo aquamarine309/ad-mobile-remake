@@ -1,5 +1,5 @@
 import { Decimal } from '../decimal';
-import { player, createInitialPlayer } from '../state/player';
+import { player, createInitialPlayer, applyPlayer } from '../state/player';
 import { serialize, deserialize } from './serialize';
 import { encodeSave, decodeSave } from './serializer';
 
@@ -31,7 +31,7 @@ export function load() {
 
     const fresh = createInitialPlayer();
     deepAssign(fresh, loaded);
-    Object.assign(player, fresh);
+    applyPlayer(fresh);
 
     return offlineMs;
   } catch (e) {
@@ -41,24 +41,12 @@ export function load() {
   }
 }
 
-export function hardReset() {
-  localStorage.removeItem(SAVE_KEY);
-  location.reload();
-}
-
 // --- Export / Import ---
 
-/**
- * Export the current save as a portable string.
- */
 export function exportSave() {
   return encodeSave(JSON.stringify(serialize(player)));
 }
 
-/**
- * Parse and validate a save string. Throws if invalid.
- * Does NOT write to storage or modify player.
- */
 export function parseSave(text) {
   const json = decodeSave(text.trim());
   const loaded = deserialize(JSON.parse(json));
@@ -71,11 +59,6 @@ export function parseSave(text) {
   return loaded;
 }
 
-/**
- * Import a save from text. Validates first, then writes to storage.
- * The caller is responsible for reloading the page afterwards.
- * Throws on invalid input.
- */
 export function importSave(text) {
   const loaded = parseSave(text);
 

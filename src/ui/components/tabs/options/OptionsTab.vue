@@ -4,9 +4,10 @@ import OptionCard from './OptionCard.vue';
 import { player } from '@/core/state/player';
 import {
   exportSave,
-  importSave,
-  hardReset,
+  importSave
 } from '@/core/storage/save';
+
+import { resetGame } from '@/game/reset';
 import { GameLoop } from '@/core/loop/game-loop';
 
 // --- Save & Load ---
@@ -36,7 +37,7 @@ function doImport() {
 function doReset() {
   if (!confirm('Reset your save? This cannot be undone.')) return;
   if (!confirm('Are you really sure? All progress will be lost.')) return;
-  hardReset();
+  resetGame();
 }
 
 // --- Gameplay ---

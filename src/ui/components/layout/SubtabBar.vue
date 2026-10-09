@@ -1,5 +1,12 @@
 <script setup>
-import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
+import { visibleSubtabs, currentSubtabKey, showSubtab, currentTab } from '@/ui/tabs/state';
+import { t } from '@/i18n';
+
+function labelKey(sub) {
+  return sub.key === currentTab.value.key
+    ? `tab_${sub.key}`
+    : `tab_${sub.key}_short`;
+}
 </script>
 
 <template>
@@ -11,7 +18,7 @@ import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
       :class="{ 'nav-bar__btn--active': currentSubtabKey === s.key }"
       @click="showSubtab(s.key)"
     >
-      {{ s.name }}
+      {{ t(labelKey(s)) }}
     </button>
   </nav>
 </template>

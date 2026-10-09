@@ -1,5 +1,7 @@
 import { logic, dispatch, GAME_EVENT } from '@/core/events';
 
+import { t } from "@/i18n";
+
 export class AchievementState {
   constructor(config) {
     this.config = config;
@@ -14,8 +16,19 @@ export class AchievementState {
   }
 
   get id() { return this.config.id; }
-  get name() { return this.config.name; }
-  get description() { return this.config.description; }
+  get name() {
+    if (this.config.name !== undefined) return this.config.name;
+    const prefix = this.isSecret ? 'secret_achievement' : 'achievement';
+    return t(`${prefix}_${this.id}_name`);
+  }
+  
+  get description() {
+    const description = this.config.description;
+    if (description !== undefined) return description;
+    const prefix = this.isSecret ? 'secret_achievement' : 'achievement';
+    return t(`${prefix}_${this.id}_tooltip`);
+  }
+  
   get row() { return this._row; }
   get column() { return this._column; }
 

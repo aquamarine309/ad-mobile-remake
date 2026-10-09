@@ -2,7 +2,7 @@ import { ref, computed } from 'vue';
 import { TABS } from './config';
 
 export const currentTabKey = ref('dimensions');
-export const currentSubtabKey = ref('antimatter');
+export const currentSubtabKey = ref('antimatter_dimensions');
 
 export const currentTab = computed(() =>
   TABS.find(t => t.key === currentTabKey.value) ?? TABS[0]

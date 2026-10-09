@@ -3,6 +3,7 @@ import { Currency } from "@/core/currency";
 import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { format } from "@/core/format";
 import { computed } from "vue";
+import { t } from "@/i18n";
 
 const antimatter = computed(() => format(Currency.antimatter.value, 2, 1));
 const perSecond = computed(() =>

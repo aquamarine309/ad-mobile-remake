@@ -6,35 +6,21 @@ import SecretAchievementsTab from "@/ui/components/tabs/achievements/SecretAchie
 export const TABS = [
   {
     key: 'dimensions',
-    name: 'Dimensions',
-    letter: 'D',
     subtabs: [
-      {
-        key: 'antimatter',
-        name: 'Antimatter',
-        component: AntimatterDimensionsTab,
-      },
+      { key: 'antimatter_dimensions', component: AntimatterDimensionsTab },
     ],
   },
   {
     key: 'achievements',
-    name: 'Achievements',
-    letter: 'A',
     subtabs: [
-      { key: 'normal', name: 'Normal', component: NormalAchievementsTab },
-      { key: 'secret', name: 'Secret', component: SecretAchievementsTab },
+      { key: 'normal_achievements', component: NormalAchievementsTab },
+      { key: 'secret_achievements', component: SecretAchievementsTab },
     ],
   },
   {
     key: 'options',
-    name: 'Options',
-    letter: 'O',
     subtabs: [
-      {
-        key: 'options',
-        name: 'Options',
-        component: OptionsTab,
-      },
+      { key: 'options', component: OptionsTab },
     ],
   },
 ];

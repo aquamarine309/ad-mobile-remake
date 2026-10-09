@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import AchievementGrid from './AchievementGrid.vue';
 import { NormalAchievements } from '@/core/achievements';
 import { formatX } from '@/core/format';
+import { t } from "@/i18n";
 
 const multiplierText = computed(() => formatX(NormalAchievements.multiplier, 2, 3));
 </script>
@@ -10,7 +11,7 @@ const multiplierText = computed(() => formatX(NormalAchievements.multiplier, 2, 
 <template>
   <div class="normal-achievements-tab">
     <div class="normal-achievements-tab__header">
-      Achievements provide a multiplier to Antimatter Dimensions:
+      {{ t("achievement_multiplier_to") }}
       {{ multiplierText }}
     </div>
     <AchievementGrid

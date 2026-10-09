@@ -1,17 +1,18 @@
 <script setup>
 import { visibleTabs, currentTabKey, showTab } from "@/ui/tabs/state";
+import { t } from '@/i18n';
 </script>
 
 <template>
   <nav class="nav-bar tab-bar">
     <button
-      v-for="t in visibleTabs"
-      :key="t.key"
+      v-for="tab in visibleTabs"
+      :key="tab.key"
       class="nav-bar__btn tab-bar__btn"
-      :class="{ 'nav-bar__btn--active': currentTabKey === t.key }"
-      @click="showTab(t.key)"
+      :class="{ 'nav-bar__btn--active': currentTabKey === tab.key }"
+      @click="showTab(tab.key)"
     >
-      {{ t.letter }}
+      {{ t(`tab_${tab.key}_letter`) }}
     </button>
   </nav>
 </template>

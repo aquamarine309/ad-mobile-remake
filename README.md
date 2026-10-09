@@ -166,10 +166,10 @@ ad.events.logic.on(ad.events.GAME_EVENT.GALAXY_RESET_AFTER, () => console.log('g
 - [x] Directory layering (core / ui / game)
 - [x] CSS variables (styles/variables.css)
 - [x] Safe area support (notch, bottom bar)
+- [x] Achievements
 
 ### In Progress / TODO
 
-- [ ] Achievements
 - [ ] News ticker
 - [ ] Big Crunch entry
 - [ ] Infinity content

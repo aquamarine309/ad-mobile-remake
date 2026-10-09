@@ -4,6 +4,7 @@ import { SECRET_ACHIEVEMENT_DATA } from '@/content/secret-achievements';
 
 class SecretAchievementState extends AchievementState {
   get _bits() { return player.achievements.secret; }
+  get isSecret() { return true; }
 }
 
 const ALL = SECRET_ACHIEVEMENT_DATA.map(c => new SecretAchievementState(c));

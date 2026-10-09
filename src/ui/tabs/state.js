@@ -21,12 +21,18 @@ export const currentSubtab = computed(() =>
   ?? currentTab.value.subtabs[0]
 );
 
-export function showTab(key) {
+export function showSubtab(key) {
+  currentSubtabKey.value = key;
+}
+
+export function showTab(key, subtabKey) {
   currentTabKey.value = key;
+  if (subtabKey !== undefined) {
+    currentSubtabKey.value = subtabKey;
+    return;
+  }
   const tab = TABS.find(t => t.key === key);
   currentSubtabKey.value = tab.subtabs[0].key;
 }
 
-export function showSubtab(key) {
-  currentSubtabKey.value = key;
-}
+export const focusedAchievementId = ref(null);

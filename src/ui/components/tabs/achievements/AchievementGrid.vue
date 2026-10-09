@@ -1,5 +1,6 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
+import { focusedAchievementId } from '@/ui/tabs/state';
 import AchievementCell from './AchievementCell.vue';
 import AchievementTooltip from './AchievementTooltip.vue';
 
@@ -8,6 +9,8 @@ const props = defineProps({
   iconPrefix: { type: String, required: true },
   isSecret: { type: Boolean, default: false },
 });
+
+const gridRoot = ref(null);
 
 const rows = computed(() => {
   const byRow = new Map();
@@ -82,6 +85,22 @@ function onCellClick({ ach, event }) {
   tooltipPos.value = { left, top, placement };
 }
 
+async function tryFocus(id) {
+  if (id === null) return;
+  const ach = props.achievements.find(a => a.id === id);
+
+  await nextTick();
+
+  const el = gridRoot.value?.querySelector(`[data-achievement-id="${id}"]`);
+
+  onCellClick({ ach, event: { currentTarget: el } });
+  focusedAchievementId.value = null;
+}
+
+watch(focusedAchievementId, (id) => {
+  tryFocus(id)
+}, { immediate: true });
+
 function closeTooltip() {
   selectedId.value = null;
 }
@@ -91,7 +110,10 @@ onUnmounted(() => document.removeEventListener('click', closeTooltip));
 </script>
 
 <template>
-  <div class="achievements-grid">
+  <div
+    class="achievements-grid"
+    ref="gridRoot"
+  >
     <div
       v-for="row in rows"
       :key="row.row"

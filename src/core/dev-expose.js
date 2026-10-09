@@ -9,6 +9,8 @@ import { save, load } from './storage/save';
 import { resetGame } from "@/game/reset";
 import { Achievement, NormalAchievements, SecretAchievements } from './achievements';
 import { dispatch } from '@/core/events';
+import { notify } from "@/ui/notifications";
+import { focusedAchievementId } from '@/ui/tabs/state';
 
 export function exposeDevTools() {
   if (!import.meta.env.DEV) return;
@@ -20,6 +22,8 @@ export function exposeDevTools() {
     AntimatterDimension, Currency,
     save, load, resetGame,
     Achievement, NormalAchievements, SecretAchievements,
+    notify,
+    focusedAchievementId
   };
 
   window.ad.setAM = (v) => { player.antimatter = D(v); };

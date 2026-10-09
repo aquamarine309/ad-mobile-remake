@@ -7,6 +7,7 @@ import TabContent from './ui/components/layout/TabContent';
 import TabBar from './ui/components/layout/TabBar';
 import SubtabBar from './ui/components/layout/SubtabBar';
 import FabRow from './ui/components/layout/FabRow';
+import NotificationStack from './ui/components/layout/NotificationStack';
 
 const bottomRef = ref(null);
 let observer = null;
@@ -40,6 +41,7 @@ onUnmounted(() => {
       <TabContent />
     </div>
     <div ref="bottomRef" class="app__bottom">
+      <NotificationStack />
       <FabRow />
       <TabBar />
       <SubtabBar />

@@ -27,6 +27,7 @@ function onClick(event) {
 <template>
   <button
     class="achievement-cell"
+    :data-achievement-id="achievement.id"
     :class="{
       'achievement-cell--locked': !achievement.isUnlocked && !isSecret,
       'achievement-cell--locked-secret': !achievement.isUnlocked && isSecret,

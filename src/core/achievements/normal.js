@@ -7,6 +7,7 @@ import { ACHIEVEMENT_DATA } from '@/content/achievements';
 
 class NormalAchievementState extends AchievementState {
   get _bits() { return player.achievements.normal; }
+  get isSecret() { return false; }
 }
 
 const ALL = ACHIEVEMENT_DATA.map(c => new NormalAchievementState(c));

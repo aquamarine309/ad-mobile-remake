@@ -19,6 +19,7 @@
   padding: var(--safe-top) var(--gap-md) 0;
   background: var(--color-teal);
   color: var(--color-text-light);
+  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.25);
 }
 
 .app-bar__drawer-btn {

@@ -1,3 +1,5 @@
+import { format, formatInt } from "@/core/format";
+
 export const SECRET_ACHIEVEMENT_DATA = [
   {
     id: 11,
@@ -6,8 +8,8 @@ export const SECRET_ACHIEVEMENT_DATA = [
   },
   {
     id: 12,
-    name: "Just in case",
-    get description() { return `Save ${formatInt(100)} times without refreshing.`; }
+    name: "The second one isn't so free.",
+    get description() { return `Click on this achievement ${formatInt(100)} times.`; }
   },
   {
     id: 13,

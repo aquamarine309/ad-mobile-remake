@@ -19,7 +19,18 @@ const iconUrl = computed(() => {
   return `/achievements/${props.iconPrefix}${props.achievement.id}.webp`;
 });
 
+let s12ClickCount = 0;
+
 function onClick(event) {
+  const id = props.achievement.id;
+  if (props.isSecret) {
+    if (id === 11) props.achievement.unlock();
+    if (id === 12 && !props.achievement.isUnlocked) {
+      s12ClickCount++;
+      if (s12ClickCount >= 100) props.achievement.unlock();
+      else if (s12ClickCount > 2) return;
+    }
+  }
   emit('cell-click', { ach: props.achievement, event });
 }
 </script>

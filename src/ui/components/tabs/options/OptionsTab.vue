@@ -9,6 +9,7 @@ import {
 
 import { resetGame } from '@/game/reset';
 import { GameLoop } from '@/core/loop/game-loop';
+import { t } from "@/i18n";
 
 // --- Save & Load ---
 
@@ -89,11 +90,21 @@ function editUpdateRate() {
 
 <template>
   <div class="options">
-    <h2 class="options__title">Save &amp; Load</h2>
+    <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
     <div class="options__grid">
-      <OptionCard label="Export Save" value="Click" @click="doExport" />
-      <OptionCard label="Import Save" value="Click" @click="doImport" />
-      <OptionCard label="Reset Save" value="Click" danger @click="doReset" />
+      <OptionCard
+        :label="t('export_to_mobile')"
+        @click="doExport"
+      />
+      <OptionCard
+        :label="t('import_string')"
+        @click="doImport"
+      />
+      <OptionCard
+        :label="t('reset_current_save')"
+        danger
+        @click="doReset"
+      />
     </div>
 
     <h2 class="options__title">Gameplay</h2>

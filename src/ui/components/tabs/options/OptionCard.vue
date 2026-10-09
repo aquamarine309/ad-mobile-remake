@@ -47,6 +47,7 @@ defineEmits(['click']);
 }
 
 .option-card__label {
+  white-space: pre-line;
   line-height: 1.2;
 }
 

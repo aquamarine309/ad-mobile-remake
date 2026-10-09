@@ -91,7 +91,11 @@ function transformValue(raw) {
     .replace(/%s/g, '{1}')                            // bare %s
     .replace(/%d/g, '{1}')                            // bare %d
     .replace(/\x00PCT\x00/g, '%');
-
+  // Android wraps strings in double quotes to preserve leading/trailing whitespace.
+  // The quotes themselves are not displayed.
+  if (s.length >= 2 && s.charAt(0) === '"' && s.charAt(s.length - 1) === '"') {
+    s = s.slice(1, -1);
+  }
   return s;
 }
 

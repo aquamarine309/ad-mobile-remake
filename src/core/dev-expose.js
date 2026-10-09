@@ -11,6 +11,7 @@ import { Achievement, NormalAchievements, SecretAchievements } from './achieveme
 import { dispatch } from '@/core/events';
 import { notify } from "@/ui/notifications";
 import { focusedAchievementId } from '@/ui/tabs/state';
+import { t, setLanguage, getLanguage } from '@/i18n';
 
 export function exposeDevTools() {
   if (!import.meta.env.DEV) return;
@@ -23,7 +24,8 @@ export function exposeDevTools() {
     save, load, resetGame,
     Achievement, NormalAchievements, SecretAchievements,
     notify,
-    focusedAchievementId
+    focusedAchievementId,
+    t, setLanguage, getLanguage
   };
 
   window.ad.setAM = (v) => { player.antimatter = D(v); };

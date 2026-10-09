@@ -22,10 +22,13 @@ const iconUrl = computed(() => {
 let s12ClickCount = 0;
 
 function onClick(event) {
+  // S11 and S12 are one-off click-based achievements. Inlined here instead of
+  // making them config fields, since no other achievement uses these triggers.
+  // See discussion in the achievement system design.
   const id = props.achievement.id;
   if (props.isSecret) {
     if (id === 11) props.achievement.unlock();
-    if (id === 12 && !props.achievement.isUnlocked) {
+    else if (id === 12 && !props.achievement.isUnlocked) {
       s12ClickCount++;
       if (s12ClickCount >= 100) props.achievement.unlock();
       else if (s12ClickCount > 2) return;

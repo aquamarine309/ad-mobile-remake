@@ -4,3 +4,5 @@ dist/
 .DS_Store
 src.bak-*
 .bak-*
+scripts/input/
+en-raw.json

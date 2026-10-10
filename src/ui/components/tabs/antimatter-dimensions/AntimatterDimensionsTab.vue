@@ -59,6 +59,5 @@ const sacrificeTotal = computed(() => Sacrifice.totalBoost);
   gap: 0.6rem;
   padding: 0.6rem 0.7rem;
   margin-top: 0.6rem;
-  border-top: 0.2rem solid var(--color-text);
 }
 </style>

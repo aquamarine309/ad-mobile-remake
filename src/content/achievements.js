@@ -22,5 +22,8 @@ export const ACHIEVEMENT_DATA = [
   },
   {
     id: 18
+  },
+  {
+    id: 21
   }
 ];

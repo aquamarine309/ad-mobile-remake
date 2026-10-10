@@ -17,8 +17,8 @@
   align-items: center;
   min-height: var(--appbar-height);
   padding: var(--safe-top) var(--gap-md) 0;
-  background: var(--color-teal);
-  color: var(--color-text-light);
+  background: var(--color-primary);
+  color: var(--color-appbar-fg);
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.25);
 }
 

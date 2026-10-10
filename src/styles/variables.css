@@ -2,9 +2,8 @@
   --color-text: #000;
   --color-text-muted: #666;
   --color-bg: #fff;
-
-  --color-teal: #008577;
-  --color-teal-dark: #00574b;
+  --color-primary: #008577;
+  --color-primary-dark: #00574b;
   --color-good: #127a20;
   --color-good-light: #8bc599;
   --color-bad: #b82b3f;
@@ -18,7 +17,7 @@
   --color-reality: #1bc01e;
 
   /* nav bar */
-  --color-nav-bg: var(--color-teal);
+  --color-nav-bg: var(--color-primary);
   --color-nav-inactive: rgba(255, 255, 255, 0.6);
   --color-nav-active: #ffffff;
   --color-nav-underline: #e91e63;
@@ -39,7 +38,7 @@
   --gap-md: 1rem;
   --gap-lg: 1.5rem;
   
-  --color-text-light: #ffffff;
+  --color-appbar-fg: #ffffff;
   --color-row-even: rgba(33, 150, 243, 0.27);
 
   /* border radius */

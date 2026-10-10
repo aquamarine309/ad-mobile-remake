@@ -1,23 +1,20 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, watch } from 'vue';
 import OptionCard from './OptionCard.vue';
+import OptionSlider from './OptionSlider.vue';
+import OptionSliderValues from './OptionSliderValues.vue';
 import { player } from '@/core/state/player';
-import {
-  exportSave,
-  importSave
-} from '@/core/storage/save';
-
+import { exportSave, importSave } from '@/core/storage/save';
 import { resetGame } from '@/game/reset';
 import { formatInt } from '@/core/format';
 import { GameLoop } from '@/core/loop/game-loop';
-import { t } from "@/i18n";
+import { t, ta } from "@/i18n";
 
 // --- Save & Load ---
 
 function doExport() {
   try {
-    const text = exportSave();
-    prompt('Copy your save below:', text);
+    prompt('Copy your save below:', exportSave());
   } catch (e) {
     alert(`Export failed: ${e.message}`);
   }
@@ -42,46 +39,9 @@ function doReset() {
   resetGame();
 }
 
-// --- Gameplay ---
+// --- Bottom nav symbols ---
 
-const offlineProgressLabel = computed(() =>
-  player.options.offlineProgress ? 'ON' : 'OFF'
-);
-
-function toggleOfflineProgress() {
-  player.options.offlineProgress = !player.options.offlineProgress;
-}
-
-function editOfflineTicks() {
-  const input = prompt(
-    'Max offline ticks (1000 - 1000000):',
-    String(player.options.offlineTicks)
-  );
-  if (input === null) return;
-  const n = parseInt(input, 10);
-  if (!Number.isFinite(n) || n < 1000 || n > 1000000) {
-    alert('Invalid value. Must be between 1000 and 1000000.');
-    return;
-  }
-  player.options.offlineTicks = n;
-}
-
-
-function editUpdateRate() {
-  const input = prompt(
-    'Update rate in ms (16 - 1000):',
-    String(player.options.updateRate)
-  );
-  if (input === null) return;
-  const n = parseInt(input, 10);
-  if (!Number.isFinite(n) || n < 16 || n > 1000) {
-    alert('Invalid value. Must be between 16 and 1000.');
-    return;
-  }
-  player.options.updateRate = n;
-  GameLoop.stop();
-  GameLoop.start();
-}
+const SYMBOL_MODES = ['all', 'mainOnly', 'subOnly', 'none'];
 
 const bottomNavSymbolsLabel = computed(() => {
   const mode = player.options.bottomNavSymbols;
@@ -91,53 +51,74 @@ const bottomNavSymbolsLabel = computed(() => {
   return t('bottom_symbols_only_sub_tabs');
 });
 
-const SYMBOL_MODES = ['all', 'mainOnly', 'subOnly', 'none'];
-
 function cycleBottomNavSymbols() {
   const i = SYMBOL_MODES.indexOf(player.options.bottomNavSymbols);
   player.options.bottomNavSymbols = SYMBOL_MODES[(i + 1) % SYMBOL_MODES.length];
 }
+
+// --- Offline progress (3-state) ---
+
+const OFFLINE_MODES = ['show', 'hide', 'disable'];
+
+const offlineProgressLabel = computed(() => {
+  const modes = ta('offline_progress');
+  const i = OFFLINE_MODES.indexOf(player.options.offlineProgress);
+  return modes[i >= 0 ? i : 0];
+});
+
+function cycleOfflineProgress() {
+  const i = OFFLINE_MODES.indexOf(player.options.offlineProgress);
+  player.options.offlineProgress = OFFLINE_MODES[(i + 1) % OFFLINE_MODES.length];
+}
+
+// --- Sliders ---
+
+const OFFLINE_TICKS_VALUES = [
+  1000, 2000, 5000, 10000, 25000, 100000, 250000, 500000, 1000000,
+];
+
+const offlineTicksLabel = computed(() =>
+  t('max_offline_ticks', formatInt(player.options.offlineTicks))
+);
+
+const updateRateLabel = computed(() =>
+  t('ui_update_rate', formatInt(player.options.updateRate))
+);
+
+watch(() => player.options.updateRate, () => {
+  GameLoop.stop();
+  GameLoop.start();
+});
 </script>
 
 <template>
   <div class="options">
     <h2 class="options__title">{{ t("options_ui") }}</h2>
     <div class="options__grid">
-      <OptionCard
-        :label="bottomNavSymbolsLabel"
-        @click="cycleBottomNavSymbols"
-      />
+      <OptionCard :label="bottomNavSymbolsLabel" @click="cycleBottomNavSymbols" />
     </div>
+
     <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
     <div class="options__grid">
-      <OptionCard
-        :label="t('export_to_mobile')"
-        @click="doExport"
-      />
-      <OptionCard
-        :label="t('import_string')"
-        @click="doImport"
-      />
-      <OptionCard
-        :label="t('reset_current_save')"
-        danger
-        @click="doReset"
-      />
+      <OptionCard :label="t('export_to_mobile')" @click="doExport" />
+      <OptionCard :label="t('import_string')" @click="doImport" />
+      <OptionCard :label="t('reset_current_save')" danger @click="doReset" />
     </div>
+
     <h2 class="options__title">{{ t("options_other") }}</h2>
     <div class="options__grid">
-      <OptionCard
-        label="Offline Progress"
-        :value="offlineProgressLabel"
-        @click="toggleOfflineProgress"
+      <OptionCard :label="offlineProgressLabel" @click="cycleOfflineProgress" />
+      <OptionSliderValues
+        :label="offlineTicksLabel"
+        v-model="player.options.offlineTicks"
+        :values="OFFLINE_TICKS_VALUES"
       />
-      <OptionCard
-        :label="t('max_offline_ticks', formatInt(player.options.offlineTicks))"
-        @click="editOfflineTicks"
-      />
-      <OptionCard
-        :label="t('ui_update_rate', formatInt(player.options.updateRate))"
-        @click="editUpdateRate"
+      <OptionSlider
+        :label="updateRateLabel"
+        v-model="player.options.updateRate"
+        :min="50"
+        :max="200"
+        :step="10"
       />
     </div>
   </div>

@@ -24,8 +24,8 @@ export function createInitialPlayer() {
     sacrificed: D(0),
     lastUpdate: Date.now(),
     options: {
-      updateRate: 33,
-      offlineProgress: true,
+      updateRate: 50,
+      offlineProgress: 'show',
       offlineTicks: 5000,
       lastTab: "dimensions",
       lastSubtabs: {},

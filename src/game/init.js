@@ -12,7 +12,7 @@ let beforeUnloadHandler = null;
 export function initGame() {
   const offlineMs = load();
 
-  if (player.options.offlineProgress && offlineMs > 10000) {
+  if (player.options.offlineProgress !== 'disable' && offlineMs > 10000) {
     simulateTime(offlineMs / 1000, { fast: offlineMs < 50000 });
   }
 

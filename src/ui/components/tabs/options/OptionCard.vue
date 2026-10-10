@@ -1,7 +1,6 @@
 <script setup>
 defineProps({
   label: { type: String, required: true },
-  value: { type: String, default: '' },
   danger: { type: Boolean, default: false },
 });
 defineEmits(['click']);
@@ -14,7 +13,6 @@ defineEmits(['click']);
     @click="$emit('click')"
   >
     <span class="option-card__label">{{ label }}</span>
-    <span v-if="value" class="option-card__value">{{ value }}</span>
   </button>
 </template>
 
@@ -24,7 +22,6 @@ defineEmits(['click']);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
   width: 100%;
   min-height: 6rem;
   padding: 0.5rem 0.3rem;
@@ -48,12 +45,6 @@ defineEmits(['click']);
 
 .option-card__label {
   white-space: pre-line;
-  line-height: 1.2;
-}
-
-.option-card__value {
-  font-size: 1rem;
-  color: var(--color-text-muted);
   line-height: 1.2;
 }
 </style>

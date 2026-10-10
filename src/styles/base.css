@@ -23,6 +23,20 @@ body {
   background: var(--color-bg);
 }
 
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("/fonts/fa-solid-900.woff2") format("woff2");
+}
+
+.fas, .fa-solid {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+}
+
 button {
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;

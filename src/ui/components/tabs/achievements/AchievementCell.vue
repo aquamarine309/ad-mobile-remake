@@ -93,11 +93,6 @@ function onClick(event) {
   display: block;
 }
 
-.achievement-cell--locked .achievement-cell__icon {
-  filter: grayscale(100%) brightness(0.6);
-  opacity: 0.7;
-}
-
 .achievement-cell__id {
   font-size: 1rem;
   font-weight: bold;

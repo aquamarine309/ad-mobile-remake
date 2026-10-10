@@ -1,6 +1,17 @@
 <script setup>
+import { computed } from 'vue';
 import { visibleTabs, currentTabKey, showTab } from "@/ui/tabs/state";
+import { player } from '@/core/state/player';
 import { t } from '@/i18n';
+
+const useSymbol = computed(() =>
+  player.options.bottomNavSymbols === 'all' ||
+  player.options.bottomNavSymbols === 'mainOnly'
+);
+
+function label(tab) {
+  return useSymbol.value ? tab.symbol : t(`tab_${tab.key}_letter`);
+}
 </script>
 
 <template>
@@ -12,7 +23,7 @@ import { t } from '@/i18n';
       :class="{ 'nav-bar__btn--active': currentTabKey === tab.key }"
       @click="showTab(tab.key)"
     >
-      {{ t(`tab_${tab.key}_letter`) }}
+      {{ label(tab) }}
     </button>
   </nav>
 </template>

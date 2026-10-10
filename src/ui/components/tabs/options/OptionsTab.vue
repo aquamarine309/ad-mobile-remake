@@ -8,6 +8,7 @@ import {
 } from '@/core/storage/save';
 
 import { resetGame } from '@/game/reset';
+import { formatInt } from '@/core/format';
 import { GameLoop } from '@/core/loop/game-loop';
 import { t } from "@/i18n";
 
@@ -51,10 +52,6 @@ function toggleOfflineProgress() {
   player.options.offlineProgress = !player.options.offlineProgress;
 }
 
-const offlineTicksLabel = computed(() =>
-  String(player.options.offlineTicks)
-);
-
 function editOfflineTicks() {
   const input = prompt(
     'Max offline ticks (1000 - 1000000):',
@@ -69,7 +66,6 @@ function editOfflineTicks() {
   player.options.offlineTicks = n;
 }
 
-const updateRateLabel = computed(() => `${player.options.updateRate} ms`);
 
 function editUpdateRate() {
   const input = prompt(
@@ -86,10 +82,32 @@ function editUpdateRate() {
   GameLoop.stop();
   GameLoop.start();
 }
+
+const bottomNavSymbolsLabel = computed(() => {
+  const mode = player.options.bottomNavSymbols;
+  if (mode === 'all') return t('bottom_symbols_X', t('on'));
+  if (mode === 'none') return t('bottom_symbols_X', t('off'));
+  if (mode === 'mainOnly') return t('bottom_symbols_only_main_tabs');
+  return t('bottom_symbols_only_sub_tabs');
+});
+
+const SYMBOL_MODES = ['all', 'mainOnly', 'subOnly', 'none'];
+
+function cycleBottomNavSymbols() {
+  const i = SYMBOL_MODES.indexOf(player.options.bottomNavSymbols);
+  player.options.bottomNavSymbols = SYMBOL_MODES[(i + 1) % SYMBOL_MODES.length];
+}
 </script>
 
 <template>
   <div class="options">
+    <h2 class="options__title">{{ t("options_ui") }}</h2>
+    <div class="options__grid">
+      <OptionCard
+        :label="bottomNavSymbolsLabel"
+        @click="cycleBottomNavSymbols"
+      />
+    </div>
     <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
     <div class="options__grid">
       <OptionCard
@@ -106,8 +124,7 @@ function editUpdateRate() {
         @click="doReset"
       />
     </div>
-
-    <h2 class="options__title">Gameplay</h2>
+    <h2 class="options__title">{{ t("options_other") }}</h2>
     <div class="options__grid">
       <OptionCard
         label="Offline Progress"
@@ -115,13 +132,11 @@ function editUpdateRate() {
         @click="toggleOfflineProgress"
       />
       <OptionCard
-        label="Offline Ticks"
-        :value="offlineTicksLabel"
+        :label="t('max_offline_ticks', formatInt(player.options.offlineTicks))"
         @click="editOfflineTicks"
       />
       <OptionCard
-        label="Update Rate"
-        :value="updateRateLabel"
+        :label="t('ui_update_rate', formatInt(player.options.updateRate))"
         @click="editUpdateRate"
       />
     </div>

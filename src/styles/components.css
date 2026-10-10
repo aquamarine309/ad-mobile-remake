@@ -17,3 +17,9 @@
   color: var(--color-nav-active);
   box-shadow: inset 0 -0.3rem 0 var(--color-nav-underline);
 }
+
+.tab-bar__btn,
+.subtab-bar__btn {
+  font-family: "Font Awesome 6 Free", monospace;
+  font-weight: 900;
+}

@@ -1,11 +1,41 @@
-import { ref, computed } from 'vue';
+import { computed, ref } from 'vue';
 import { TABS } from './config';
+import { player } from '@/core/state/player';
 
-export const currentTabKey = ref('dimensions');
-export const currentSubtabKey = ref('antimatter_dimensions');
+const DEFAULT_TAB_KEY = TABS[0].key;
+const DEFAULT_SUBTAB_KEY = TABS[0].subtabs[0].key;
+
+function findTab(key) {
+  return TABS.find(t => t.key === key);
+}
+
+export const currentTabKey = computed({
+  get() {
+    const key = player.options.lastTab;
+    return findTab(key) ? key : DEFAULT_TAB_KEY;
+  },
+  set(key) {
+    if (findTab(key)) player.options.lastTab = key;
+  },
+});
+
+export const currentSubtabKey = computed({
+  get() {
+    const tab = currentTab.value;
+    const stored = player.options.lastSubtabs[tab.key];
+    if (tab.subtabs.some(s => s.key === stored)) return stored;
+    return tab.subtabs[0].key;
+  },
+  set(key) {
+    const tab = currentTab.value;
+    if (tab.subtabs.some(s => s.key === key)) {
+      player.options.lastSubtabs[tab.key] = key;
+    }
+  },
+});
 
 export const currentTab = computed(() =>
-  TABS.find(t => t.key === currentTabKey.value) ?? TABS[0]
+  findTab(currentTabKey.value) ?? TABS[0]
 );
 
 export const visibleTabs = computed(() =>
@@ -21,18 +51,15 @@ export const currentSubtab = computed(() =>
   ?? currentTab.value.subtabs[0]
 );
 
-export function showSubtab(key) {
-  currentSubtabKey.value = key;
-}
-
 export function showTab(key, subtabKey) {
   currentTabKey.value = key;
   if (subtabKey !== undefined) {
     currentSubtabKey.value = subtabKey;
-    return;
   }
-  const tab = TABS.find(t => t.key === key);
-  currentSubtabKey.value = tab.subtabs[0].key;
+}
+
+export function showSubtab(key) {
+  currentSubtabKey.value = key;
 }
 
 export const focusedAchievementId = ref(null);

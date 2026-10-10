@@ -27,6 +27,9 @@ export function createInitialPlayer() {
       updateRate: 33,
       offlineProgress: true,
       offlineTicks: 5000,
+      lastTab: "dimensions",
+      lastSubtabs: {},
+      bottomNavSymbols: 'all',
     },
   };
 }

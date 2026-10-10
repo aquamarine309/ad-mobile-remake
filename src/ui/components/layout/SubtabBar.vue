@@ -1,11 +1,16 @@
 <script setup>
-import { visibleSubtabs, currentSubtabKey, showSubtab, currentTab } from '@/ui/tabs/state';
+import { computed } from 'vue';
+import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
+import { player } from '@/core/state/player';
 import { t } from '@/i18n';
 
-function labelKey(sub) {
-  return sub.key === currentTab.value.key
-    ? `tab_${sub.key}`
-    : `tab_${sub.key}_short`;
+const useSymbol = computed(() =>
+  player.options.bottomNavSymbols === 'all' ||
+  player.options.bottomNavSymbols === 'subOnly'
+);
+
+function label(sub) {
+  return useSymbol.value ? sub.symbol : t(sub.nameKey);
 }
 </script>
 
@@ -18,7 +23,7 @@ function labelKey(sub) {
       :class="{ 'nav-bar__btn--active': currentSubtabKey === s.key }"
       @click="showSubtab(s.key)"
     >
-      {{ t(labelKey(s)) }}
+      {{ label(s) }}
     </button>
   </nav>
 </template>

@@ -1,29 +1,27 @@
 <script setup>
-const props = defineProps({
+import RangeSlider from './RangeSlider.vue';
+
+defineProps({
   label: { type: String, required: true },
   modelValue: { type: Number, required: true },
-  min: { type: Number, required: true },
-  max: { type: Number, required: true },
+  min: { type: Number, default: 0 },
+  max: { type: Number, default: 100 },
   step: { type: Number, default: 1 },
+  values: { type: Array, default: null },
 });
-const emit = defineEmits(['update:modelValue']);
-
-function onInput(e) {
-  emit('update:modelValue', Number(e.target.value));
-}
+defineEmits(['update:modelValue']);
 </script>
 
 <template>
   <div class="option-slider">
     <div class="option-slider__label">{{ label }}</div>
-    <input
-      class="option-slider__range"
-      type="range"
+    <RangeSlider
+      :model-value="modelValue"
       :min="min"
       :max="max"
       :step="step"
-      :value="modelValue"
-      @input="onInput"
+      :values="values"
+      @update:model-value="$emit('update:modelValue', $event)"
     />
   </div>
 </template>
@@ -50,10 +48,5 @@ function onInput(e) {
   white-space: pre-line;
   line-height: 1.2;
   text-align: center;
-}
-
-.option-slider__range {
-  width: 100%;
-  accent-color: var(--color-good);
 }
 </style>

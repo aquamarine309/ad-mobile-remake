@@ -59,15 +59,7 @@ export function parseSave(text) {
   return loaded;
 }
 
-export function importSave(text) {
-  const loaded = parseSave(text);
-
-  const fresh = createInitialPlayer();
-  deepAssign(fresh, loaded);
-  localStorage.setItem(SAVE_KEY, encodeSave(JSON.stringify(serialize(fresh))));
-}
-
-function deepAssign(dst, src) {
+export function deepAssign(dst, src) {
   for (const k of Object.keys(src)) {
     const sv = src[k];
     if (sv !== null && typeof sv === 'object' && !Array.isArray(sv) && !(sv instanceof Decimal)) {
@@ -77,4 +69,8 @@ function deepAssign(dst, src) {
       dst[k] = sv;
     }
   }
+}
+
+export function writeSaveToStorage(playerObject) {
+  localStorage.setItem(SAVE_KEY, encodeSave(JSON.stringify(serialize(playerObject))));
 }

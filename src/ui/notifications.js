@@ -65,7 +65,7 @@ export const notify = {
 logic.on(GAME_EVENT.ACHIEVEMENT_UNLOCKED, ach => {
   notify.success(ach.name, {
     onClick: () => {
-      showTab('achievements', ach.isSecret ? 'secret' : 'normal');
+      showTab('achievements', ach.isSecret ? 'secret_achievements' : 'normal_achievements');
       focusedAchievementId.value = ach.id;
     },
   });

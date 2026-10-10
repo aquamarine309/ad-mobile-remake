@@ -53,4 +53,7 @@
   --color-achievement-secret-locked: #878787;
   --color-tooltip-bg: #e0e0e0;
   --color-tooltip-overlay: rgba(0, 0, 0, 0.6);
+  
+  --color-slider-track: #e0e0e0;
+  --color-slider-fill: #d81b60;
 }

@@ -2,13 +2,13 @@
 import { computed, watch } from 'vue';
 import OptionCard from './OptionCard.vue';
 import OptionSlider from './OptionSlider.vue';
-import OptionSliderValues from './OptionSliderValues.vue';
 import { player } from '@/core/state/player';
-import { exportSave, importSave } from '@/core/storage/save';
+import { exportSave } from '@/core/storage/save';
 import { resetGame } from '@/game/reset';
 import { formatInt } from '@/core/format';
 import { GameLoop } from '@/core/loop/game-loop';
 import { t, ta } from "@/i18n";
+import { importGame } from '@/game/import';
 
 // --- Save & Load ---
 
@@ -25,9 +25,8 @@ function doImport() {
   if (!text) return;
   if (!confirm('Import this save? Your current save will be overwritten.')) return;
   try {
-    importSave(text);
-    alert('Save imported. The page will reload.');
-    location.reload();
+    importGame(text);
+    alert('Save imported.');
   } catch (e) {
     alert(`Import failed: ${e.message}`);
   }
@@ -125,7 +124,7 @@ watch(() => player.options.updateRate, () => {
         @click="cycleOfflineProgress"
         :bad="player.options.offlineProgress === 'disable'"
       />
-      <OptionSliderValues
+      <OptionSlider
         :label="offlineTicksLabel"
         v-model="player.options.offlineTicks"
         :values="OFFLINE_TICKS_VALUES"

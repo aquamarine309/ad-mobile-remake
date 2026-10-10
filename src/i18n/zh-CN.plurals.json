@@ -1,0 +1,371 @@
+{
+  "X_color_schemes": {
+    "other": "{1} 配色"
+  },
+  "X_completions": {
+    "other": "完成次数 {1}"
+  },
+  "X_completions_on_eternity": {
+    "other": "永恒以完成 {1} 次挑战"
+  },
+  "X_levels_higher_than_your_best": {
+    "other": "比你最高等级的符文高 {1}"
+  },
+  "X_levels_lower_than_your_best": {
+    "other": "比你最高等级的符文低 {1}"
+  },
+  "X_perk_points": {
+    "other": "{1} 复兴点数"
+  },
+  "X_realities": {
+    "other": "{1} 现实次数"
+  },
+  "X_reality_machines": {
+    "other": "{1} 现实机器"
+  },
+  "X_relic_shards": {
+    "other": "{1} 遗迹碎片"
+  },
+  "X_symbols": {
+    "other": "{1} 符号"
+  },
+  "armageddon_for_X_remnants": {
+    "other": "末日后获得 {1} 遗物\n现实碎片 {2}/秒 ➜ {3}/秒"
+  },
+  "automator_X_errors": {
+    "other": "你的脚本有以下 {1} 个错误："
+  },
+  "automator_speed": {
+    "other": "自动机每秒运行 {1} 条指令"
+  },
+  "bh2_will_activate_2": {
+    "other": "黑洞 2 将在黑洞 1 启动 {1} 次后启动。"
+  },
+  "black_hole_X_activated_Y_times": {
+    "other": "{1} 已经启动了 {2} 次"
+  },
+  "black_holes_automatically_inverted": {
+    "other": "黑洞已自动反转"
+  },
+  "black_holes_automatically_paused": {
+    "other": "黑洞已自动暂停"
+  },
+  "black_holes_automatically_unpaused": {
+    "other": "黑洞已自动恢复"
+  },
+  "black_holes_inverted": {
+    "other": "黑洞已反转"
+  },
+  "black_holes_paused": {
+    "other": "黑洞已暂停"
+  },
+  "black_holes_unpaused": {
+    "other": "黑洞已恢复"
+  },
+  "break_infinity_upgrade_5_effect": {
+    "other": "{1} 无限次数 / {2}"
+  },
+  "condense_X_times": {
+    "other": "凝聚 {1} 次"
+  },
+  "condense_de_to_singularity": {
+    "other": "凝聚所有暗能量以得到 {1} 个奇点"
+  },
+  "cost_X_eternity_points": {
+    "other": "价格：{1} 永恒点数"
+  },
+  "cost_X_galaxies": {
+    "other": "价格：{1} 星系"
+  },
+  "cost_X_imaginary_machines": {
+    "other": "价格：{1} 虚幻机器"
+  },
+  "cost_X_infinity_points": {
+    "other": "价格：{1} 无限点数"
+  },
+  "cost_X_perk_points": {
+    "other": "价格：{1} 复兴点数"
+  },
+  "cost_X_reality_machines": {
+    "other": "价格：{1} 现实机器"
+  },
+  "cost_X_reality_shards": {
+    "other": "价格：{1} 现实碎片"
+  },
+  "cost_X_relic_shards": {
+    "other": "价格：{1} 遗迹碎片"
+  },
+  "cost_X_time_theorems": {
+    "other": "价格：{1} 时间之理"
+  },
+  "current_interval": {
+    "other": "当前时间间隔：{1} 秒"
+  },
+  "day": {
+    "other": "天"
+  },
+  "ec12_eternity_button_restriction": {
+    "other": "在\n{1} / {2} 秒内"
+  },
+  "ec12_restriction": {
+    "other": "在 {1} 秒内"
+  },
+  "ec4_restriction": {
+    "other": "在小于或等于 {1} 次无限之内"
+  },
+  "ec_completed_times": {
+    "other": "已完成 {1} 次"
+  },
+  "eternities": {
+    "other": "永恒"
+  },
+  "eternity_confirmation_2": {
+    "other": "永恒将重置除成就、挑战纪录、统计标签页“概况”中的内容以外所有的游戏进度。你将获得 {1} 永恒点数。"
+  },
+  "exo_controls_fastforward_by_amount_description": {
+    "other": "快进 {1} 秒",
+    "one": "快进 {1} 秒"
+  },
+  "exo_controls_rewind_by_amount_description": {
+    "other": "快退 {1} 秒",
+    "one": "快退 {1} 秒"
+  },
+  "gain_X_completions": {
+    "other": "完成 {1} 次"
+  },
+  "gain_X_eternity_points": {
+    "other": "获得 {1}\n永恒点数"
+  },
+  "gain_X_infinity_points": {
+    "other": "获得 {1}\n无限点数"
+  },
+  "gain_X_reality_machines": {
+    "other": "获得 {1}\n现实机器"
+  },
+  "gain_X_tachyon_particles_eternity_button": {
+    "other": "获得 {1}\n超光速粒子。"
+  },
+  "hour": {
+    "other": "时"
+  },
+  "in_X_singularities": {
+    "other": "还需 {1} 奇点"
+  },
+  "infinities": {
+    "other": "无限"
+  },
+  "infinity_X_times_to_unlock": {
+    "other": "大坍缩 {1} 次以解锁。"
+  },
+  "memories": {
+    "other": "{1} 记忆"
+  },
+  "memory_chunks": {
+    "other": "{1} 记忆块"
+  },
+  "milestone_eternity_display": {
+    "other": "{1} 永恒："
+  },
+  "minute": {
+    "other": "分"
+  },
+  "mtrl_badge_content_description": {
+    "other": "{1} 条新通知",
+    "one": "{1} 条新通知"
+  },
+  "nameless_have_X_memories": {
+    "other": "{1} 拥有 {2} 记忆"
+  },
+  "pet_has_X_memories": {
+    "other": "{1} 拥有 {2} 记忆"
+  },
+  "protected_slots": {
+    "other": "保护格：\n（{1} 行）"
+  },
+  "purchases_left_ec8": {
+    "other": "你还能买 {1} 次。"
+  },
+  "reach_X_antimatter": {
+    "other": "达到 {1}\n反物质"
+  },
+  "reach_X_de_to_condense": {
+    "other": "达到 {1} 暗能量以凝聚 {2} 个奇点"
+  },
+  "reach_X_infinity_points": {
+    "other": "达到 {1}\n无限点数"
+  },
+  "realities": {
+    "other": "现实"
+  },
+  "references_X_constants": {
+    "other": "引用了 {1} 个已定义的常量。"
+  },
+  "references_X_presets": {
+    "other": "引用了 {1} 个已识别的研究预设。"
+  },
+  "second": {
+    "other": "秒"
+  },
+  "simulated_realities": {
+    "other": "选中该符文后游戏将计算剩余的现实，随后游戏将基于符文筛选的设置，自动选择另外 {1} 个符文。"
+  },
+  "statistics_banked_infinities": {
+    "other": "你拥有 {1} 储存的无限次数。"
+  },
+  "statistics_banked_infinities_gain": {
+    "other": "永恒后储存的无限次数增加 {1} （ {2} /分钟）。"
+  },
+  "statistics_best_laitela_destabilization": {
+    "other": "完成莱特拉的现实的最短用时：{1}, {2} 个维度（暗物质 {3}）"
+  },
+  "statistics_eternities": {
+    "other": "你进行了 {1} 次永恒。"
+  },
+  "statistics_game_completed": {
+    "other": "您已通关游戏 {1} 次。"
+  },
+  "statistics_infinities": {
+    "other": "你的无限次数是 {1}"
+  },
+  "statistics_infinities_gain": {
+    "other": "大坍缩后获得 {1} 无限次数（ {2} /分钟）。"
+  },
+  "statistics_news_seen": {
+    "other": "你已阅读 {1} 条新闻。"
+  },
+  "statistics_realities": {
+    "other": "你进行了 {1} 次现实。"
+  },
+  "statistics_secret_achievements": {
+    "other": "你已解锁 {1} 个隐藏成就。"
+  },
+  "statistics_total_antimatter": {
+    "other": "您总共制造了 {1} 个反物质。"
+  },
+  "stored_game_time_X_real_time_Y_hours": {
+    "other": "存储的游戏时间 {1}, 且存储现实时间的上限 +{2} 小时。"
+  },
+  "tachyon_galaxies_1": {
+    "other": "下一个超光速粒子星系将于 {1} 膨胀时间时获得"
+  },
+  "tachyon_galaxies_1_multiple": {
+    "other": "下 {1} 个超光速粒子星系将于 {2} 膨胀时间时获得"
+  },
+  "tachyon_galaxies_2": {
+    "other": "你已获得 {1} 超光速粒子星系。"
+  },
+  "there_is_X_matter": {
+    "other": "你有 {1} 物质。"
+  },
+  "ticks_done": {
+    "other": "已计算 {1}/{2} 时间间隔"
+  },
+  "timestudy_224": {
+    "other": "遥远星系的价格增长推迟 {1} 星系（每 {3} 次维度提升后多推迟 {2} 星系）"
+  },
+  "timestudy_225_226_effect": {
+    "other": "+{1} 复制器星系"
+  },
+  "will_unlock_X_sets": {
+    "other": "将解锁 {1} 个"
+  },
+  "year": {
+    "other": "年"
+  },
+  "you_are_gaining_X_galaxies_per_second": {
+    "other": "你每秒获得 {1} 星系。"
+  },
+  "you_are_gaining_a_galaxy_every_X_seconds": {
+    "other": "你每过 {1} 秒能获得一个星系。"
+  },
+  "you_are_getting_X_7th_dimensions_per_second": {
+    "other": "你每秒能得到 {1} 第七维度。"
+  },
+  "you_are_getting_X_8th_inf_dimensions_per_second": {
+    "other": "每秒获得 {1} 第八无限维度。"
+  },
+  "you_are_getting_X_antimatter_per_second": {
+    "other": "你每秒获得 {1} 反物质。"
+  },
+  "you_are_getting_X_infinity_power_per_second": {
+    "other": "你每秒能得到 {1} 无限之力。"
+  },
+  "you_are_getting_X_time_shards_per_second": {
+    "other": "每秒获得 {1} 个时间碎片"
+  },
+  "you_can_charge_X_upgrades": {
+    "other": "你可以充能 {1} 个无限升级。"
+  },
+  "you_have_X_antimatter": {
+    "other": "你拥有 {1} 反物质。"
+  },
+  "you_have_X_dark_energy": {
+    "other": "你拥有 {1} 暗能量。"
+  },
+  "you_have_X_dark_matter": {
+    "other": "你拥有 {1} 暗物质"
+  },
+  "you_have_X_dilated_time": {
+    "other": "你拥有 {1} 膨胀时间。"
+  },
+  "you_have_X_eternity_points": {
+    "other": "你拥有 {1} 永恒点数。"
+  },
+  "you_have_X_galaxies": {
+    "other": "你总共拥有 {1} 个星系。 +{2}/s"
+  },
+  "you_have_X_infinity_points": {
+    "other": "你拥有 {1} 无限点数。"
+  },
+  "you_have_X_infinity_power": {
+    "other": "你拥有 {1} 无限之力，"
+  },
+  "you_have_X_perk_points": {
+    "other": "你拥有 {1} 复兴点数。"
+  },
+  "you_have_X_reality_machines": {
+    "other": "你拥有 {1} 现实机器。"
+  },
+  "you_have_X_reality_shards": {
+    "other": "你拥有 {1} 现实碎片。"
+  },
+  "you_have_X_relic_shards": {
+    "other": "你拥有 {1} 遗迹碎片。"
+  },
+  "you_have_X_remnants": {
+    "other": "你拥有 {1} 遗物。"
+  },
+  "you_have_X_replicanti": {
+    "other": "你拥有 {1} 复制器。"
+  },
+  "you_have_X_replicanti_galaxies": {
+    "other": "你拥有 {1} 复制器星系。"
+  },
+  "you_have_X_singularities": {
+    "other": "你拥有 {1} 奇点。"
+  },
+  "you_have_X_space_theorems": {
+    "other": "你拥有 {1} 空间之理。"
+  },
+  "you_have_X_tachyon_particles": {
+    "other": "你拥有 {1} 超光速粒子。"
+  },
+  "you_have_X_time_shards": {
+    "other": "你拥有 {1} 时间碎片。"
+  },
+  "you_have_X_time_theorems": {
+    "other": "你拥有 {1} 时间之理。"
+  },
+  "you_have_unlocked_X_resources": {
+    "other": "你已解锁 {1} 个炼金资源。"
+  },
+  "you_have_unlocked_X_triad_studies": {
+    "other": "你已解锁了 {1} 个三体研究。"
+  },
+  "youve_gained_X_tickspeed_upgrades": {
+    "other": "你已获得 {1} 次计数频率升级。"
+  },
+  "youve_purchased_X_tickspeed_upgrades": {
+    "other": "你已购买 {1} 次计数频率提升。"
+  }
+}

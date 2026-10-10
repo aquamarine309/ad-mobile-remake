@@ -7,7 +7,6 @@ import { t } from "@/i18n";
 const visible = computed(() => Sacrifice.isVisible);
 const canSacrifice = computed(() => Sacrifice.canSacrifice);
 const next = computed(() => Sacrifice.nextBoost);
-const total = computed(() => Sacrifice.totalBoost);
 const disabledReason = computed(() => Sacrifice.disabledCondition);
 
 const buttonText = computed(() => {
@@ -25,9 +24,6 @@ function sacrifice() { Sacrifice.sacrifice(); }
     <button class="sacrifice__btn" :disabled="!canSacrifice" @click="sacrifice">
       {{ buttonText }}
     </button>
-    <div class="sacrifice__total">
-      {{ t("sacrifice_total_multiplier", formatX(total, 2, 2)) }}
-    </div>
   </div>
 </template>
 
@@ -56,10 +52,5 @@ function sacrifice() { Sacrifice.sacrifice(); }
   background: var(--color-btn-bg-disabled);
   border-color: var(--color-bad);
   cursor: default;
-}
-
-.sacrifice__total {
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
 }
 </style>

@@ -1,0 +1,476 @@
+{
+  "X_color_schemes": {
+    "other": "{1} color schemes",
+    "one": "{1} color scheme"
+  },
+  "X_completions": {
+    "other": "{1} completions",
+    "one": "{1} completion"
+  },
+  "X_completions_on_eternity": {
+    "other": "{1} completions on Eternity",
+    "one": "{1} completion on Eternity"
+  },
+  "X_levels_higher_than_your_best": {
+    "other": "{1} levels higher than your best",
+    "one": "{1} level higher than your best"
+  },
+  "X_levels_lower_than_your_best": {
+    "other": "{1} levels lower than your best",
+    "one": "{1} level lower than your best"
+  },
+  "X_perk_points": {
+    "other": "{1} Perk Points",
+    "one": "{1} Perk Point"
+  },
+  "X_realities": {
+    "other": "{1} Realities",
+    "one": "{1} Reality"
+  },
+  "X_reality_machines": {
+    "other": "{1} Reality Machines",
+    "one": "{1} Reality Machine"
+  },
+  "X_relic_shards": {
+    "other": "{1} Relic Shards",
+    "one": "{1} Relic Shard"
+  },
+  "X_symbols": {
+    "other": "{1} symbols",
+    "one": "{1} symbol"
+  },
+  "armageddon_for_X_remnants": {
+    "other": "Armageddon for {1} Remnants\nReality Shards {2}/s ➜ {3}/s",
+    "one": "Armageddon for {1} Remnant\nReality Shards {2}/s ➜ {3}/s"
+  },
+  "automator_X_errors": {
+    "other": "Your script has the following {1} errors:",
+    "one": "Your script has the following {1} error:"
+  },
+  "automator_speed": {
+    "other": "The Automator is running {1} commands per real-time second.",
+    "one": "The Automator is running {1} command per real-time second."
+  },
+  "bh2_will_activate_2": {
+    "other": "Black Hole 2 will activate after {1} more active cycles of Black Hole 1.",
+    "one": "Black Hole 2 will activate after {1} more active cycle of Black Hole 1."
+  },
+  "black_hole_X_activated_Y_times": {
+    "other": "Your {1} activated {2} times",
+    "one": "Your {1} activated {2} time"
+  },
+  "black_holes_automatically_inverted": {
+    "other": "Black Holes automatically inverted",
+    "one": "Black Hole automatically inverted"
+  },
+  "black_holes_automatically_paused": {
+    "other": "Black Holes automatically paused",
+    "one": "Black Hole automatically paused"
+  },
+  "black_holes_automatically_unpaused": {
+    "other": "Black Holes automatically unpaused",
+    "one": "Black Hole automatically unpaused"
+  },
+  "black_holes_inverted": {
+    "other": "Black Holes inverted",
+    "one": "Black Hole inverted"
+  },
+  "black_holes_paused": {
+    "other": "Black Holes paused",
+    "one": "Black Hole paused"
+  },
+  "black_holes_unpaused": {
+    "other": "Black Holes unpaused",
+    "one": "Black Hole unpaused"
+  },
+  "break_infinity_upgrade_5_effect": {
+    "other": "{1} Infinities every {2}",
+    "one": "{1} Infinity every {2}"
+  },
+  "condense_X_times": {
+    "other": "Condense {1} times",
+    "one": "Condense {1} time"
+  },
+  "condense_de_to_singularity": {
+    "other": "Condense all DE into {1} Singularities",
+    "one": "Condense all DE into a Singularity"
+  },
+  "cost_X_eternity_points": {
+    "other": "Cost: {1} Eternity Points",
+    "one": "Cost: {1} Eternity Point"
+  },
+  "cost_X_galaxies": {
+    "other": "Cost: {1} Galaxies",
+    "one": "Cost: {1} Galaxy"
+  },
+  "cost_X_imaginary_machines": {
+    "other": "Cost: {1} Imaginary Machines",
+    "one": "Cost: {1} Imaginary Machine"
+  },
+  "cost_X_infinity_points": {
+    "other": "Cost: {1} Infinity Points",
+    "one": "Cost: {1} Infinity Point"
+  },
+  "cost_X_perk_points": {
+    "other": "Cost: {1} Perk Points",
+    "one": "Cost: {1} Perk Point"
+  },
+  "cost_X_reality_machines": {
+    "other": "Cost: {1} Reality Machines",
+    "one": "Cost: {1} Reality Machine"
+  },
+  "cost_X_reality_shards": {
+    "other": "Cost: {1} Reality Shards",
+    "one": "Cost: {1} Reality Shard"
+  },
+  "cost_X_relic_shards": {
+    "other": "Cost: {1} Relic Shards",
+    "one": "Cost: {1} Relic Shard"
+  },
+  "cost_X_time_theorems": {
+    "other": "Cost: {1} Time Theorems",
+    "one": "Cost: {1} Time Theorem"
+  },
+  "current_interval": {
+    "other": "Current interval: {1} seconds",
+    "one": "Current interval: {1} second"
+  },
+  "day": {
+    "other": "days",
+    "one": "day"
+  },
+  "ec12_eternity_button_restriction": {
+    "other": "in\n{1} / {2} seconds",
+    "one": "in\n{1} / {2} second"
+  },
+  "ec12_restriction": {
+    "other": "in ≤ {1} seconds",
+    "one": "in ≤ {1} second"
+  },
+  "ec4_restriction": {
+    "other": "in ≤ {1} Infinities",
+    "one": "in ≤ {1} Infinity"
+  },
+  "ec_completed_times": {
+    "other": "Completed {1} times",
+    "one": "Completed {1} time"
+  },
+  "eternities": {
+    "other": "Eternities",
+    "one": "Eternity"
+  },
+  "eternity_confirmation_2": {
+    "other": "Eternity will reset everything except Achievements, Challenge records, and anything under the General header on the Statistics tab. You will also gain {1} Eternity Points.",
+    "one": "Eternity will reset everything except Achievements, Challenge records, and anything under the General header on the Statistics tab. You will also gain {1} Eternity Point."
+  },
+  "exo_controls_fastforward_by_amount_description": {
+    "other": "Fast forward {1} seconds",
+    "one": "Fast forward {1} second"
+  },
+  "exo_controls_rewind_by_amount_description": {
+    "other": "Rewind {1} seconds",
+    "one": "Rewind {1} second"
+  },
+  "gain_X_completions": {
+    "other": "Gain {1} completions",
+    "one": "Gain {1} completion"
+  },
+  "gain_X_eternity_points": {
+    "other": "Gain {1}\nEternity Points",
+    "one": "Gain {1}\nEternity Point"
+  },
+  "gain_X_infinity_points": {
+    "other": "Gain {1}\nInfinity Points",
+    "one": "Gain {1}\nInfinity Point"
+  },
+  "gain_X_reality_machines": {
+    "other": "Gain {1}\nReality Machines",
+    "one": "Gain {1}\nReality Machine"
+  },
+  "gain_X_tachyon_particles_eternity_button": {
+    "other": "Gain {1}\nTachyon Particles",
+    "one": "Gain {1}\nTachyon Particle"
+  },
+  "hour": {
+    "other": "hours",
+    "one": "hour"
+  },
+  "in_X_singularities": {
+    "other": "In {1} Singularities",
+    "one": "In {1} Singularity"
+  },
+  "infinities": {
+    "other": "Infinities",
+    "one": "Infinity"
+  },
+  "infinity_X_times_to_unlock": {
+    "other": "Infinity {1} times to unlock.",
+    "one": "Infinity {1} time to unlock."
+  },
+  "memories": {
+    "other": "{1} Memories",
+    "one": "{1} Memory"
+  },
+  "memory_chunks": {
+    "other": "{1} Memory Chunks",
+    "one": "{1} Memory Chunk"
+  },
+  "milestone_eternity_display": {
+    "other": "{1} Eternities:",
+    "one": "{1} Eternity:"
+  },
+  "minute": {
+    "other": "minutes",
+    "one": "minute"
+  },
+  "mtrl_badge_content_description": {
+    "other": "{1} new notifications",
+    "one": "{1} new notification"
+  },
+  "nameless_have_X_memories": {
+    "other": "{1} have {2} Memories",
+    "one": "{1} have {2} Memory"
+  },
+  "pet_has_X_memories": {
+    "other": "{1} has {2} Memories",
+    "one": "{1} has {2} Memory"
+  },
+  "protected_slots": {
+    "other": "Protected Slots:\n({1} rows)",
+    "one": "Protected Slots:\n({1} row)"
+  },
+  "purchases_left_ec8": {
+    "other": "You have {1} purchases left.",
+    "one": "You have {1} purchase left."
+  },
+  "reach_X_antimatter": {
+    "other": "Reach {1}\nantimatter"
+  },
+  "reach_X_de_to_condense": {
+    "other": "Reach {1} DE to condense all DE into {2} Singularities",
+    "one": "Reach {1} DE to condense all DE into a Singularity"
+  },
+  "reach_X_infinity_points": {
+    "other": "Reach {1}\nInfinity Points",
+    "one": "Reach {1}\nInfinity Point"
+  },
+  "realities": {
+    "other": "Realities",
+    "one": "Reality"
+  },
+  "references_X_constants": {
+    "other": "References {1} defined constants.",
+    "one": "References {1} defined constant."
+  },
+  "references_X_presets": {
+    "other": "References {1} recognized study presets.",
+    "one": "References {1} recognized study preset."
+  },
+  "second": {
+    "other": "seconds",
+    "one": "second"
+  },
+  "simulated_realities": {
+    "other": "After choosing this Glyph the game will simulate the rest of your Realities, automatically choosing another {1} Glyphs based on your Glyph filter settings.",
+    "one": "After choosing this Glyph the game will simulate the rest of your Realities, automatically choosing another {1} Glyph based on your Glyph filter settings."
+  },
+  "statistics_banked_infinities": {
+    "other": "You have {1} Banked Infinities.",
+    "one": "You have {1} Banked Infinity."
+  },
+  "statistics_banked_infinities_gain": {
+    "other": "You will gain {1} Banked Infinities on Eternity ({2}/m).",
+    "one": "You will gain {1} Banked Infinity on Eternity ({2}/m)."
+  },
+  "statistics_best_laitela_destabilization": {
+    "other": "Best Lai'tela Destabilization: {1}, {2} Dimensions ({3} DM)",
+    "one": "Best Lai'tela Destabilization: {1}, {2} Dimension ({3} DM)"
+  },
+  "statistics_eternities": {
+    "other": "You have {1} Eternities.",
+    "one": "You have {1} Eternity."
+  },
+  "statistics_game_completed": {
+    "other": "You have completed the entire game {1} times.",
+    "one": "You have completed the entire game {1} time."
+  },
+  "statistics_infinities": {
+    "other": "You have {1} Infinities.",
+    "one": "You have {1} Infinity."
+  },
+  "statistics_infinities_gain": {
+    "other": "You will gain {1} Infinities on Crunch ({2}/m).",
+    "one": "You will gain {1} Infinity on Crunch ({2}/m)."
+  },
+  "statistics_news_seen": {
+    "other": "You have seen {1} news ticker messages in total.",
+    "one": "You have seen {1} news ticker message in total."
+  },
+  "statistics_realities": {
+    "other": "You have {1} Realities.",
+    "one": "You have {1} Reality."
+  },
+  "statistics_secret_achievements": {
+    "other": "You have unlocked {1} Secret Achievements.",
+    "one": "You have unlocked {1} Secret Achievement."
+  },
+  "statistics_total_antimatter": {
+    "other": "You have made a total of {1} antimatter."
+  },
+  "stored_game_time_X_real_time_Y_hours": {
+    "other": "Stored game time {1} and real time +{2} hours.",
+    "one": "Stored game time {1} and real time +{2} hour."
+  },
+  "tachyon_galaxies_1": {
+    "other": "Next Tachyon Galaxy at {1} Dilated Time,"
+  },
+  "tachyon_galaxies_1_multiple": {
+    "other": "Next {1} Tachyon Galaxies at {2} Dilated Time,"
+  },
+  "tachyon_galaxies_2": {
+    "other": "gained total of {1} Tachyon Galaxies.",
+    "one": "gained total of {1} Tachyon Galaxy."
+  },
+  "there_is_X_matter": {
+    "other": "There is {1} matter."
+  },
+  "ticks_done": {
+    "other": "{1}/{2} ticks done",
+    "one": "{1}/{2} tick done"
+  },
+  "timestudy_224": {
+    "other": "Distant Galaxy cost scaling starts {1} Galaxies later ({2} for every {3} Dimboosts)",
+    "one": "Distant Galaxy cost scaling starts {1} Galaxy later ({2} for every {3} Dimboosts)"
+  },
+  "timestudy_225_226_effect": {
+    "other": "+{1} RGs",
+    "one": "+{1} RG"
+  },
+  "will_unlock_X_sets": {
+    "other": "Will unlock {1} sets",
+    "one": "Will unlock {1} set"
+  },
+  "year": {
+    "other": "years",
+    "one": "year"
+  },
+  "you_are_gaining_X_galaxies_per_second": {
+    "other": "You are gaining {1} galaxies per second",
+    "one": "You are gaining {1} galaxy per second"
+  },
+  "you_are_gaining_a_galaxy_every_X_seconds": {
+    "other": "You are gaining a galaxy every {1} seconds",
+    "one": "You are gaining a galaxy every {1} second"
+  },
+  "you_are_getting_X_7th_dimensions_per_second": {
+    "other": "You are getting {1} 7th Dimensions per second.",
+    "one": "You are getting {1} 7th Dimension per second."
+  },
+  "you_are_getting_X_8th_inf_dimensions_per_second": {
+    "other": "You are getting {1} 8th Inf. Dimensions per second."
+  },
+  "you_are_getting_X_antimatter_per_second": {
+    "other": "You are getting {1} antimatter per second."
+  },
+  "you_are_getting_X_infinity_power_per_second": {
+    "other": "You are getting {1} Infinity Power per second."
+  },
+  "you_are_getting_X_time_shards_per_second": {
+    "other": "You are getting {1} Time Shards per second.",
+    "one": "You are getting {1} Time Shard per second."
+  },
+  "you_can_charge_X_upgrades": {
+    "other": "You can Charge {1} Infinity Upgrades.",
+    "one": "You can Charge {1} Infinity Upgrade."
+  },
+  "you_have_X_antimatter": {
+    "other": "You have {1} antimatter."
+  },
+  "you_have_X_dark_energy": {
+    "other": "You have {1} Dark Energy."
+  },
+  "you_have_X_dark_matter": {
+    "other": "You have {1} Dark Matter"
+  },
+  "you_have_X_dilated_time": {
+    "other": "You have {1} Dilated Time."
+  },
+  "you_have_X_eternity_points": {
+    "other": "You have {1} Eternity Points.",
+    "one": "You have {1} Eternity Point."
+  },
+  "you_have_X_galaxies": {
+    "other": "You have a total of {1} Galaxies. +{2}/s",
+    "one": "You have a total of {1} Galaxy. +{2}/s"
+  },
+  "you_have_X_infinity_points": {
+    "other": "You have {1} Infinity Points.",
+    "one": "You have {1} Infinity Point."
+  },
+  "you_have_X_infinity_power": {
+    "other": "You have {1} Infinity Power,"
+  },
+  "you_have_X_perk_points": {
+    "other": "You have {1} Perk Points.",
+    "one": "You have {1} Perk Point."
+  },
+  "you_have_X_reality_machines": {
+    "other": "You have {1} Reality Machines.",
+    "one": "You have {1} Reality Machine."
+  },
+  "you_have_X_reality_shards": {
+    "other": "You have {1} Reality Shards.",
+    "one": "You have {1} Reality Shard."
+  },
+  "you_have_X_relic_shards": {
+    "other": "You have {1} Relic Shards.",
+    "one": "You have {1} Relic Shard."
+  },
+  "you_have_X_remnants": {
+    "other": "You have {1} Remnants.",
+    "one": "You have {1} Remnant."
+  },
+  "you_have_X_replicanti": {
+    "other": "You have {1} Replicanti,"
+  },
+  "you_have_X_replicanti_galaxies": {
+    "other": "You have {1} Replicanti Galaxies.",
+    "one": "You have {1} Replicanti Galaxy."
+  },
+  "you_have_X_singularities": {
+    "other": "You have {1} Singularities.",
+    "one": "You have {1} Singularity."
+  },
+  "you_have_X_space_theorems": {
+    "other": "You have {1} Space Theorems.",
+    "one": "You have {1} Space Theorem."
+  },
+  "you_have_X_tachyon_particles": {
+    "other": "You have {1} Tachyon Particles.",
+    "one": "You have {1} Tachyon Particle."
+  },
+  "you_have_X_time_shards": {
+    "other": "You have {1} Time Shards.",
+    "one": "You have {1} Time Shard."
+  },
+  "you_have_X_time_theorems": {
+    "other": "You have {1} Time Theorems.",
+    "one": "You have {1} Time Theorem."
+  },
+  "you_have_unlocked_X_resources": {
+    "other": "You have unlocked {1} Alchemy Resources.",
+    "one": "You have unlocked {1} Alchemy Resource."
+  },
+  "you_have_unlocked_X_triad_studies": {
+    "other": "You have unlocked {1} Triad Studies.",
+    "one": "You have unlocked {1} Triad Study."
+  },
+  "youve_gained_X_tickspeed_upgrades": {
+    "other": "You've gained {1} Tickspeed upgrades.",
+    "one": "You've gained {1} Tickspeed upgrade."
+  },
+  "youve_purchased_X_tickspeed_upgrades": {
+    "other": "You've purchased {1} Tickspeed upgrades.",
+    "one": "You've purchased {1} Tickspeed upgrade."
+  }
+}

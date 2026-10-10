@@ -152,7 +152,7 @@ class AntimatterDimensionState extends DimensionState {
   }
   
   get multiplier() {
-    let mult = D(2).pow(this.bought.div(10).floor());
+    let mult = AntimatterDimensions.buyTenMultiplier.pow(this.bought.div(10).floor());
     mult = mult.times(DimBoost.multiplierToNDTier(this.tier));
     mult = mult.times(NormalAchievements.multiplier);
     if (this.tier === 8) {
@@ -222,6 +222,10 @@ export const AntimatterDimensions = {
   
   onBuyDimension(tier) {
     Achievement(tier + 10).unlock();
+  },
+  
+  get buyTenMultiplier() {
+    return D(2);
   },
   
   tick(diff) {

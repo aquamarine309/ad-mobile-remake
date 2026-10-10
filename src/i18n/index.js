@@ -1,18 +1,23 @@
-// src/i18n/index.js
 import { reactive } from 'vue';
-import zhCN from './zh-CN.json';
-import en from './en.json';
+import zhStrings from './zh-CN.json';
+import zhPlurals from './zh-CN.plurals.json';
+import enStrings from './en.json';
+import enPlurals from './en.plurals.json';
+import { Decimal } from '@/core/decimal';
 
-const locales = { 'zh-CN': zhCN, en };
+const locales = {
+  'zh-CN': { strings: zhStrings, plurals: zhPlurals },
+  en:      { strings: enStrings,  plurals: enPlurals  },
+};
 
-const state = reactive({ current: 'zh-CN' });
+export const i18nState = reactive({ current: 'zh-CN' });
 
 export function setLanguage(lang) {
-  if (locales[lang]) state.current = lang;
+  if (locales[lang]) i18nState.current = lang;
 }
 
 export function getLanguage() {
-  return state.current;
+  return i18nState.current;
 }
 
 function format(s, args) {
@@ -24,23 +29,53 @@ function format(s, args) {
 }
 
 export function t(key, ...args) {
-  const s = locales[state.current]?.[key];
-  if (s === undefined) {
-    console.warn(`[i18n] Missing key: ${key} (${state.current})`);
-    return key;
-  }
+  const s = locales[i18nState.current]?.strings?.[key];
   if (typeof s !== 'string') {
-    console.warn(`[i18n] Key "${key}" is not a string (plurals/array?)`);
+    console.warn(`[i18n] Missing string key: ${key}`);
     return key;
   }
   return format(s, args);
 }
 
 export function ta(key, ...args) {
-  const s = locales[state.current]?.[key];
+  const s = locales[i18nState.current]?.strings?.[key];
   if (typeof s !== 'string') {
-    console.warn(`[i18n] "${key}" is not a string`);
+    console.warn(`[i18n] Missing array key: ${key}`);
     return [];
   }
   return s.split('|').map(part => format(part, args));
+}
+
+function isOne(n) {
+  if (typeof n === 'number') return n === 1;
+  if (n instanceof Decimal) return n.eq(1);
+  return false;
+}
+
+function pickForm(n) {
+  if (i18nState.current === 'en') return isOne(n) ? 'one' : 'other';
+  return 'other';
+}
+
+export function tp(key, count, ...args) {
+  const forms = locales[i18nState.current]?.plurals?.[key];
+  if (!forms) {
+    console.warn(`[i18n] Missing plurals key: ${key}`);
+    return key;
+  }
+  const s = forms[pickForm(count)] ?? forms.other;
+  return format(s, args);
+}
+
+export function tpHtml(key, count, ...args) {
+  const forms = locales[i18nState.current]?.plurals?.[key];
+  if (!forms) {
+    console.warn(`[i18n] Missing plurals key: ${key}`);
+    return key;
+  }
+  const s = forms[pickForm(count)] ?? forms.other;
+  return s.replace(/\{(\d+)\}/g, (_, n) => {
+    const v = args[Number(n) - 1];
+    return `<span class="i18n-amt">${v ?? ''}</span>`;
+  });
 }

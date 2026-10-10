@@ -1,39 +1,34 @@
 <script setup>
-import { Currency } from "@/core/currency";
-import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
-import { format } from "@/core/format";
-import { computed } from "vue";
-import { t } from "@/i18n";
+import { computed } from 'vue';
+import { Currency } from '@/core/currency';
+import { format } from '@/core/format';
+import { tpHtml } from '@/i18n';
 
-const antimatter = computed(() => format(Currency.antimatter.value, 2, 1));
-const perSecond = computed(() =>
-  format(AntimatterDimension(1).productionPerSecond, 2)
-);
+const rawAM = computed(() => Currency.antimatter.value);
+const formattedAM = computed(() => format(rawAM.value, 2, 1));
 </script>
 
 <template>
   <header class="header">
-    <div class="header__main">You have {{ antimatter }} antimatter.</div>
-    <div class="header__sub">
-      You are getting {{ perSecond }} antimatter per second.
-    </div>
+    <div
+      class="header__main"
+      v-html="tpHtml('you_have_X_antimatter', rawAM, formattedAM)"
+    />
   </header>
 </template>
 
 <style scoped>
 .header {
   text-align: center;
-  padding: 1rem 0.7rem;
+  padding: 1rem 0.7rem 0.6rem;
 }
 
 .header__main {
   font-size: 1.5rem;
-  font-weight: bold;
 }
 
-.header__sub {
-  font-size: 1.1rem;
-  color: var(--color-text-muted);
-  margin-top: 0.2rem;
+.header__main :deep(.i18n-amt) {
+  font-size: 1.65em;
+  font-weight: bold;
 }
 </style>

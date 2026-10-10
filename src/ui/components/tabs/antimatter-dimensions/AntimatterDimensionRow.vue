@@ -79,18 +79,18 @@ function buy() {
 .dim-row {
   display: flex;
   align-items: center;
-  padding: 0.3rem 0.7rem 0.3rem 0;
+  padding: 0 0.7rem 0 0;
   margin-top: 0.3rem;
+}
+
+.dim-row__name {
+  flex: 13;
+  min-width: 0;
+  padding-left: 0.3rem;
 }
 
 .dim-row--even {
   background: var(--color-row-even);
-}
-
-.dim-row__name {
-  flex: 15;
-  min-width: 0;
-  padding-left: 0.3rem;
 }
 
 .dim-row__name > div:first-child {

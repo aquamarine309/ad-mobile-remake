@@ -2,6 +2,8 @@ import { D } from '@/core/decimal';
 import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 import { dispatch, GAME_EVENT } from '@/core/events';
+import { ta } from "@/i18n";
+import { formatInt } from "@/core/format";
 
 export const GALAXY_TYPE = {
   NORMAL: 0,
@@ -62,6 +64,10 @@ export const Galaxy = {
     if (galaxies.gte(this.remoteStart)) return GALAXY_TYPE.REMOTE;
     if (galaxies.gte(this.costScalingStart)) return GALAXY_TYPE.DISTANT;
     return GALAXY_TYPE.NORMAL;
+  },
+  
+  get title() {
+    return ta("galaxy_types", formatInt(player.galaxies))[this.type];
   },
 
   get requirement() {

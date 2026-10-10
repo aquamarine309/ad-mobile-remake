@@ -2,6 +2,7 @@
 import { Tickspeed } from '@/core/pre-infinity/tickspeed';
 import { format, formatX } from '@/core/format';
 import { computed } from "vue";
+import { t } from "@/i18n";
 
 const visible = computed(() => Tickspeed.isUnlocked);
 const cost = computed(() => Tickspeed.cost);
@@ -16,18 +17,18 @@ function buyMax() { Tickspeed.buyMax(); }
 <template>
   <div v-if="visible" class="tickspeed">
     <div class="tickspeed__label">
-      Tickspeed multiplier: {{ formatX(multiplier, 2, 3) }}
+      {{ t("tickspeed_multiplier", formatX(base, 2, 3)) }}
     </div>
     <div class="tickspeed__buttons">
       <button class="tickspeed__btn" :disabled="!canBuy" @click="buy">
-        Cost: {{ format(cost) }}
+        {{ t("cost_X", format(cost)) }}
       </button>
       <button class="tickspeed__btn" :disabled="!canBuy" @click="buyMax">
-        Buy Max
+        {{ t("buy_max") }}
       </button>
     </div>
     <div class="tickspeed__amount">
-      Tickspeed: {{ format(base, 2, 3) }}/s
+      {{ t("tickspeed", format(multiplier, 2, 3)) }}
     </div>
   </div>
 </template>

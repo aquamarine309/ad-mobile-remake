@@ -35,3 +35,12 @@ export function t(key, ...args) {
   }
   return format(s, args);
 }
+
+export function ta(key, ...args) {
+  const s = locales[state.current]?.[key];
+  if (typeof s !== 'string') {
+    console.warn(`[i18n] "${key}" is not a string`);
+    return [];
+  }
+  return s.split('|').map(part => format(part, args));
+}

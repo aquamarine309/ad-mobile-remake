@@ -4,6 +4,7 @@ import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/ant
 import { formatInt, formatX } from '@/core/format';
 import { Tickspeed } from "./tickspeed";
 import { dispatch, GAME_EVENT } from '@/core/events';
+import { t } from "@/i18n";
 
 class DimBoostRequirement {
   constructor(tier, amount) {
@@ -66,20 +67,18 @@ export const DimBoost = {
   
     let newUnlock = "";
     if (boosts.lt(max - 4)) {
-      newUnlock = `unlock the ${formatInt(boosts.toNumber() + 5)}th Dimension`;
+      newUnlock = t("dimboost_button_unlock_dimension", AntimatterDimension(boosts.toNumber() + 5).name);
     } else if (boosts.eq(4)) {
-      newUnlock = "unlock Sacrifice";
+      newUnlock = t("dimboost_button_unlock_sacrifice");
     }
-  
-    const multText = `give a ${formatX(this.power, 2, 1)} multiplier`;
-    let range = "to the 1st Dimension";
-    if (boosts.gt(0)) range = `to Dimensions 1-${Math.min(boosts.toNumber() + 1, 8)}`;
-    if (boosts.gte(max - 1)) range = "to all Dimensions";
-  
-    if (newUnlock === "") {
-      return `Reset your Dimensions to ${multText} ${range}`;
-    }
-    return `Reset your Dimensions to ${newUnlock} and ${multText} ${range}`;
+    
+    const multText = formatX(this.power, 2, 1);
+    let range = "";
+    if (boosts.eq(0)) range = t("dimboost_button_boost_first_dimension", multText);
+    else if (boosts.gte(max - 1)) range = t("dimboost_button_boost_all_dimension", multText);
+    else range = t("dimboost_button_boost_range_of_dimension", multText, "1", Math.min(boosts.toNumber() + 1, 8));
+    const reward = newUnlock === "" ? range :  t("X_and_Y", newUnlock, range);
+    return t("dimboost_button_reset_dimensions", reward);
   },
 
   buy() {

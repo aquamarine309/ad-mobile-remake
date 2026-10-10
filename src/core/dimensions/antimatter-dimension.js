@@ -7,6 +7,7 @@ import { Tickspeed } from "@/core/pre-infinity/tickspeed";
 import { DimBoost } from "@/core/pre-infinity/dimension-boost";
 import { Sacrifice } from "@/core/pre-infinity/sacrifice";
 import { Achievement, NormalAchievements } from '@/core/achievements';
+import { t, ta } from "@/i18n";
 
 const BASE_COSTS = [10, 100, 1e4, 1e6, 1e9, 1e13, 1e18, 1e24];
 const BASE_COST_MULTIPLIERS = [1e3, 1e4, 1e5, 1e6, 1e8, 1e10, 1e12, 1e15];
@@ -17,6 +18,9 @@ class AntimatterDimensionState extends DimensionState {
     this._baseCost = D(BASE_COSTS[tier - 1]);
     this._baseCostMultiplier = D(BASE_COST_MULTIPLIERS[tier - 1]);
   }
+  
+  get name() { return t(`_${this.shortDisplayName}_ad`); }
+  get shortName() { return ta("dimension_names_short")[this.tier - 1]; }
   
   get costScale() {
     return new ExponentialCostScaling({

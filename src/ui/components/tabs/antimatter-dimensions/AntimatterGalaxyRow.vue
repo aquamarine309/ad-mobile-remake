@@ -4,12 +4,13 @@ import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
 import { player } from '@/core/state/player';
 import { formatInt } from '@/core/format';
 import { computed } from "vue";
+import { t } from "@/i18n";
 
-const count = computed(() => player.galaxies);
+const title = computed(() => Galaxy.title);
 const tier = computed(() => Galaxy.requirement.tier);
 const amount = computed(() => Galaxy.requirement.amount);
 const satisfied = computed(() => Galaxy.requirement.isSatisfied);
-const tierName = computed(() => AntimatterDimension(tier.value).shortDisplayName);
+const tierName = computed(() => AntimatterDimension(tier.value).shortName);
 
 function buy() { Galaxy.buy(); }
 </script>
@@ -17,14 +18,13 @@ function buy() { Galaxy.buy(); }
 <template>
   <div class="galaxy">
     <div class="galaxy__title">
-      Antimatter Galaxies ({{ formatInt(count) }})
+      {{ title }}
     </div>
     <div class="galaxy__req">
-      Requires: {{ formatInt(amount) }} {{ tierName }} Dimensions
+      {{ t("requires_X_dimension", formatInt(amount), tierName) }}
     </div>
     <button class="galaxy__btn" :disabled="!satisfied" @click="buy">
-      Reset your Dimensions and Dimension Boosts
-      to increase the power of Tickspeed upgrades
+      {{ t("galaxy_button") }}
     </button>
   </div>
 </template>

@@ -3,12 +3,13 @@ import { computed } from "vue";
 import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { format, formatX, formatInt } from "@/core/format";
 import { D } from "@/core/decimal";
+import { t } from "@/i18n";
 
 const { tier } = defineProps({
   tier: { type: Number, required: true }
 });
 const dimension = computed(() => AntimatterDimension(tier));
-const name = computed(() => `${dimension.value.shortDisplayName} Dimension`);
+const name = computed(() => dimension.value.name);
 const amount = computed(() => dimension.value.amount);
 const multiplier = computed(() => dimension.value.multiplier);
 const boughtBefore10 = computed(() => dimension.value.boughtBefore10);
@@ -29,7 +30,7 @@ const costThreshold = D("ee7");
 const costText = computed(() => {
   const text = format(cost.value);
   if (cost.value.gte(costThreshold)) return text;
-  return `Cost: ${text}`;
+  return t("cost_X", text);
 });
 
 function formatAmount(value) {

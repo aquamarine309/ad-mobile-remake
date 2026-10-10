@@ -2,6 +2,7 @@
 import { Sacrifice } from '@/core/pre-infinity/sacrifice';
 import { formatX } from '@/core/format';
 import { computed } from "vue";
+import { t } from "@/i18n";
 
 const visible = computed(() => Sacrifice.isVisible);
 const canSacrifice = computed(() => Sacrifice.canSacrifice);
@@ -11,9 +12,9 @@ const disabledReason = computed(() => Sacrifice.disabledCondition);
 
 const buttonText = computed(() => {
   if (canSacrifice.value) {
-    return `Dimensional Sacrifice (${formatX(next.value, 2, 2)})`;
+    return t("sacrifice_next_multiplier", formatX(next.value, 2, 2));
   }
-  return `Sacrifice Disabled (${disabledReason.value})`;
+  return t("sacrifice_locked_text", disabledReason.value);
 });
 
 function sacrifice() { Sacrifice.sacrifice(); }
@@ -25,7 +26,7 @@ function sacrifice() { Sacrifice.sacrifice(); }
       {{ buttonText }}
     </button>
     <div class="sacrifice__total">
-      Total Sacrifice multiplier: {{ formatX(total, 2, 2) }}
+      {{ t("sacrifice_total_multiplier", formatX(total, 2, 2)) }}
     </div>
   </div>
 </template>

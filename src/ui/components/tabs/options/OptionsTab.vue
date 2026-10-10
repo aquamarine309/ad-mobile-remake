@@ -95,19 +95,36 @@ watch(() => player.options.updateRate, () => {
   <div class="options">
     <h2 class="options__title">{{ t("options_ui") }}</h2>
     <div class="options__grid">
-      <OptionCard :label="bottomNavSymbolsLabel" @click="cycleBottomNavSymbols" />
+      <OptionCard
+        :label="bottomNavSymbolsLabel"
+        @click="cycleBottomNavSymbols"
+      />
     </div>
 
     <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
     <div class="options__grid">
-      <OptionCard :label="t('export_to_mobile')" @click="doExport" />
-      <OptionCard :label="t('import_string')" @click="doImport" />
-      <OptionCard :label="t('reset_current_save')" danger @click="doReset" />
+      <OptionCard
+        :label="t('export_to_mobile')"
+        @click="doExport"
+      />
+      <OptionCard
+        :label="t('import_string')"
+        @click="doImport"
+      />
+      <OptionCard
+        :label="t('reset_current_save')"
+        @click="doReset"
+        bad
+      />
     </div>
 
     <h2 class="options__title">{{ t("options_other") }}</h2>
     <div class="options__grid">
-      <OptionCard :label="offlineProgressLabel" @click="cycleOfflineProgress" />
+      <OptionCard
+        :label="offlineProgressLabel"
+        @click="cycleOfflineProgress"
+        :bad="player.options.offlineProgress === 'disable'"
+      />
       <OptionSliderValues
         :label="offlineTicksLabel"
         v-model="player.options.offlineTicks"

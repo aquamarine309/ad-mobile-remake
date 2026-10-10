@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   label: { type: String, required: true },
-  danger: { type: Boolean, default: false },
+  bad: { type: Boolean, default: false },
 });
 defineEmits(['click']);
 </script>
@@ -9,7 +9,7 @@ defineEmits(['click']);
 <template>
   <button
     class="option-card"
-    :class="{ 'option-card--danger': danger }"
+    :class="{ 'option-card--bad': bad }"
     @click="$emit('click')"
   >
     <span class="option-card__label">{{ label }}</span>
@@ -17,6 +17,7 @@ defineEmits(['click']);
 </template>
 
 <style scoped>
+
 .option-card {
   display: flex;
   flex-direction: column;
@@ -35,16 +36,16 @@ defineEmits(['click']);
   text-align: center;
 }
 
-.option-card:active {
+.option-card:not(.option-card--bad):active {
   background: var(--color-good-light);
-}
-
-.option-card--danger {
-  border-color: var(--color-bad);
 }
 
 .option-card__label {
   white-space: pre-line;
   line-height: 1.2;
+}
+
+.option-card--bad {
+  border-color: var(--color-bad);
 }
 </style>

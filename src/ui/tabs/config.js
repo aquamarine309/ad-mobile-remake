@@ -3,6 +3,7 @@ import OptionsTab from "@/ui/components/tabs/options/OptionsTab";
 import NormalAchievementsTab from "@/ui/components/tabs/achievements/NormalAchievementsTab";
 import SecretAchievementsTab from "@/ui/components/tabs/achievements/SecretAchievementsTab";
 import StatsTab from "@/ui/components/tabs/stats/StatsTab";
+import AutobuyersTab from "@/ui/components/tabs/autobuyers/AutobuyersTab";
 
 export const TABS = [
   {
@@ -14,6 +15,18 @@ export const TABS = [
         symbol: 'Ω',
         nameKey: 'tab_antimatter_dimensions_short',
         component: AntimatterDimensionsTab,
+      },
+    ],
+  },
+  {
+    key: 'automation',
+    symbol: '\uf085',
+    subtabs: [
+      {
+        key: 'autobuyers',
+        symbol: '\uf013',
+        nameKey: 'tab_autobuyers',
+        component: AutobuyersTab,
       },
     ],
   },

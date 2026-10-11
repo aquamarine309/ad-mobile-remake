@@ -19,6 +19,21 @@ export function createInitialPlayer() {
       normal: repeat(0, 17),
       secret: repeat(0, 4),
     },
+    auto: {
+      autobuyersOn: true,
+      antimatterDims: range(1, 8).map(() => ({
+        isBought: false,
+        isActive: true,
+        lastTick: 0,
+        mode: '10',          // '1' | '10'
+      })),
+      tickspeed: {
+        isBought: false,
+        isActive: true,
+        lastTick: 0,
+        mode: 'max',         // 'single' | 'max'
+      },
+    },
     records: {
       gameCreatedTime: Date.now(),
     

@@ -1,7 +1,8 @@
 <script setup>
 import { FAB_BUTTONS } from '@/ui/fab-buttons';
+import { InputHold } from '@/core/loop/input-hold';
 import { onUnmounted, computed } from 'vue';
-import { t } from "@/i18n";
+import { t } from '@/i18n';
 
 const visibleButtons = computed(() =>
   FAB_BUTTONS.filter(b => b.isVisible())
@@ -11,38 +12,24 @@ function isEnabled(btn) {
   return btn.isEnabled ? btn.isEnabled() : true;
 }
 
-const timers = new Map();
+function onPointerDown(btn, event) {
+  try {
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  } catch { /* ignore */ }
 
-function stopRepeat(key) {
-  const t = timers.get(key);
-  if (!t) return;
-  clearTimeout(t.delay);
-  clearInterval(t.repeat);
-  timers.delete(key);
-}
-
-function onPointerDown(btn) {
-  stopRepeat(btn.key);
   btn.action();
-
-  const interval = btn.key === 'max_full' ? 50 : 25;
-  const t = { delay: null, repeat: null };
-
-  t.delay = setTimeout(() => {
-    t.repeat = setInterval(() => {
-      btn.action();
-    }, interval);
-  }, 200);
-
-  timers.set(btn.key, t);
+  InputHold.begin(btn.key, {
+    action: btn.action,
+    isEnabled: btn.isEnabled,
+  });
 }
 
-function onPointerUp(btn) {
-  stopRepeat(btn.key);
+function onPointerStop(btn) {
+  InputHold.end(btn.key);
 }
 
 onUnmounted(() => {
-  for (const key of timers.keys()) stopRepeat(key);
+  InputHold.clear();
 });
 </script>
 
@@ -53,10 +40,9 @@ onUnmounted(() => {
       :key="btn.key"
       class="fab-row__btn"
       :class="{ 'fab-row__btn--enabled': isEnabled(btn) }"
-      @pointerdown="onPointerDown(btn)"
-      @pointerup="onPointerUp(btn)"
-      @pointerleave="onPointerUp(btn)"
-      @pointercancel="onPointerUp(btn)"
+      @pointerdown="onPointerDown(btn, $event)"
+      @pointerup="onPointerStop(btn)"
+      @pointercancel="onPointerStop(btn)"
       @contextmenu.prevent
     >
       {{ t(`bottom_button_${btn.key}_short`) }}
@@ -96,10 +82,6 @@ onUnmounted(() => {
 
 .fab-row__btn--enabled {
   text-decoration: underline;
-}
-
-.fab-row__btn:active {
-  
 }
 
 .fab-row__btn:not(.fab-row__btn--enabled):active {

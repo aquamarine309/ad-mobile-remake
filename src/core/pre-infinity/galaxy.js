@@ -4,6 +4,7 @@ import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/ant
 import { dispatch, GAME_EVENT } from '@/core/events';
 import { ta } from "@/i18n";
 import { formatInt } from "@/core/format";
+import { Currency } from "@/core/currency";
 
 export const GALAXY_TYPE = {
   NORMAL: 0,
@@ -155,7 +156,7 @@ export const Galaxy = {
     player.sacrificed = D(0);
     player.tickspeed.bought = D(0);
     AntimatterDimensions.reset();
-    player.antimatter = D(10);
+    Currency.antimatter.value = D(10);
   
     dispatch(GAME_EVENT.GALAXY_RESET_AFTER);
   },

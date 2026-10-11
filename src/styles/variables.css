@@ -56,4 +56,12 @@
   
   --color-slider-track: #e0e0e0;
   --color-slider-fill: #d81b60;
+  --color-checkbox-border: rgba(0, 0, 0, 0.54);
+  --color-checkbox-border-disabled: rgba(0, 0, 0, 0.3);
+  
+  --color-unlockable: #ff9800;
+  --color-card-fill: rgba(0, 0, 0, 0.04);
+  --color-card-fill-active: rgba(0, 0, 0, 0.10);
+  --color-card-border: rgba(0, 0, 0, 0.10);
+  --color-card-border-active: rgba(0, 0, 0, 0.30);
 }

@@ -23,3 +23,41 @@
   font-family: "Font Awesome 6 Free", monospace;
   font-weight: 900;
 }
+
+/* Autobuyer checkbox — shared between AD and Tickspeed cards */
+.ad-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  border: 0.2rem solid var(--color-checkbox-border);
+  border-radius: 0.3rem;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+.ad-checkbox:checked {
+  background: var(--color-slider-fill);
+  border-color: var(--color-slider-fill);
+}
+.ad-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  top: 0.35rem;
+  width: 0.45rem;
+  height: 0.85rem;
+  border: solid #fff;
+  border-width: 0 0.2rem 0.2rem 0;
+  transform: rotate(45deg);
+}
+.ad-checkbox:disabled {
+  border-color: var(--color-checkbox-border-disabled);
+  cursor: default;
+}
+.ad-checkbox:disabled:checked {
+  background: var(--color-checkbox-border-disabled);
+  border-color: var(--color-checkbox-border-disabled);
+}

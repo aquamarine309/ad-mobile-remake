@@ -191,11 +191,15 @@ class AntimatterDimensionState extends DimensionState {
     return true;
   }
 
-  buyMax() {
-    if (!this.isAvailableForPurchase || !this.isAffordable) return false;
+  buyMax(bulk = Infinity) {
+    if (!this.isAvailableForPurchase || this.currencyAmount.lt(this.costUntil10)) return false;
+    let bulkLeft = bulk;
     if (this.remainingUntil10 > 0 && this.remainingUntil10 < 10) {
       this.buyUntil10();
+      bulkLeft--;
     }
+    
+    if (bulkLeft <= 0) return;
   
     const currentGroups = this.bought.div(10).floor();
     const maxBought = this.costScale.getMaxBought(
@@ -205,7 +209,7 @@ class AntimatterDimensionState extends DimensionState {
     );
     if (maxBought === null) return true;
   
-    const groupsToBuy = maxBought.quantity;
+    const groupsToBuy = maxBought.quantity.clampMax(bulkLeft);
     this.bought = this.bought.add(groupsToBuy.times(10));
     this.amount = this.amount.add(groupsToBuy.times(10));
     this.currencyAmount = this.currencyAmount.sub(Decimal.pow10(maxBought.logPrice));

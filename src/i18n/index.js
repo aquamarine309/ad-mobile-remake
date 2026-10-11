@@ -3,17 +3,25 @@ import zhStrings from './zh-CN.json';
 import zhPlurals from './zh-CN.plurals.json';
 import enStrings from './en.json';
 import enPlurals from './en.plurals.json';
+import zhCustom from './custom/zh-CN.js';
+import enCustom from './custom/en.js';
 import { Decimal } from '@/core/decimal';
 import { player } from '@/core/state/player';
 
 const locales = {
-  'zh-CN': { strings: zhStrings, plurals: zhPlurals },
-  en:      { strings: enStrings,  plurals: enPlurals  },
+  'zh-CN': {
+    strings: { ...zhStrings, ...zhCustom },
+    plurals: zhPlurals,
+  },
+  en: {
+    strings: { ...enStrings, ...enCustom },
+    plurals: enPlurals,
+  },
 };
 
 export const LANGUAGES = [
-  { code: 'zh-CN', name: '简体中文' },
   { code: 'en',    name: 'English' },
+  { code: 'zh-CN', name: '简体中文' },
 ];
 
 export const i18nState = {
@@ -32,7 +40,10 @@ export function getLanguage() {
 function format(s, args) {
   return s.replace(/\{(\d+)(?::fixed\((\d+)\))?\}/g, (_, n, f) => {
     let v = args[Number(n) - 1];
-    if (f !== undefined) v = Number(v).toFixed(Number(f));
+    if (f !== undefined) {
+      const n = v instanceof Decimal ? v.toNumber() : Number(v);
+      v = n.toFixed(Number(f));
+    }
     return v ?? '';
   });
 }

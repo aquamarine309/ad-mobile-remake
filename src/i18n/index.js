@@ -4,13 +4,22 @@ import zhPlurals from './zh-CN.plurals.json';
 import enStrings from './en.json';
 import enPlurals from './en.plurals.json';
 import { Decimal } from '@/core/decimal';
+import { player } from '@/core/state/player';
 
 const locales = {
   'zh-CN': { strings: zhStrings, plurals: zhPlurals },
   en:      { strings: enStrings,  plurals: enPlurals  },
 };
 
-export const i18nState = reactive({ current: 'zh-CN' });
+export const LANGUAGES = [
+  { code: 'zh-CN', name: '简体中文' },
+  { code: 'en',    name: 'English' },
+];
+
+export const i18nState = {
+  get current() { return player.options.language; },
+  set current(v) { player.options.language = v; },
+};
 
 export function setLanguage(lang) {
   if (locales[lang]) i18nState.current = lang;

@@ -2,13 +2,14 @@
 import { computed, watch } from 'vue';
 import OptionCard from './OptionCard.vue';
 import OptionSlider from './OptionSlider.vue';
+import OptionDropdown from './OptionDropdown.vue';
 import { player } from '@/core/state/player';
 import { exportSave } from '@/core/storage/save';
 import { resetGame } from '@/game/reset';
 import { formatInt } from '@/core/format';
 import { GameLoop } from '@/core/loop/game-loop';
-import { t, ta } from "@/i18n";
 import { importGame } from '@/game/import';
+import { t, ta, LANGUAGES } from "@/i18n";
 
 // --- Save & Load ---
 
@@ -70,6 +71,9 @@ function cycleOfflineProgress() {
   player.options.offlineProgress = OFFLINE_MODES[(i + 1) % OFFLINE_MODES.length];
 }
 
+// --- Languages ---
+const languageOptions = LANGUAGES.map(l => ({ value: l.code, label: l.name }));
+
 // --- Sliders ---
 
 const OFFLINE_TICKS_VALUES = [
@@ -94,12 +98,16 @@ watch(() => player.options.updateRate, () => {
   <div class="options">
     <h2 class="options__title">{{ t("options_ui") }}</h2>
     <div class="options__grid">
+      <OptionDropdown
+        :label="t('language')"
+        v-model="player.options.language"
+        :options="languageOptions"
+      />
       <OptionCard
         :label="bottomNavSymbolsLabel"
         @click="cycleBottomNavSymbols"
       />
     </div>
-
     <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
     <div class="options__grid">
       <OptionCard

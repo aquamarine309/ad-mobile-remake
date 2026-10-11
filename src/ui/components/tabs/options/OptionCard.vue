@@ -27,7 +27,7 @@ defineEmits(['click']);
   min-height: 6rem;
   padding: 0.5rem 0.3rem;
   font-family: inherit;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--color-text);
   background: var(--color-btn-bg);
   border: 0.1rem solid var(--color-good);

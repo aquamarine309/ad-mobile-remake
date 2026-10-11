@@ -29,7 +29,8 @@ export function createInitialPlayer() {
       offlineTicks: 5000,
       lastTab: "dimensions",
       lastSubtabs: {},
-      bottomNavSymbols: 'all',
+      bottomNavSymbols: "all",
+      language: "en"
     },
   };
 }

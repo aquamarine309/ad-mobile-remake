@@ -19,6 +19,25 @@ export function createInitialPlayer() {
       normal: repeat(0, 17),
       secret: repeat(0, 4),
     },
+    records: {
+      gameCreatedTime: Date.now(),
+    
+      totalAntimatter: D(0),
+      totalTimePlayed: D(0),
+      realTimePlayed: 0,
+    
+      thisInfinity: {
+        time: D(0),
+        realTime: 0,
+        maxAM: D(0),
+      },
+      bestInfinity: {
+        time: D(Number.MAX_VALUE),
+        realTime: Number.MAX_VALUE,
+        bestIPmin: D(0),
+        bestIPminVal: D(0),
+      },
+    },
     dimensionBoosts: D(0),
     galaxies: D(0),
     sacrificed: D(0),

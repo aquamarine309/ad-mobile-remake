@@ -25,10 +25,12 @@ const formattedAM = computed(() => format(rawAM.value, 2, 1));
 
 .header__main {
   font-size: 1.5rem;
+  color: var(--color-text-muted)
 }
 
 .header__main :deep(.i18n-amt) {
   font-size: 1.65em;
   font-weight: bold;
+  color: var(--color-antimatter)
 }
 </style>

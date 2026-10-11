@@ -13,27 +13,21 @@ function maxAll() {
 
 export const FAB_BUTTONS = [
   {
-    key: 'maxAll',
-    label: 'Max',
-    tooltip: 'Max All',
+    key: 'max',
     action: () => maxAll(),
     isVisible: () => true,
     isEnabled: () => false,
   },
   {
-    key: 'dimBoost',
-    label: 'D',
-    tooltip: 'Dimension Boost',
+    key: 'dimboost',
     action: () => DimBoost.buyMax(),
-    isVisible: () => player.dimensionBoosts.gt(0) || DimBoost.requirement.isSatisfied,
+    isVisible: () => true,
     isEnabled: () => DimBoost.requirement.isSatisfied && DimBoost.canBeBought,
   },
   {
     key: 'galaxy',
-    label: 'G',
-    tooltip: 'Antimatter Galaxy',
     action: () => Galaxy.buyMax(),
-    isVisible: () => player.galaxies.gt(0) || Galaxy.requirement.isSatisfied,
+    isVisible: () => true,
     isEnabled: () => Galaxy.requirement.isSatisfied && Galaxy.canBeBought,
   }
 ];

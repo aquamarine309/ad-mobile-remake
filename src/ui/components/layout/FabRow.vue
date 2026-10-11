@@ -1,7 +1,7 @@
 <script setup>
 import { FAB_BUTTONS } from '@/ui/fab-buttons';
-import { onUnmounted } from 'vue';
-import { computed } from "vue";
+import { onUnmounted, computed } from 'vue';
+import { t } from "@/i18n";
 
 const visibleButtons = computed(() =>
   FAB_BUTTONS.filter(b => b.isVisible())
@@ -25,7 +25,7 @@ function onPointerDown(btn) {
   stopRepeat(btn.key);
   btn.action();
 
-  const interval = btn.key === 'maxAll' ? 50 : 25;
+  const interval = btn.key === 'max_full' ? 50 : 25;
   const t = { delay: null, repeat: null };
 
   t.delay = setTimeout(() => {
@@ -59,7 +59,7 @@ onUnmounted(() => {
       @pointercancel="onPointerUp(btn)"
       @contextmenu.prevent
     >
-      {{ btn.label }}
+      {{ t(`bottom_button_${btn.key}_short`) }}
     </button>
   </div>
 </template>
@@ -74,8 +74,8 @@ onUnmounted(() => {
 }
 
 .fab-row__btn {
-  width: 5rem;
-  height: 5rem;
+  width: 5.6rem;
+  height: 5.6rem;
   display: flex;
   align-items: center;
   justify-content: center;

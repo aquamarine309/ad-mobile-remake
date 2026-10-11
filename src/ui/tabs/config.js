@@ -2,6 +2,7 @@ import AntimatterDimensionsTab from "@/ui/components/tabs/antimatter-dimensions/
 import OptionsTab from "@/ui/components/tabs/options/OptionsTab";
 import NormalAchievementsTab from "@/ui/components/tabs/achievements/NormalAchievementsTab";
 import SecretAchievementsTab from "@/ui/components/tabs/achievements/SecretAchievementsTab";
+import StatsTab from "@/ui/components/tabs/stats/StatsTab";
 
 export const TABS = [
   {
@@ -31,6 +32,18 @@ export const TABS = [
         symbol: '?',
         nameKey: 'tab_secret_achievements_short',
         component: SecretAchievementsTab,
+      },
+    ],
+  },
+  {
+    key: 'statistics',
+    symbol: '\uf46d',   // clipboard-list
+    subtabs: [
+      {
+        key: 'statistics',
+        symbol: '\uf46d',
+        nameKey: 'tab_statistics_short',
+        component: StatsTab,
       },
     ],
   },

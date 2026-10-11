@@ -22,8 +22,16 @@ class CurrencyState {
 export const Currency = {
   antimatter: new CurrencyState(
     () => player.antimatter,
-    v => {
-      player.antimatter = v;
+    value => {
+      const old = player.antimatter;
+      if (value.gt(old)) {
+        const gained = value.minus(old);
+        player.records.totalAntimatter = player.records.totalAntimatter.add(gained);
+      }
+      if (value.gt(player.records.thisInfinity.maxAM)) {
+        player.records.thisInfinity.maxAM = value;
+      }
+      player.antimatter = value;
     }
   )
 };

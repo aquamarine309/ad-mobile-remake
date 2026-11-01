@@ -1,17 +1,17 @@
-import { D, Decimal } from './decimal';
+import { D, Decimal } from "./decimal";
 import { player } from "@/core/state/player";
 import { t } from "@/i18n";
 
-const SMALL = D('1e-300');
-const SCI_UPPER = D('1e1e9');
-const THREE_LAYER_UPPER = D('1e9e15');
+const SMALL = D("1e-300");
+const SCI_UPPER = D("1e1e9");
+const THREE_LAYER_UPPER = D("1e9e15");
 
 export function formatPostBreak(value, places = 0, placesUnder1000 = 0) {
   const num = D(value);
 
-  if (!num.isFinite()) return 'Infinite';
-  if (isNaN(num.sign) || isNaN(num.layer) || isNaN(num.mag)) return 'NaN';
-  if (num.sign < 0) return '-' + format(num.neg(), places, placesUnder1000);
+  if (!num.isFinite()) return "Infinite";
+  if (isNaN(num.sign) || isNaN(num.layer) || isNaN(num.mag)) return "NaN";
+  if (num.sign < 0) return "-" + format(num.neg(), places, placesUnder1000);
   if (num.eq(0)) return (0).toFixed(placesUnder1000);
 
   if (num.lt(SMALL)) return formatVerySmall(num, placesUnder1000);
@@ -49,7 +49,8 @@ export function formatPostBreak(value, places = 0, placesUnder1000 = 0) {
 }
 
 export function format(value, places = 0, placesUnder1000 = 0) {
-  if (Decimal.abs(value).gte(Decimal.dNumberMax) && !player.break) return t("infinite");
+  if (Decimal.abs(value).gte(Decimal.dNumberMax) && !player.break)
+    return t("infinite");
   return formatPostBreak(value, places, placesUnder1000);
 }
 
@@ -65,13 +66,13 @@ function formatScientific(num, places) {
 function formatVerySmall(num, places) {
   const inverted = Decimal.recip(num);
   const formatted = format(inverted, places, places);
-  return formatted.replace(/e(\d)/, 'e-$1');
+  return formatted.replace(/e(\d)/, "e-$1");
 }
 
 function formatExponent(exp) {
   const n = exp.toNumber();
   if (n < 100000) return n.toString();
-  if (n < 1e9) return n.toLocaleString('en-US');
+  if (n < 1e9) return n.toLocaleString("en-US");
   return format(exp, 2, 2);
 }
 
@@ -88,7 +89,9 @@ export function formatPercents(value, places, placesUnder1000) {
 }
 
 export function formatInt(value, placesAboveE9 = 0) {
-  if (value instanceof Decimal && value.lt(1e9)) return value.toNumber().toLocaleString('en-US');
-  if (typeof value === "number" && value < 1e9) return value.toLocaleString('en-US');
+  if (value instanceof Decimal && value.lt(1e9))
+    return value.toNumber().toLocaleString("en-US");
+  if (typeof value === "number" && value < 1e9)
+    return value.toLocaleString("en-US");
   return format(value, placesAboveE9);
 }

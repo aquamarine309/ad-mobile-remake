@@ -1,12 +1,13 @@
 <script setup>
-import { computed } from 'vue';
-import { visibleSubtabs, currentSubtabKey, showSubtab } from '@/ui/tabs/state';
-import { player } from '@/core/state/player';
-import { t } from '@/i18n';
+import { computed } from "vue";
+import { visibleSubtabs, currentSubtabKey, showSubtab } from "@/ui/tabs/state";
+import { player } from "@/core/state/player";
+import { t } from "@/i18n";
 
-const useSymbol = computed(() =>
-  player.options.bottomNavSymbols === 'all' ||
-  player.options.bottomNavSymbols === 'subOnly'
+const useSymbol = computed(
+  () =>
+    player.options.bottomNavSymbols === "all" ||
+    player.options.bottomNavSymbols === "subOnly",
 );
 
 function label(sub) {

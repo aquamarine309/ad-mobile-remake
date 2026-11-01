@@ -1,11 +1,11 @@
-import { ref } from 'vue';
-import { player } from '@/core/state/player';
+import { ref } from "vue";
+import { player } from "@/core/state/player";
 
 export const HOLD_DELAY_MS = 0;
 export const STICKY_THRESHOLD_MS = 500;
 
-const held = new Map();       // key -> { startTime, action, vibrated }
-let sticky = null;            // { key, action } | null
+const held = new Map(); // key -> { startTime, action, vibrated }
+let sticky = null; // { key, action } | null
 export const stickyKey = ref(null);
 
 function canSticky() {
@@ -54,7 +54,11 @@ export function tickInputHold() {
 
   for (const [, entry] of held) {
     // Vibrate once when the hold crosses the sticky threshold
-    if (!entry.vibrated && canSticky() && now - entry.startTime >= STICKY_THRESHOLD_MS) {
+    if (
+      !entry.vibrated &&
+      canSticky() &&
+      now - entry.startTime >= STICKY_THRESHOLD_MS
+    ) {
       entry.vibrated = true;
       vibrate();
     }

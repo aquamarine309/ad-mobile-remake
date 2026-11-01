@@ -210,3 +210,9 @@ Two-layer theme system, mirroring the Android palette + Metro overlay approach
 
 - `devSpeed` is a dev accelerator; change it in `core/time/game-speed.js`. Production should be `D(1)`
 - Some mechanics (e.g. Galaxy remote scaling) trade numerical accuracy for b_e compatibility. Values may differ slightly from the original
+
+## Disclaimer & Credits
+- This is an unofficial fan-made mobile remake. All original game design, mechanics, and assets belong to Hevipelle and the Antimatter Dimensions development team.
+- This project is not affiliated with, endorsed by, or sponsored by the original developers.
+- No commercial use is allowed. This project is strictly for educational and personal use.
+- The Android UI assets and localized strings used in this project are for reference purposes to achieve mobile-native fidelity. If the original developers request their removal, they will be promptly taken down.

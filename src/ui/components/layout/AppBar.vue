@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 2.4rem;      /* Android 24dp */
+  width: 2.4rem; /* Android 24dp */
   height: 1.8rem;
   padding: 0;
   background: transparent;
@@ -36,13 +36,13 @@
 .app-bar__drawer-btn > span {
   display: block;
   height: 0.2rem;
-  background: var(--color-appbar-fg);   /* was --color-bg */
+  background: var(--color-appbar-fg); /* was --color-bg */
   border-radius: 0.1rem;
 }
 
 .app-bar__title {
   flex: 1;
-  margin-left: 1.6rem;   /* Android navigation icon → title gap */
+  margin-left: 1.6rem; /* Android navigation icon → title gap */
   font-size: 1.4rem;
   font-weight: bold;
   white-space: nowrap;

@@ -1,9 +1,9 @@
-import { GameLoop } from '@/core/loop/game-loop';
-import { simulateTime } from '@/core/loop/simulate-time';
-import { load, save } from '@/core/storage/save';
-import { dispatch, GAME_EVENT } from '@/core/events';
-import { player } from '@/core/state/player';
-import { offlineController } from '@/ui/offline/state';
+import { GameLoop } from "@/core/loop/game-loop";
+import { simulateTime } from "@/core/loop/simulate-time";
+import { load, save } from "@/core/storage/save";
+import { dispatch, GAME_EVENT } from "@/core/events";
+import { player } from "@/core/state/player";
+import { offlineController } from "@/ui/offline/state";
 
 const AUTOSAVE_INTERVAL_MS = 30000;
 const MIN_OFFLINE_MS = 10000;
@@ -24,7 +24,7 @@ export async function simulateAfterLoad(offlineMs) {
 
   let result = null;
   const shouldSimulate =
-    player.options.offlineProgress !== 'disable' && offlineMs > MIN_OFFLINE_MS;
+    player.options.offlineProgress !== "disable" && offlineMs > MIN_OFFLINE_MS;
 
   if (shouldSimulate) {
     const seconds = offlineMs / 1000;
@@ -51,7 +51,7 @@ export async function initGame() {
 
   autosaveTimer = setInterval(save, AUTOSAVE_INTERVAL_MS);
   beforeUnloadHandler = () => save();
-  window.addEventListener('beforeunload', beforeUnloadHandler);
+  window.addEventListener("beforeunload", beforeUnloadHandler);
 }
 
 export function startGameLoop() {
@@ -66,7 +66,7 @@ export function startGameLoop() {
   // Add beforeunload listener to save on exit if not already added
   if (beforeUnloadHandler === null) {
     beforeUnloadHandler = () => save();
-    window.addEventListener('beforeunload', beforeUnloadHandler);
+    window.addEventListener("beforeunload", beforeUnloadHandler);
   }
 }
 
@@ -77,7 +77,7 @@ export function stopGame() {
     autosaveTimer = null;
   }
   if (beforeUnloadHandler !== null) {
-    window.removeEventListener('beforeunload', beforeUnloadHandler);
+    window.removeEventListener("beforeunload", beforeUnloadHandler);
     beforeUnloadHandler = null;
   }
 }

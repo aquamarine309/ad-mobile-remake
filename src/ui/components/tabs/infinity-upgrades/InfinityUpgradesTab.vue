@@ -1,32 +1,43 @@
 <script setup>
-import { t } from '@/i18n';
-import { player } from '@/core/state/player';
-import { INFINITY_UPGRADE_GRID, InfinityUpgrade } from '@/core/infinity/upgrades';
-import UpgradeCell from './UpgradeCell';
+import { t } from "@/i18n";
+import {
+  INFINITY_UPGRADE_GRID,
+  InfinityUpgrade,
+} from "@/core/infinity/upgrades";
+import UpgradeCell from "./UpgradeCell";
 import { Achievement } from "@/core/achievements";
 import { computed } from "vue";
 import { formatPostBreak } from "@/core/format";
 
 const sections = [
-  { headerKeys: ['column1', 'column2'], cols: [INFINITY_UPGRADE_GRID[0], INFINITY_UPGRADE_GRID[1]] },
-  { headerKeys: ['column3', 'column4'], cols: [INFINITY_UPGRADE_GRID[2], INFINITY_UPGRADE_GRID[3]] },
+  {
+    headerKeys: ["column1", "column2"],
+    cols: [INFINITY_UPGRADE_GRID[0], INFINITY_UPGRADE_GRID[1]],
+  },
+  {
+    headerKeys: ["column3", "column4"],
+    cols: [INFINITY_UPGRADE_GRID[2], INFINITY_UPGRADE_GRID[3]],
+  },
 ];
 
-const ipMultUpgrade = InfinityUpgrade('ipMult');
-const ipOfflineMult = InfinityUpgrade('ipOffline');
+const ipMultUpgrade = InfinityUpgrade("ipMult");
+const ipOfflineMult = InfinityUpgrade("ipOffline");
 const hasDLC = computed(() => Achievement(41).isUnlocked);
 </script>
 
 <template>
   <div class="infinity-upgrades">
     <!-- ipMult section -->
-    <p class="infinity-upgrades__info">{{ t('infinity_upgrades_info') }}</p>
-    <div
-      v-if="hasDLC"
-      class="ip-mult-section"
-    >
+    <p class="infinity-upgrades__info">{{ t("infinity_upgrades_info") }}</p>
+    <div v-if="hasDLC" class="ip-mult-section">
       <p class="infinity-upgrades__info">
-        {{ t('ip_mult_info', formatPostBreak("1e3000000"), formatPostBreak("1e6000000")) }}
+        {{
+          t(
+            "ip_mult_info",
+            formatPostBreak("1e3000000"),
+            formatPostBreak("1e6000000"),
+          )
+        }}
       </p>
       <div class="ip-mult-grid">
         <UpgradeCell :upgrade="ipMultUpgrade" />
@@ -35,24 +46,12 @@ const hasDLC = computed(() => Achievement(41).isUnlocked);
     </div>
 
     <!-- 4x4 Grid Sections -->
-    <div
-      v-for="(section, si) in sections"
-      :key="si"
-      class="infinity-section"
-    >
-      <div
-        v-for="(col, ci) in section.cols"
-        :key="ci"
-        class="infinity-column"
-      >
+    <div v-for="(section, si) in sections" :key="si" class="infinity-section">
+      <div v-for="(col, ci) in section.cols" :key="ci" class="infinity-column">
         <div class="infinity-column__header">
           {{ t(section.headerKeys[ci]) }}
         </div>
-        <UpgradeCell
-          v-for="u in col"
-          :key="u.config.id"
-          :upgrade="u"
-        />
+        <UpgradeCell v-for="u in col" :key="u.config.id" :upgrade="u" />
       </div>
     </div>
   </div>
@@ -144,15 +143,15 @@ const hasDLC = computed(() => Achievement(41).isUnlocked);
   .ip-mult-section {
     grid-column: 1 / -1;
   }
-  
+
   .ip-mult-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .ip-mult-grid > :first-child {
     grid-column: span 2;
   }
-  
+
   .upgrade-cell-placeholder {
     grid-column: span 2;
   }
@@ -162,7 +161,7 @@ const hasDLC = computed(() => Achievement(41).isUnlocked);
   }
 
   .infinity-column {
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 }
 </style>

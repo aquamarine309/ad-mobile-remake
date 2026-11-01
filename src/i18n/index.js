@@ -1,15 +1,14 @@
-import { reactive } from 'vue';
-import zhStrings from './zh-CN.json';
-import zhPlurals from './zh-CN.plurals.json';
-import enStrings from './en.json';
-import enPlurals from './en.plurals.json';
-import jaStrings from './ja-JP.json';
-import jaPlurals from './ja-JP.plurals.json';
-import { Decimal } from '@/core/decimal';
-import { player } from '@/core/state/player';
+import zhStrings from "./zh-CN.json";
+import zhPlurals from "./zh-CN.plurals.json";
+import enStrings from "./en.json";
+import enPlurals from "./en.plurals.json";
+import jaStrings from "./ja-JP.json";
+import jaPlurals from "./ja-JP.plurals.json";
+import { Decimal } from "@/core/decimal";
+import { player } from "@/core/state/player";
 
 const locales = {
-  'zh-CN': {
+  "zh-CN": {
     strings: { ...zhStrings },
     plurals: zhPlurals,
   },
@@ -19,19 +18,23 @@ const locales = {
   },
   "ja-JP": {
     strings: { ...jaStrings },
-    plurals: jaPlurals
-  }
+    plurals: jaPlurals,
+  },
 };
 
 export const LANGUAGES = [
-  { code: 'en',    name: 'English' },
-  { code: 'zh-CN', name: '简体中文' },
-  { code: "ja-JP", name: "日本語" }
+  { code: "en", name: "English" },
+  { code: "zh-CN", name: "简体中文" },
+  { code: "ja-JP", name: "日本語" },
 ];
 
 export const i18nState = {
-  get current() { return player.options.language; },
-  set current(v) { player.options.language = v; },
+  get current() {
+    return player.options.language;
+  },
+  set current(v) {
+    player.options.language = v;
+  },
 };
 
 export function setLanguage(lang) {
@@ -49,13 +52,14 @@ function format(s, args) {
       const n = v instanceof Decimal ? v.toNumber() : Number(v);
       v = n.toFixed(Number(f));
     }
-    return v ?? '';
+    return v ?? "";
   });
 }
 
 export function t(key, ...args) {
-  const s = locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
-  if (typeof s !== 'string') {
+  const s =
+    locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
+  if (typeof s !== "string") {
     console.warn(`[i18n] Missing string key: ${key}`);
     return key;
   }
@@ -63,27 +67,29 @@ export function t(key, ...args) {
 }
 
 export function ta(key, ...args) {
-  const s = locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
-  if (typeof s !== 'string') {
+  const s =
+    locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
+  if (typeof s !== "string") {
     console.warn(`[i18n] Missing array key: ${key}`);
     return [];
   }
-  return s.split('|').map(part => format(part, args));
+  return s.split("|").map((part) => format(part, args));
 }
 
 function isOne(n) {
-  if (typeof n === 'number') return n === 1;
+  if (typeof n === "number") return n === 1;
   if (n instanceof Decimal) return n.eq(1);
   return false;
 }
 
 function pickForm(n) {
-  if (i18nState.current === 'en') return isOne(n) ? 'one' : 'other';
-  return 'other';
+  if (i18nState.current === "en") return isOne(n) ? "one" : "other";
+  return "other";
 }
 
 export function tp(key, count, ...args) {
-  const forms = locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
+  const forms =
+    locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
   if (!forms) {
     console.warn(`[i18n] Missing plurals key: ${key}`);
     return key;
@@ -93,7 +99,8 @@ export function tp(key, count, ...args) {
 }
 
 export function tpHtml(key, count, ...args) {
-  const forms = locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
+  const forms =
+    locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
   if (!forms) {
     console.warn(`[i18n] Missing plurals key: ${key}`);
     return key;
@@ -101,6 +108,6 @@ export function tpHtml(key, count, ...args) {
   const s = forms[pickForm(count)] ?? forms.other;
   return s.replace(/\{(\d+)\}/g, (_, n) => {
     const v = args[Number(n) - 1];
-    return `<span class="i18n-num">${v ?? ''}</span>`;
+    return `<span class="i18n-num">${v ?? ""}</span>`;
   });
 }

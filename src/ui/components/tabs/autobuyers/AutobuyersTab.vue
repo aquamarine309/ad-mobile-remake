@@ -1,12 +1,11 @@
 <script setup>
-import { computed } from 'vue';
-import { t } from '@/i18n';
-import { NormalChallenge } from '@/core/challenges/normal';
-import ADAutobuyerCard from './ADAutobuyerCard.vue';
-import TickspeedAutobuyerCard from './TickspeedAutobuyerCard.vue';
-import DimensionBoostAutobuyerCard from './DimensionBoostAutobuyerCard.vue';
-import GalaxyAutobuyerCard from './GalaxyAutobuyerCard.vue';
-import BigCrunchAutobuyerCard from './BigCrunchAutobuyerCard.vue';
+import { computed } from "vue";
+import { NormalChallenge } from "@/core/challenges/normal";
+import ADAutobuyerCard from "./ADAutobuyerCard.vue";
+import TickspeedAutobuyerCard from "./TickspeedAutobuyerCard.vue";
+import DimensionBoostAutobuyerCard from "./DimensionBoostAutobuyerCard.vue";
+import GalaxyAutobuyerCard from "./GalaxyAutobuyerCard.vue";
+import BigCrunchAutobuyerCard from "./BigCrunchAutobuyerCard.vue";
 import AutobuyerToggles from "./AutobuyerToggles";
 
 const isDimBoostUnlocked = computed(() => NormalChallenge(10).isCompleted);
@@ -17,17 +16,17 @@ const isBigCrunchUnlocked = computed(() => NormalChallenge(12).isCompleted);
 <template>
   <div class="autobuyers-tab">
     <AutobuyerToggles />
-    
+
     <div class="autobuyer-row">
       <BigCrunchAutobuyerCard v-if="isBigCrunchUnlocked" class="row-item" />
       <DimensionBoostAutobuyerCard v-if="isDimBoostUnlocked" class="row-item" />
     </div>
-    
+
     <div class="autobuyer-row">
       <GalaxyAutobuyerCard v-if="isGalaxyUnlocked" class="row-item" />
       <TickspeedAutobuyerCard class="row-item" />
-    </div>    
-    
+    </div>
+
     <div class="ad-grid">
       <ADAutobuyerCard v-for="tier in 8" :key="tier" :tier="tier" />
     </div>
@@ -61,7 +60,7 @@ const isBigCrunchUnlocked = computed(() => NormalChallenge(12).isCompleted);
 }
 
 .row-item {
-  flex: 0 0 calc(50% - 0.4rem); 
+  flex: 0 0 calc(50% - 0.4rem);
   max-width: calc(50% - 0.4rem);
 }
 

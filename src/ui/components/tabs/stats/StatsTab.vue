@@ -89,7 +89,6 @@ const bestIPText = computed(() => {
       {{ scaleText }}
     </div>
 
-    <!-- Infinity 分类 -->
     <div v-if="showInfinity" class="stats__category">
       <h2 class="stats__title stats__title--infinity">{{ t('tab_infinity') }}</h2>
       <div class="stats__line">{{ infinitiesText }}</div>

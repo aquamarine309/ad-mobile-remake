@@ -1,18 +1,22 @@
 <script setup>
-import { DimBoost } from '@/core/pre-infinity/dimension-boost';
-import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
-import { formatInt } from '@/core/format';
+import { DimBoost } from "@/core/pre-infinity/dimension-boost";
+import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
+import { formatInt } from "@/core/format";
 import { computed } from "vue";
 import { t } from "@/i18n";
 
 const count = computed(() => DimBoost.purchasedBoosts);
 const tier = computed(() => DimBoost.requirement.tier);
 const amount = computed(() => DimBoost.requirement.amount);
-const satisfied = computed(() => DimBoost.canBeBought && DimBoost.requirement.isSatisfied);
+const satisfied = computed(
+  () => DimBoost.canBeBought && DimBoost.requirement.isSatisfied,
+);
 const tierName = computed(() => AntimatterDimension(tier.value).shortName);
 const buttonText = computed(() => DimBoost.unlockedByBoost);
 
-function buy() { DimBoost.buy(); }
+function buy() {
+  DimBoost.buy();
+}
 </script>
 
 <template>

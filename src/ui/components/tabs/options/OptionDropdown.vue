@@ -1,20 +1,20 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
   label: { type: String, required: true },
   modelValue: { type: String, required: true },
-  options: { type: Array, required: true },   // [{ value, label }]
+  options: { type: Array, required: true }, // [{ value, label }]
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const open = ref(false);
 const rootRef = ref(null);
 const panelAbove = ref(false);
 
 const currentLabel = computed(() => {
-  const opt = props.options.find(o => o.value === props.modelValue);
-  return opt ? opt.label : '';
+  const opt = props.options.find((o) => o.value === props.modelValue);
+  return opt ? opt.label : "";
 });
 
 function toggle() {
@@ -33,7 +33,7 @@ function toggle() {
 }
 
 function select(opt) {
-  emit('update:modelValue', opt.value);
+  emit("update:modelValue", opt.value);
   open.value = false;
 }
 
@@ -44,8 +44,8 @@ function onDocumentClick(e) {
   }
 }
 
-onMounted(() => document.addEventListener('click', onDocumentClick));
-onUnmounted(() => document.removeEventListener('click', onDocumentClick));
+onMounted(() => document.addEventListener("click", onDocumentClick));
+onUnmounted(() => document.removeEventListener("click", onDocumentClick));
 </script>
 
 <template>
@@ -65,7 +65,9 @@ onUnmounted(() => document.removeEventListener('click', onDocumentClick));
           v-for="opt in options"
           :key="opt.value"
           class="option-dropdown__item"
-          :class="{ 'option-dropdown__item--selected': opt.value === modelValue }"
+          :class="{
+            'option-dropdown__item--selected': opt.value === modelValue,
+          }"
           @click="select(opt)"
         >
           {{ opt.label }}

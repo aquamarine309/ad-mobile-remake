@@ -1,13 +1,14 @@
 import * as pako from "pako";
 
-const STARTING_STRING = "AntimatterDimensionsVue3SavefileFormat";
+const STARTING_STRING = "AntimatterDimensionsSavefileFormat";
 const ENDING_STRING = "EndOfSavefile";
 const VERSION = "AAA";
 
 function bytesToBinary(bytes) {
   // Avoid String.fromCharCode.apply which hits the argument limit on large saves
   let binary = "";
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  for (let i = 0; i < bytes.length; i++)
+    binary += String.fromCharCode(bytes[i]);
   return binary;
 }
 

@@ -1,18 +1,24 @@
 <script setup>
-import { Tickspeed } from '@/core/pre-infinity/tickspeed';
-import { format, formatX } from '@/core/format';
+import { Tickspeed } from "@/core/pre-infinity/tickspeed";
+import { format, formatX } from "@/core/format";
 import { computed } from "vue";
 import { t } from "@/i18n";
-import { isInfinityUnlocked } from '@/core/progress';
+import { isInfinityUnlocked } from "@/core/progress";
 
 const isUnlocked = computed(() => Tickspeed.isUnlocked);
 const cost = computed(() => Tickspeed.cost);
 const base = computed(() => Tickspeed.base);
 const multiplier = computed(() => Tickspeed.multiplier);
-const canBuy = computed(() => Tickspeed.isAvailableForPurchase && Tickspeed.isAffordable);
+const canBuy = computed(
+  () => Tickspeed.isAvailableForPurchase && Tickspeed.isAffordable,
+);
 
-function buy() { Tickspeed.buy(); }
-function buyMax() { Tickspeed.buyMax(); }
+function buy() {
+  Tickspeed.buy();
+}
+function buyMax() {
+  Tickspeed.buyMax();
+}
 </script>
 
 <template>
@@ -22,7 +28,9 @@ function buyMax() { Tickspeed.buyMax(); }
     </div>
     <div class="tickspeed__buttons">
       <button class="tickspeed__btn" :disabled="!canBuy" @click="buy">
-        {{ isUnlocked ? t("cost_X", format(cost)) : t("tickspeed_locked_text") }}
+        {{
+          isUnlocked ? t("cost_X", format(cost)) : t("tickspeed_locked_text")
+        }}
       </button>
       <button class="tickspeed__btn" :disabled="!canBuy" @click="buyMax">
         {{ t("buy_max") }}

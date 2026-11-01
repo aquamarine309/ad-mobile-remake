@@ -15,12 +15,13 @@ const isVisible = computed(() => isC2Running.value || isC3Running.value);
 </script>
 
 <template>
-  <div
-    v-if="isVisible"
-    class="challenge-effects"
-  >
-    <div v-if="isC2Running">{{ t("nc_name", 2) }}: {{ formatPercents(c2Pow, 2, 2) }}</div>
-    <div v-if="isC3Running">{{ t("nc_name", 3) }}: {{ formatX(c3Pow, 2, 4) }}</div>
+  <div v-if="isVisible" class="challenge-effects">
+    <div v-if="isC2Running">
+      {{ t("nc_name", 2) }}: {{ formatPercents(c2Pow, 2, 2) }}
+    </div>
+    <div v-if="isC3Running">
+      {{ t("nc_name", 3) }}: {{ formatX(c3Pow, 2, 4) }}
+    </div>
   </div>
 </template>
 

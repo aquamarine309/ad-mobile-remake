@@ -4,28 +4,54 @@ export class DimensionState {
   constructor(getData, tier) {
     this._tier = tier;
     this._getData = getData;
-    const SHORT_DISPLAY_NAMES = [null, "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"];
+    const SHORT_DISPLAY_NAMES = [
+      null,
+      "1st",
+      "2nd",
+      "3rd",
+      "4th",
+      "5th",
+      "6th",
+      "7th",
+      "8th",
+    ];
     this._shortDisplayName = SHORT_DISPLAY_NAMES[tier];
   }
 
-  get tier() { return this._tier; }
+  get tier() {
+    return this._tier;
+  }
 
-  get shortDisplayName() { return this._shortDisplayName; }
+  get shortDisplayName() {
+    return this._shortDisplayName;
+  }
 
-  get data() { return this._getData()[this.tier - 1]; }
+  get data() {
+    return this._getData()[this.tier - 1];
+  }
 
   /** @returns {Decimal} */
-  get amount() { return this.data.amount; }
+  get amount() {
+    return this.data.amount;
+  }
   /** @param {Decimal} value */
-  set amount(value) { this.data.amount = value; }
+  set amount(value) {
+    this.data.amount = value;
+  }
 
   /** @returns {Decimal} */
-  get bought() { return this.data.bought; }
+  get bought() {
+    return this.data.bought;
+  }
   /** @param {Decimal} value */
-  set bought(value) { this.data.bought = value; }
+  set bought(value) {
+    this.data.bought = value;
+  }
 
   /** @abstract */
-  get productionPerSecond() { throw new Error(); }
+  get productionPerSecond() {
+    throw new Error();
+  }
 
   productionForDiff(diff) {
     return this.productionPerSecond.times(diff.div(1e3));
@@ -39,12 +65,14 @@ export class DimensionState {
     dimension.amount = dimension.amount.plus(this.productionForDiff(diff));
   }
 
-  static get dimensionCount() { return 8; }
+  static get dimensionCount() {
+    return 8;
+  }
 
   static createAccessor() {
-    const index = range(1, this.dimensionCount).map(tier => new this(tier));
+    const index = range(1, this.dimensionCount).map((tier) => new this(tier));
     index.unshift(null);
-    const accessor = tier => index[tier];
+    const accessor = (tier) => index[tier];
     accessor.index = index;
     return accessor;
   }

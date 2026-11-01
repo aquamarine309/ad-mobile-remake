@@ -1,52 +1,47 @@
 <script setup>
-import { computed } from 'vue';
-import { t, tp } from '@/i18n';
-import { format } from '@/core/format';
-import { offlineModal, offlineController, dismissOfflineModal } from './state';
+import { computed } from "vue";
+import { t, tp } from "@/i18n";
+import { offlineModal, offlineController, dismissOfflineModal } from "./state";
 import { formatTimeLong } from "@/core/time/timespan";
 
 const visible = computed(() => offlineModal.value !== null);
 const phase = computed(() => offlineModal.value?.phase);
-const cancelable = computed(() => phase.value === 'report');
+const cancelable = computed(() => phase.value === "report");
 
 // 0..10000, matching the Android ProgressBar max
 const progressValue = computed(() => {
   const m = offlineModal.value;
-  if (m?.phase !== 'progress' || !m.totalTicks) return 0;
+  if (m?.phase !== "progress" || !m.totalTicks) return 0;
   return Math.floor((m.doneTicks / m.totalTicks) * 10000);
 });
 
 // Elapsed real time since the progress phase began, as mm:ss
 const elapsedStr = computed(() => {
   const m = offlineModal.value;
-  if (m?.phase !== 'progress') return '00:00';
+  if (m?.phase !== "progress") return "00:00";
   const s = Math.floor((Date.now() - m.startedAt) / 1000);
-  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 });
 
 const totalStr = computed(() => {
   const m = offlineModal.value;
-  if (m?.phase !== 'progress') return '00:00';
+  if (m?.phase !== "progress") return "00:00";
   const s = Math.floor(m.seconds ?? 0);
-  return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+  return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 });
 
 const progressText = computed(() => {
   const m = offlineModal.value;
-  if (m?.phase !== 'progress') return '';
-  return `${tp('ticks_done', m.doneTicks, m.doneTicks, m.totalTicks)}`;
+  if (m?.phase !== "progress") return "";
+  return `${tp("ticks_done", m.doneTicks, m.doneTicks, m.totalTicks)}`;
 });
 
 function onScrimClick() {
   if (cancelable.value) dismissOfflineModal();
 }
 
-const canSpeedUp = computed(() =>
-  offlineController.value?.remaining > 500
-);
-const canSkip = computed(() =>
-  offlineController.value?.remaining > 10
-);
+const canSpeedUp = computed(() => offlineController.value?.remaining > 500);
+const canSkip = computed(() => offlineController.value?.remaining > 10);
 </script>
 
 <template>
@@ -54,36 +49,55 @@ const canSkip = computed(() =>
     <div class="offline-modal">
       <!-- Phase 1: progress -->
       <template v-if="phase === 'progress'">
-        <div class="offline-modal__title">{{ t('calculating_offline_progress') }}</div>
+        <div class="offline-modal__title">
+          {{ t("calculating_offline_progress") }}
+        </div>
         <div class="offline-modal__text">
-          {{ t('X_time_simulated', elapsedStr, totalStr) }}
+          {{ t("X_time_simulated", elapsedStr, totalStr) }}
         </div>
         <div class="offline-modal__text">{{ progressText }}</div>
-        <div class="offline-modal__text">{{ t('time_left_unknown') }}</div>
+        <div class="offline-modal__text">{{ t("time_left_unknown") }}</div>
         <div class="offline-progress">
-          <div class="offline-progress__fill" :style="{ width: progressValue / 100 + '%' }" />
+          <div
+            class="offline-progress__fill"
+            :style="{ width: progressValue / 100 + '%' }"
+          />
         </div>
         <div v-if="phase === 'progress'" class="offline-actions">
           <button
             v-if="canSpeedUp"
             class="offline-modal__btn"
             @click="offlineController?.speedUp()"
-          >{{ t('speed_up') }}</button>
+          >
+            {{ t("speed_up") }}
+          </button>
           <span class="offline-actions__spacer" />
           <button
             v-if="canSkip"
             class="offline-modal__btn"
             @click="offlineController?.skip()"
-          >{{ t('skip') }}</button>
+          >
+            {{ t("skip") }}
+          </button>
         </div>
       </template>
 
       <!-- Phase 2: report -->
       <template v-else>
-        <div class="offline-modal__title">{{ t('while_you_were_away_for_X', formatTimeLong(offlineModal.seconds * 1000)) }}</div>
+        <div class="offline-modal__title">
+          {{
+            t(
+              "while_you_were_away_for_X",
+              formatTimeLong(offlineModal.seconds * 1000),
+            )
+          }}
+        </div>
         <div class="offline-modal__body">
-          <div v-if="offlineModal.lines.length === 0" class="offline-modal__text">
-            {{ t('nothing_happened') }}
+          <div
+            v-if="offlineModal.lines.length === 0"
+            class="offline-modal__text"
+          >
+            {{ t("nothing_happened") }}
           </div>
           <div
             v-for="line in offlineModal.lines"
@@ -96,7 +110,7 @@ const canSkip = computed(() =>
         </div>
         <div class="offline-modal__actions">
           <button class="offline-modal__btn" @click="dismissOfflineModal">
-            {{ t('confirm') }}
+            {{ t("confirm") }}
           </button>
         </div>
       </template>

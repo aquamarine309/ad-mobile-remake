@@ -3,7 +3,7 @@ defineProps({
   label: { type: String, required: true },
   bad: { type: Boolean, default: false },
 });
-defineEmits(['click']);
+defineEmits(["click"]);
 </script>
 
 <template>
@@ -17,7 +17,6 @@ defineEmits(['click']);
 </template>
 
 <style scoped>
-
 .option-card {
   display: flex;
   flex-direction: column;

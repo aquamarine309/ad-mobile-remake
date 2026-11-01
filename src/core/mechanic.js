@@ -32,11 +32,11 @@ export class EffectState {
   powEffect(base) {
     return this.isEffectActive ? base.pow(this.effect()) : base;
   }
-  
+
   maxEffect(base) {
     return this.isEffectActive ? base.max(this.effect()) : base;
   }
-  
+
   minEffect(base) {
     return this.isEffectActive ? base.min(this.effect()) : base;
   }

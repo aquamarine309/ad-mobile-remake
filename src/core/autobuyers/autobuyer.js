@@ -1,5 +1,5 @@
-import { player } from '@/core/state/player';
-import { Currency } from '@/core/currency';
+import { player } from "@/core/state/player";
+import { Currency } from "@/core/currency";
 import { Achievement } from "@/core/achievements";
 
 /** Ordered prestige events. A higher tier implies all lower ones. */
@@ -12,12 +12,22 @@ export const PRESTIGE_EVENT = {
 };
 
 export class AutobuyerState {
-  get data() { throw new Error('abstract: data'); }
-  get isUnlocked() { throw new Error('abstract: isUnlocked'); }
+  get data() {
+    throw new Error("abstract: data");
+  }
+  get isUnlocked() {
+    throw new Error("abstract: isUnlocked");
+  }
 
-  get isActive() { return this.data.isActive; }
-  set isActive(v) { this.data.isActive = v; }
-  toggle() { this.isActive = !this.isActive; }
+  get isActive() {
+    return this.data.isActive;
+  }
+  set isActive(v) {
+    this.data.isActive = v;
+  }
+  toggle() {
+    this.isActive = !this.isActive;
+  }
 
   get canTick() {
     if (!player.auto.autobuyersOn) return false;
@@ -25,12 +35,18 @@ export class AutobuyerState {
     return this.isUnlocked;
   }
 
-  tick() { throw new Error('abstract: tick'); }
-  reset() { /* no-op */ }
+  tick() {
+    throw new Error("abstract: tick");
+  }
+  reset() {
+    /* no-op */
+  }
 }
 
 export class IntervaledAutobuyerState extends AutobuyerState {
-  get interval() { return this.data.interval; }
+  get interval() {
+    return this.data.interval;
+  }
 
   get timeSinceLastTick() {
     return player.records.realTimePlayed - this.data.lastTick;
@@ -45,7 +61,9 @@ export class IntervaledAutobuyerState extends AutobuyerState {
   }
 
   /** Which prestige event resets this autobuyer's timer. */
-  get resetTickOn() { return undefined; }
+  get resetTickOn() {
+    return undefined;
+  }
 
   /**
    * `lastTick = 0` means "fire on next tick". The next tick's canTick check
@@ -57,7 +75,9 @@ export class IntervaledAutobuyerState extends AutobuyerState {
 }
 
 export class UpgradeableAutobuyerState extends IntervaledAutobuyerState {
-  get baseInterval() { throw new Error('abstract: baseInterval'); }
+  get baseInterval() {
+    throw new Error("abstract: baseInterval");
+  }
 
   get interval() {
     // Break Infinity upgrade halving interval is not implemented yet.
@@ -67,16 +87,18 @@ export class UpgradeableAutobuyerState extends IntervaledAutobuyerState {
     return this.data.interval;
   }
 
-  get cost() { return this.data.cost; }
+  get cost() {
+    return this.data.cost;
+  }
 
   get hasMaxedInterval() {
     return this.data.interval <= 100;
   }
-  
+
   get canBeUpgraded() {
     return true;
   }
-  
+
   upgradeInterval({ free = false } = {}) {
     if (!this.canBeUpgraded) return false;
     if (player.infinity.upgrades.size === 0) return false;

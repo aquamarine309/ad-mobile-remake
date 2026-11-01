@@ -1,17 +1,14 @@
 <script setup>
 import { t } from "@/i18n";
-import EffectDisplay from '@/ui/components/EffectDisplay';
+import EffectDisplay from "@/ui/components/EffectDisplay";
 
 defineProps({
   achievement: { type: Object, required: true },
   position: { type: Object, required: true },
   arrowOffset: { type: Number, default: 0 },
-  isSecret: { type: Boolean, default: false }
+  isSecret: { type: Boolean, default: false },
 });
 
-const formattedEffect = (() => {
-  return achievement.config.formatEffect(achievement.effectValue);
-});
 </script>
 
 <template>
@@ -35,7 +32,9 @@ const formattedEffect = (() => {
       {{ achievement.description }}
     </div>
     <template v-if="achievement.reward">
-      <div class="achievement-tooltip__desc">{{ t("reward")}}: {{ achievement.reward }}</div>
+      <div class="achievement-tooltip__desc">
+        {{ t("reward") }}: {{ achievement.reward }}
+      </div>
       <EffectDisplay :state="achievement" />
     </template>
   </div>
@@ -71,10 +70,9 @@ const formattedEffect = (() => {
   transform-origin: center;
 }
 
-
 /* Arrow — a small CSS triangle pointing at the cell */
 .achievement-tooltip::before {
-  content: '';
+  content: "";
   position: absolute;
   width: 0;
   height: 0;
@@ -112,7 +110,9 @@ const formattedEffect = (() => {
 
 .achievement-tooltip-enter-active,
 .achievement-tooltip-leave-active {
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
+  transition:
+    transform 0.15s ease-out,
+    opacity 0.15s ease-out;
 }
 
 .achievement-tooltip-enter-from,

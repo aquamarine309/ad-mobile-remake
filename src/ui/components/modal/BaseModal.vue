@@ -1,46 +1,56 @@
 <script setup>
-import { computed, ref, watch, nextTick } from 'vue';
-import { modalState, Modal } from './index';
-import { t } from '@/i18n';
+import { computed, ref, watch, nextTick } from "vue";
+import { modalState, Modal } from "./index";
+import { t } from "@/i18n";
 
 const state = computed(() => modalState.current);
-const inputValue = ref('');
+const inputValue = ref("");
 const inputRef = ref(null);
 
-watch(state, async (s) => {
-  if (s?.type === 'prompt') {
-    inputValue.value = s.props.defaultValue ?? '';
-    await nextTick();
-    inputRef.value?.focus();
-  }
-}, { immediate: true });
+watch(
+  state,
+  async (s) => {
+    if (s?.type === "prompt") {
+      inputValue.value = s.props.defaultValue ?? "";
+      await nextTick();
+      inputRef.value?.focus();
+    }
+  },
+  { immediate: true },
+);
 
-const confirmText = computed(() => state.value?.props.confirmText ?? t('confirm'));
-const cancelText = computed(() => state.value?.props.cancelText ?? t('cancel'));
+const confirmText = computed(
+  () => state.value?.props.confirmText ?? t("confirm"),
+);
+const cancelText = computed(() => state.value?.props.cancelText ?? t("cancel"));
 
 function confirm() {
   const s = state.value;
   if (!s) return;
-  if (s.type === 'alert') Modal.close(undefined);
-  else if (s.type === 'confirm') Modal.close(true);
-  else if (s.type === 'prompt') Modal.close(inputValue.value);
+  if (s.type === "alert") Modal.close(undefined);
+  else if (s.type === "confirm") Modal.close(true);
+  else if (s.type === "prompt") Modal.close(inputValue.value);
 }
 
 function cancel() {
   const s = state.value;
   if (!s) return;
-  if (s.type === 'confirm') Modal.close(false);
-  else if (s.type === 'prompt') Modal.close(null);
+  if (s.type === "confirm") Modal.close(false);
+  else if (s.type === "prompt") Modal.close(null);
   else Modal.close(undefined);
 }
 
-watch(state, async (s) => {
-  if (s?.type === 'prompt') {
-    inputValue.value = s.props.defaultValue ?? '';
-    await nextTick();
-    inputRef.value?.focus();
-  }
-}, { immediate: true });
+watch(
+  state,
+  async (s) => {
+    if (s?.type === "prompt") {
+      inputValue.value = s.props.defaultValue ?? "";
+      await nextTick();
+      inputRef.value?.focus();
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -53,8 +63,8 @@ watch(state, async (s) => {
         <textarea
           v-if="state.type === 'prompt'"
           ref="inputRef"
-          class="modal__input"
           v-model="inputValue"
+          class="modal__input"
           rows="1"
         />
         <div class="modal__text">{{ state.props.text }}</div>
@@ -87,8 +97,12 @@ watch(state, async (s) => {
 }
 
 @keyframes modal-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal {
@@ -143,12 +157,12 @@ watch(state, async (s) => {
   max-height: 5.6rem;
   resize: none;
   outline: none;
-  scrollbar-width: none;           /* Firefox */
-  -ms-overflow-style: none;        /* Edge / IE */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge / IE */
 }
 
 .modal__input::-webkit-scrollbar {
-  display: none;                   /* Chrome / Safari / Webkit */
+  display: none; /* Chrome / Safari / Webkit */
   width: 0;
   height: 0;
 }

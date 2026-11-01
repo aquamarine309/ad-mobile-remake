@@ -1,20 +1,21 @@
 <script setup>
-import { FAB_BUTTONS } from '@/ui/fab-buttons';
-import { InputHold, stickyKey } from '@/core/loop/input-hold';
-import { onUnmounted, computed } from 'vue';
-import { t } from '@/i18n';
+import { FAB_BUTTONS } from "@/ui/fab-buttons";
+import { InputHold, stickyKey } from "@/core/loop/input-hold";
+import { onUnmounted, computed } from "vue";
+import { t } from "@/i18n";
 
-const visibleButtons = computed(() =>
-  FAB_BUTTONS.filter(b => b.isVisible())
-);
+const visibleButtons = computed(() => FAB_BUTTONS.filter((b) => b.isVisible()));
 
 function isEnabled(btn) {
   return btn.isEnabled ? btn.isEnabled() : true;
 }
 
-
 function onPointerDown(btn, event) {
-  try { event.currentTarget.setPointerCapture?.(event.pointerId); } catch {}
+  try {
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  } catch {
+    console.warn("Oh no.");
+  }
   btn.action();
   InputHold.begin(btn.key, { action: btn.action });
 }
@@ -84,11 +85,11 @@ onUnmounted(() => {
 }
 
 .fab-row__btn--sticky::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);   /* Android setToggled alpha 0.3 */
+  background: rgba(255, 255, 255, 0.3); /* Android setToggled alpha 0.3 */
   pointer-events: none;
   border: 0.1rem solid var(--color-text);
 }

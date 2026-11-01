@@ -1,4 +1,4 @@
-import { player } from '@/core/state/player';
+import { player } from "@/core/state/player";
 
 /**
  * Progress milestone checks.

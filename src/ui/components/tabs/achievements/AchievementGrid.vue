@@ -1,8 +1,8 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref, watch, nextTick } from 'vue';
-import { focusedAchievementId } from '@/ui/tabs/state';
-import AchievementCell from './AchievementCell.vue';
-import AchievementTooltip from './AchievementTooltip.vue';
+import { computed, onMounted, onUnmounted, ref, watch, nextTick } from "vue";
+import { focusedAchievementId } from "@/ui/tabs/state";
+import AchievementCell from "./AchievementCell.vue";
+import AchievementTooltip from "./AchievementTooltip.vue";
 
 const props = defineProps({
   achievements: { type: Array, required: true },
@@ -31,10 +31,10 @@ const selectedId = ref(null);
 const selectedAchievement = computed(() =>
   selectedId.value === null
     ? null
-    : props.achievements.find(a => a.id === selectedId.value) ?? null
+    : (props.achievements.find((a) => a.id === selectedId.value) ?? null),
 );
 
-const tooltipPos = ref({ left: 0, top: 0, placement: 'below' });
+const tooltipPos = ref({ left: 0, top: 0, placement: "below" });
 
 const TOOLTIP_WIDTH = 240;
 const MARGIN = 8;
@@ -73,13 +73,13 @@ function onCellClick({ ach, event }) {
   let placement;
   if (spaceBelow >= estHeight + MARGIN) {
     top = rect.bottom + MARGIN;
-    placement = 'below';
+    placement = "below";
   } else if (spaceAbove >= estHeight + MARGIN) {
     top = rect.top - MARGIN;
-    placement = 'above';
+    placement = "above";
   } else {
     top = viewportH / 2;
-    placement = 'middle';
+    placement = "middle";
   }
 
   tooltipPos.value = { left, top, placement };
@@ -87,7 +87,7 @@ function onCellClick({ ach, event }) {
 
 async function tryFocus(id) {
   if (id === null) return;
-  const ach = props.achievements.find(a => a.id === id);
+  const ach = props.achievements.find((a) => a.id === id);
 
   await nextTick();
 
@@ -97,36 +97,33 @@ async function tryFocus(id) {
   focusedAchievementId.value = null;
 }
 
-watch(focusedAchievementId, (id) => {
-  tryFocus(id)
-}, { immediate: true });
+watch(
+  focusedAchievementId,
+  (id) => {
+    tryFocus(id);
+  },
+  { immediate: true },
+);
 
 function closeTooltip() {
   selectedId.value = null;
 }
 
-onMounted(() => document.addEventListener('click', closeTooltip));
-onUnmounted(() => document.removeEventListener('click', closeTooltip));
+onMounted(() => document.addEventListener("click", closeTooltip));
+onUnmounted(() => document.removeEventListener("click", closeTooltip));
 </script>
 
 <template>
-  <div
-    class="achievements-grid"
-    ref="gridRoot"
-  >
-    <div
-      v-for="row in rows"
-      :key="row.row"
-      class="achievements-grid__row"
-    >
+  <div ref="gridRoot" class="achievements-grid">
+    <div v-for="row in rows" :key="row.row" class="achievements-grid__row">
       <AchievementCell
         v-for="ach in row.achievements"
         :key="ach.id"
         :achievement="ach"
         :icon-prefix="iconPrefix"
         :selected="selectedId === ach.id"
-        @cell-click="onCellClick"
         :is-secret="isSecret"
+        @cell-click="onCellClick"
       />
     </div>
 

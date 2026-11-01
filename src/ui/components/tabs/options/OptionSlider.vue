@@ -1,5 +1,5 @@
 <script setup>
-import RangeSlider from './RangeSlider.vue';
+import RangeSlider from "./RangeSlider.vue";
 
 defineProps({
   label: { type: String, required: true },
@@ -9,7 +9,7 @@ defineProps({
   step: { type: Number, default: 1 },
   values: { type: Array, default: null },
 });
-defineEmits(['update:modelValue']);
+defineEmits(["update:modelValue"]);
 </script>
 
 <template>

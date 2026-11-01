@@ -1,19 +1,21 @@
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps({
   modelValue: { type: Number, required: true },
   min: { type: Number, default: 0 },
   max: { type: Number, default: 100 },
   step: { type: Number, default: 1 },
-  values: { type: Array, default: null }
+  values: { type: Array, default: null },
 });
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(["update:modelValue"]);
 
 const isDiscrete = computed(() => Array.isArray(props.values));
-const sliderMin = computed(() => isDiscrete.value ? 0 : props.min);
-const sliderMax = computed(() => isDiscrete.value ? props.values.length - 1 : props.max);
-const sliderStep = computed(() => isDiscrete.value ? 1 : props.step);
+const sliderMin = computed(() => (isDiscrete.value ? 0 : props.min));
+const sliderMax = computed(() =>
+  isDiscrete.value ? props.values.length - 1 : props.max,
+);
+const sliderStep = computed(() => (isDiscrete.value ? 1 : props.step));
 
 const sliderValue = computed(() => {
   if (isDiscrete.value) {
@@ -31,7 +33,7 @@ const fillPercent = computed(() => {
 
 function onInput(e) {
   const v = Number(e.target.value);
-  emit('update:modelValue', isDiscrete.value ? props.values[v] : v);
+  emit("update:modelValue", isDiscrete.value ? props.values[v] : v);
 }
 </script>
 

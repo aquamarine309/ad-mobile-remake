@@ -39,10 +39,17 @@ export class ExponentialCostScaling {
     this._logCostScale = param.costScale.log10();
     if (param.purchasesBeforeScaling !== undefined) {
       this._purchasesBeforeScaling = param.purchasesBeforeScaling;
-    // eslint-disable-next-line no-negated-condition
+       
     } else if (param.scalingCostThreshold !== undefined) {
-      this._purchasesBeforeScaling = param.scalingCostThreshold.log10().minus(this._logBaseCost).div(this._logBaseIncrease).ceil();
-    } else throw new Error("Must specify either scalingCostThreshold or purchasesBeforeScaling");
+      this._purchasesBeforeScaling = param.scalingCostThreshold
+        .log10()
+        .minus(this._logBaseCost)
+        .div(this._logBaseIncrease)
+        .ceil();
+    } else
+      throw new Error(
+        "Must specify either scalingCostThreshold or purchasesBeforeScaling",
+      );
     this.updateCostScale();
   }
 
@@ -60,9 +67,20 @@ export class ExponentialCostScaling {
   }
 
   updateCostScale() {
-    this._precalcDiscriminant = this._logBaseIncrease.times(2).add(this._logCostScale).pow(2).minus(
-      this._purchasesBeforeScaling.times(this._logBaseIncrease).add(this._logBaseCost).times(this._logCostScale).times(8));
-    this._precalcCenter = this._purchasesBeforeScaling.minus(this._logBaseIncrease.div(this._logCostScale)).add(0.5);
+    this._precalcDiscriminant = this._logBaseIncrease
+      .times(2)
+      .add(this._logCostScale)
+      .pow(2)
+      .minus(
+        this._purchasesBeforeScaling
+          .times(this._logBaseIncrease)
+          .add(this._logBaseCost)
+          .times(this._logCostScale)
+          .times(8),
+      );
+    this._precalcCenter = this._purchasesBeforeScaling
+      .minus(this._logBaseIncrease.div(this._logCostScale))
+      .add(0.5);
   }
 
   /**
@@ -73,9 +91,15 @@ export class ExponentialCostScaling {
     const logMult = this._logBaseIncrease;
     const logBase = this._logBaseCost;
     const excess = currentPurchases.minus(this._purchasesBeforeScaling);
-    const logCost = excess.sign > 0
-      ? currentPurchases.times(logMult).add(logBase).add(excess.times(excess.add(1)).times(this._logCostScale).times(0.5))
-      : currentPurchases.times(logMult).add(logBase);
+    const logCost =
+      excess.sign > 0
+        ? currentPurchases
+            .times(logMult)
+            .add(logBase)
+            .add(
+              excess.times(excess.add(1)).times(this._logCostScale).times(0.5),
+            )
+        : currentPurchases.times(logMult).add(logBase);
     return Decimal.pow10(logCost);
   }
 
@@ -103,11 +127,15 @@ export class ExponentialCostScaling {
     // We can use the linear method up to one purchase past the threshold, because the first purchase
     // past the threshold doesn't have cost scaling in it yet.
     if (newPurchases.gt(this._purchasesBeforeScaling)) {
-      const discrim = this._precalcDiscriminant.add(this._logCostScale.times(logMoney).times(8));
+      const discrim = this._precalcDiscriminant.add(
+        this._logCostScale.times(logMoney).times(8),
+      );
       if (discrim.sign < 0) {
         return null;
       }
-      newPurchases = this._precalcCenter.add(discrim.sqrt().div(this._logCostScale.times(2))).floor();
+      newPurchases = this._precalcCenter
+        .add(discrim.sqrt().div(this._logCostScale.times(2)))
+        .floor();
     }
     if (newPurchases.lte(currentPurchases)) return null;
     // There's a narrow edge case where the linear method returns > this._purchasesBeforeScaling + 1
@@ -118,10 +146,19 @@ export class ExponentialCostScaling {
       logPrice = newPurchases.minus(1).times(logMult).add(logBase);
     } else {
       const pExcess = newPurchases.minus(this._purchasesBeforeScaling);
-      logPrice = newPurchases.minus(1).times(logMult).add(logBase).add(pExcess.times(pExcess.minus(1)).times(this._logCostScale).times(0.5));
+      logPrice = newPurchases
+        .minus(1)
+        .times(logMult)
+        .add(logBase)
+        .add(
+          pExcess.times(pExcess.minus(1)).times(this._logCostScale).times(0.5),
+        );
     }
-    const l = logPrice.add(numberPerSet.log10())
-    return { quantity: newPurchases.minus(currentPurchases), logPrice: l.gte(MAX_SAFE_LOG_COST) ? D(0) : l };
+    const l = logPrice.add(numberPerSet.log10());
+    return {
+      quantity: newPurchases.minus(currentPurchases),
+      logPrice: l.gte(MAX_SAFE_LOG_COST) ? D(0) : l,
+    };
   }
 
   /**
@@ -146,12 +183,16 @@ export class ExponentialCostScaling {
     // We can use the linear method up to one purchase past the threshold, because the first purchase
     // past the threshold doesn't have cost scaling in it yet.
     if (contValue.gt(this._purchasesBeforeScaling)) {
-      const discrim = this._precalcDiscriminant.add(this._logCostScale.times(logMoney).times(8));
+      const discrim = this._precalcDiscriminant.add(
+        this._logCostScale.times(logMoney).times(8),
+      );
       if (discrim.sign < 0) {
         return D(0);
       }
-      contValue = this._precalcCenter.add(discrim.sqrt().div(this._logCostScale.times(2)));
+      contValue = this._precalcCenter.add(
+        discrim.sqrt().div(this._logCostScale.times(2)),
+      );
     }
     return contValue.clampMin(0);
   }
-};
+}

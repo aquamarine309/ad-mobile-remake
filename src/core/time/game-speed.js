@@ -1,4 +1,4 @@
-import { D } from '../decimal';
+import { D } from "../decimal";
 
 export const GameSpeed = {
   devSpeed: D(1),

@@ -1,7 +1,7 @@
 import { D, Decimal } from '@/core/decimal';
 import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
-import { formatInt, formatX } from '@/core/format';
+import { formatX } from '@/core/format';
 import { Tickspeed } from "./tickspeed";
 import { dispatch, GAME_EVENT } from '@/core/events';
 import { t } from "@/i18n";

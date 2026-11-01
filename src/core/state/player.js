@@ -1,6 +1,6 @@
-import { reactive } from 'vue';
-import { D, Decimal } from '@/core/decimal';
-import { range, repeat } from '@/core/utils';
+import { reactive } from "vue";
+import { D, Decimal } from "@/core/decimal";
+import { range, repeat } from "@/core/utils";
 
 export const CURRENT_SAVE_VERSION = 3;
 
@@ -13,7 +13,7 @@ export function createInitialPlayer() {
       antimatter: range(1, 8).map(() => ({
         bought: D(0),
         amount: D(0),
-        costBumps: D(0)
+        costBumps: D(0),
       })),
     },
     tickspeed: {
@@ -26,22 +26,22 @@ export function createInitialPlayer() {
     },
     auto: {
       autobuyersOn: true,
-      antimatterDims: range(1, 8).map(i => ({
+      antimatterDims: range(1, 8).map((i) => ({
         isBought: false,
         isActive: true,
         lastTick: 0,
-        mode: '10',
+        mode: "10",
         interval: AD_BASE_INTERVALS[i - 1],
         cost: 1,
-        bulk: 1
+        bulk: 1,
       })),
       tickspeed: {
         isBought: false,
         isActive: true,
         lastTick: 0,
-        mode: 'max',
+        mode: "max",
         interval: 500,
-        cost: 1
+        cost: 1,
       },
       dimBoost: {
         isActive: true,
@@ -51,7 +51,7 @@ export function createInitialPlayer() {
         limitDimBoosts: false,
         maxDimBoosts: 10,
         limitUntilGalaxies: false,
-        galaxies: 10
+        galaxies: 10,
       },
       galaxy: {
         isActive: true,
@@ -59,19 +59,19 @@ export function createInitialPlayer() {
         interval: 20000,
         cost: 1,
         limitGalaxies: false,
-        maxGalaxies: 10
+        maxGalaxies: 10,
       },
       bigCrunch: {
         isActive: true,
         lastTick: 0,
         interval: 150000,
         cost: 1,
-        mode: 'amount',        // 'amount' | 'time' | 'xHighest'
+        mode: "amount", // 'amount' | 'time' | 'xHighest'
         amount: D(1),
         time: 1,
         xHighest: D(10),
-        increaseWithMult: false
-      }
+        increaseWithMult: false,
+      },
     },
     infinity: {
       points: D(0),
@@ -82,18 +82,18 @@ export function createInitialPlayer() {
       upgrades: new Set(),
       breakUpgrades: new Set(),
       rebuyables: [0, 0, 0],
-      ipMultPurchases: D(0)
+      ipMultPurchases: D(0),
     },
     break: false,
     challenge: {
       normal: {
         current: 0,
         completedBits: 0,
-        bestTimes: repeat(Decimal.dLayerSafeMax, 11),   // C2..C12
+        bestTimes: repeat(Decimal.dLayerSafeMax, 11), // C2..C12
         c2Pow: 0,
         c3Pow: D(0.01),
         c8Sacrifice: D(1),
-        c9TickspeedCostBumps: D(0)
+        c9TickspeedCostBumps: D(0),
       },
     },
     matter: D(0),
@@ -123,16 +123,16 @@ export function createInitialPlayer() {
       },
       permanent: {
         emojiGalaxies: 0,
-        singleTickspeed: 0
-      }
+        singleTickspeed: 0,
+      },
     },
     records: {
       gameCreatedTime: Date.now(),
-    
+
       totalAntimatter: D(0),
       totalTimePlayed: D(0),
       realTimePlayed: 0,
-    
+
       thisInfinity: {
         time: D(0),
         realTime: 0,
@@ -165,23 +165,23 @@ export function createInitialPlayer() {
     lastUpdate: Date.now(),
     options: {
       updateRate: 50,
-      offlineProgress: 'show',
+      offlineProgress: "show",
       offlineTicks: 5000,
       lastTab: "dimensions",
       lastSubtabs: {},
       bottomNavSymbols: "all",
       language: "en",
       theme: "dark",
-      orientation: 'system', // 'system' | 'portrait' | 'landscape'
-      retryChallenge: false
+      orientation: "system", // 'system' | 'portrait' | 'landscape'
+      retryChallenge: false,
     },
-    version: CURRENT_SAVE_VERSION
+    version: CURRENT_SAVE_VERSION,
   };
 }
 
 export const player = reactive(createInitialPlayer());
 
-import { Lazy } from '@/core/lazy';
+import { Lazy } from "@/core/lazy";
 
 /**
  * Replace all fields of `player` with the given object.

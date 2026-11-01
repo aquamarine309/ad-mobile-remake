@@ -3,9 +3,9 @@
 // subscriptions are live before initGame() dispatches any events.
 // Do not lazy-load OfflineProgressModal or this module.
 
-import { ref } from 'vue';
-import { ui, GAME_EVENT } from '@/core/events';
-import { buildAwayReport } from '@/core/loop/away-progress';
+import { ref } from "vue";
+import { ui, GAME_EVENT } from "@/core/events";
+import { buildAwayReport } from "@/core/loop/away-progress";
 
 /**
  * null when hidden. Otherwise one of:
@@ -20,8 +20,13 @@ export const offlineModal = ref(null);
 
 ui.on(GAME_EVENT.OFFLINE_PROGRESS_TICK, ({ done, total }) => {
   let m = offlineModal.value;
-  if (m?.phase !== 'progress') {
-    m = { phase: 'progress', startedAt: Date.now(), doneTicks: 0, totalTicks: 0 };
+  if (m?.phase !== "progress") {
+    m = {
+      phase: "progress",
+      startedAt: Date.now(),
+      doneTicks: 0,
+      totalTicks: 0,
+    };
     offlineModal.value = m;
   }
   m.doneTicks = done;
@@ -30,7 +35,7 @@ ui.on(GAME_EVENT.OFFLINE_PROGRESS_TICK, ({ done, total }) => {
 
 ui.on(GAME_EVENT.OFFLINE_PROGRESS_DONE, ({ seconds, before, after }) => {
   offlineModal.value = {
-    phase: 'report',
+    phase: "report",
     seconds,
     lines: buildAwayReport(before, after),
   };

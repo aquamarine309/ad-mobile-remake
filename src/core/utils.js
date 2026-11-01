@@ -8,7 +8,7 @@ export function range(start, count) {
 
 export function repeat(value, count) {
   const arr = [];
-  for (let i = 0; i < count;i++) {
+  for (let i = 0; i < count; i++) {
     arr.push(value);
   }
   return arr;

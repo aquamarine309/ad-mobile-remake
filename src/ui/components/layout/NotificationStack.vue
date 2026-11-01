@@ -1,5 +1,5 @@
 <script setup>
-import { notifications, dismiss, runOnClick } from '@/ui/notifications';
+import { notifications, dismiss, runOnClick } from "@/ui/notifications";
 
 function onNotificationClick() {
   const item = notifications.current;

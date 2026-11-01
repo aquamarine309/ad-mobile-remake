@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from 'vue';
-import { t } from '@/i18n';
-import { NormalChallenges } from '@/core/challenges/normal';
-import NormalChallengeBox from './NormalChallengeBox.vue';
+import { computed } from "vue";
+import { t } from "@/i18n";
+import { NormalChallenges } from "@/core/challenges/normal";
+import NormalChallengeBox from "./NormalChallengeBox.vue";
 import { player } from "@/core/state/player";
 import { Decimal } from "@/core/decimal";
 import { format } from "@/core/format";
@@ -31,28 +31,29 @@ const inf = computed(() => format(Decimal.dNumberMax, 2));
   <div class="nc-tab">
     <div v-if="isRunning" class="nc-tab__actions">
       <button class="nc-tab__action-btn" @click="restart">
-        {{ t('restart_challenge') }}
+        {{ t("restart_challenge") }}
       </button>
       <button class="nc-tab__action-btn" @click="exit">
-        {{ t('exit_challenge') }}
+        {{ t("exit_challenge") }}
       </button>
     </div>
-    
+
     <div class="nc-tab__actions">
       <button class="nc-tab__action-btn" @click="toggleRetry">
-        {{ t('automatically_retry_challenges_X', t(retryChallenge ? "on" : "off")) }}
+        {{
+          t(
+            "automatically_retry_challenges_X",
+            t(retryChallenge ? "on" : "off"),
+          )
+        }}
       </button>
     </div>
 
-    <p class="nc-tab__info">{{ t('normal_challenge_info', inf) }}</p>
-    <p class="nc-tab__info">{{ t('antimatter_challenge_crunch_info') }}</p>
+    <p class="nc-tab__info">{{ t("normal_challenge_info", inf) }}</p>
+    <p class="nc-tab__info">{{ t("antimatter_challenge_crunch_info") }}</p>
 
     <div class="nc-grid">
-      <NormalChallengeBox
-        v-for="c in challenges"
-        :key="c.id"
-        :challenge="c"
-      />
+      <NormalChallengeBox v-for="c in challenges" :key="c.id" :challenge="c" />
     </div>
   </div>
 </template>

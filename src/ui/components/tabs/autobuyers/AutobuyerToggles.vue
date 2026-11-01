@@ -1,37 +1,36 @@
 <script setup>
-import { computed } from 'vue';
-import { player } from '@/core/state/player';
-import { formatInt } from '@/core/format';
-import { Autobuyer, Autobuyers } from '@/core/autobuyers';
-import { t } from '@/i18n';
+import { computed } from "vue";
+import { player } from "@/core/state/player";
+import { formatInt } from "@/core/format";
+import { Autobuyer, Autobuyers } from "@/core/autobuyers";
+import { t } from "@/i18n";
 
 const enabledLabel = computed(() =>
-  player.auto.autobuyersOn ? t('autobuyers_enabled') : t('autobuyers_disabled')
+  player.auto.autobuyersOn ? t("autobuyers_enabled") : t("autobuyers_disabled"),
 );
 
-const adModeLabel = computed(() => t('toggle_buy_until_10', formatInt(10)));
+const adModeLabel = computed(() => t("toggle_buy_until_10", formatInt(10)));
 
-const allMax = computed(() => Autobuyer.antimatterDimensions.every(a => a.mode === '10'));
+const allMax = computed(() =>
+  Autobuyer.antimatterDimensions.every((a) => a.mode === "10"),
+);
 </script>
 
 <template>
   <div class="autobuyer-toggles">
     <button
       class="autobuyer-toggles__btn"
-      :class="{'autobuyer-toggles__btn--disabled': !player.auto.autobuyersOn }"
+      :class="{ 'autobuyer-toggles__btn--disabled': !player.auto.autobuyersOn }"
       @click="player.auto.autobuyersOn = !player.auto.autobuyersOn"
     >
       {{ enabledLabel }}
     </button>
-    <button
-      class="autobuyer-toggles__btn"
-      @click="Autobuyers.toggleAll()"
-    >
-      {{ t('toggle_all_autobuyers') }}
+    <button class="autobuyer-toggles__btn" @click="Autobuyers.toggleAll()">
+      {{ t("toggle_all_autobuyers") }}
     </button>
     <button
       class="autobuyer-toggles__btn"
-      :class="{'autobuyer-toggles__btn--disabled': !allMax }"
+      :class="{ 'autobuyer-toggles__btn--disabled': !allMax }"
       @click="Autobuyers.toggleADMode()"
     >
       {{ adModeLabel }}

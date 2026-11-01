@@ -1,19 +1,21 @@
 // core/loop/simulate-time.js
-import { player } from '@/core/state/player';
-import { tick } from './tick';
-import { runBatched } from './async-runner';
-import { GameLoop } from './game-loop';
-import { serialize } from '@/core/storage/serialize';
-import { Decimal } from '@/core/decimal';
+import { player } from "@/core/state/player";
+import { tick } from "./tick";
+import { runBatched } from "./async-runner";
+import { GameLoop } from "./game-loop";
+import { Decimal } from "@/core/decimal";
 
-export function maxOfflineTicks(simulatedMs, defaultTicks = player.options.offlineTicks) {
+export function maxOfflineTicks(
+  simulatedMs,
+  defaultTicks = player.options.offlineTicks,
+) {
   const tickLimit = Math.min(Math.floor(simulatedMs / 33), 1e6);
   return Math.min(defaultTicks, tickLimit);
 }
 
 export function cloneSnapshot(v) {
-  if (v === null || typeof v !== 'object') return v;
-  if (v instanceof Decimal) return v;        // immutable, safe to share
+  if (v === null || typeof v !== "object") return v;
+  if (v instanceof Decimal) return v; // immutable, safe to share
   if (Array.isArray(v)) return v.map(cloneSnapshot);
   if (v instanceof Set) return new Set(v);
   const out = {};
@@ -21,7 +23,10 @@ export function cloneSnapshot(v) {
   return out;
 }
 
-export async function simulateTime(seconds, { fast = false, onProgress, controller } = {}) {
+export async function simulateTime(
+  seconds,
+  { fast = false, onProgress, controller } = {},
+) {
   if (seconds <= 0) return null;
 
   let ticks = Math.floor(seconds * 20);
@@ -34,7 +39,7 @@ export async function simulateTime(seconds, { fast = false, onProgress, controll
   GameLoop.stop();
 
   let remainingSeconds = seconds;
-  const step = remaining => {
+  const step = (remaining) => {
     const diff = remainingSeconds / remaining;
     tick(1000 * diff);
     remainingSeconds -= diff;
@@ -45,7 +50,9 @@ export async function simulateTime(seconds, { fast = false, onProgress, controll
     for (let i = ticks; i > 0; i--) step(i);
   } else {
     await runBatched(step, ticks, {
-      batchSize: 1, maxTime: 30, sleepTime: 1,
+      batchSize: 1,
+      maxTime: 30,
+      sleepTime: 1,
       onProgress,
       controller,
     });

@@ -1,7 +1,7 @@
-import { EffectState, addEffectsOf } from '@/core/mechanic';
+import { EffectState, addEffectsOf } from "@/core/mechanic";
 import { UPGRADE_CONFIGS } from "./upgrade-configs";
-import { player } from '@/core/state/player';
-import { dispatch, GAME_EVENT } from '@/core/events';
+import { player } from "@/core/state/player";
+import { dispatch, GAME_EVENT } from "@/core/events";
 import { Currency } from "@/core/currency";
 import { D, Decimal } from "@/core/decimal";
 import { Achievement } from "@/core/achievements";
@@ -26,7 +26,7 @@ class InfinityUpgradeState extends EffectState {
   effect() {
     return this.config.effect?.();
   }
-  
+
   get cost() {
     return this.config.cost;
   }
@@ -36,16 +36,18 @@ class InfinityUpgradeState extends EffectState {
   }
 
   get canBeBought() {
-    return !this.isBought
-      && this.isAvailableForPurchase
-      && Currency.infinityPoints.value.gte(this.cost);
+    return (
+      !this.isBought &&
+      this.isAvailableForPurchase &&
+      Currency.infinityPoints.value.gte(this.cost)
+    );
   }
 
   purchase() {
     if (!this.canBeBought) return false;
     player.infinity.points = player.infinity.points.minus(this.cost);
     player.infinity.upgrades.add(this.config.id);
-    if (this.config.id.startsWith('skip')) skipResetsIfPossible();
+    if (this.config.id.startsWith("skip")) skipResetsIfPossible();
     dispatch(GAME_EVENT.INFINITY_UPGRADE_BOUGHT, this.config.id);
     return true;
   }
@@ -60,7 +62,7 @@ class InfinityIPMultUpgrade extends EffectState {
   get purchaseCount() {
     return player.infinity.ipMultPurchases;
   }
-  
+
   set purchaseCount(value) {
     player.infinity.ipMultPurchases = value;
   }
@@ -81,8 +83,9 @@ class InfinityIPMultUpgrade extends EffectState {
 
   get cost() {
     if (this.hasIncreasedCost) {
-      return this.config.costIncreaseThreshold
-        .times(this.costIncrease.pow(this.purchaseCount.sub(this.purchasesAtIncrease)));
+      return this.config.costIncreaseThreshold.times(
+        this.costIncrease.pow(this.purchaseCount.sub(this.purchasesAtIncrease)),
+      );
     }
     return this.costIncrease.pow(this.purchaseCount.add(1));
   }
@@ -90,11 +93,11 @@ class InfinityIPMultUpgrade extends EffectState {
   get isCapped() {
     return this.cost.gte(this.config.costCap);
   }
-  
+
   isAvailableForPurchase() {
     return true;
   }
-  
+
   // Just for UI
   get isBought() {
     return this.isCapped;
@@ -119,8 +122,12 @@ class InfinityIPMultUpgrade extends EffectState {
 
   purchase(amount = D(1)) {
     if (!this.canBeBought) return false;
-    
-    const totalCost = this.sumGeometricSeries(amount, this.cost, this.costIncrease);
+
+    const totalCost = this.sumGeometricSeries(
+      amount,
+      this.cost,
+      this.costIncrease,
+    );
     Currency.infinityPoints.sub(totalCost);
     this.purchaseCount = this.purchaseCount.add(amount);
     return true;
@@ -132,24 +139,34 @@ class InfinityIPMultUpgrade extends EffectState {
 
     // 1. Process the shallow exponential (below threshold)
     if (!this.hasIncreasedCost) {
-      const availableIP = player.infinity.points.min(this.config.costIncreaseThreshold);
-      const purchases = this.affordGeometricSeries(availableIP, this.cost, this.costIncrease);
+      const availableIP = player.infinity.points.min(
+        this.config.costIncreaseThreshold,
+      );
+      const purchases = this.affordGeometricSeries(
+        availableIP,
+        this.cost,
+        this.costIncrease,
+      );
       if (purchases.gt(0)) {
         this.purchase(purchases);
         purchasedAny = true;
       }
     }
-    
+
     // 2. Process the steeper exponential (above threshold, but below cap)
     if (this.hasIncreasedCost && !this.isCapped) {
       const availableIP = player.infinity.points.min(this.config.costCap);
-      const purchases = this.affordGeometricSeries(availableIP, this.cost, this.costIncrease);
+      const purchases = this.affordGeometricSeries(
+        availableIP,
+        this.cost,
+        this.costIncrease,
+      );
       if (purchases.gt(0)) {
         this.purchase(purchases);
         purchasedAny = true;
       }
     }
-    
+
     return purchasedAny;
   }
 
@@ -164,12 +181,12 @@ class InfinityIPMultUpgrade extends EffectState {
   // n = floor(log_ratio(available * (ratio - 1) / start + 1))
   affordGeometricSeries(available, start, ratio) {
     if (available.lt(start)) return D(0);
-    
+
     const val = available.times(ratio.sub(1)).div(start).add(1);
     let n = val.log(ratio).floor();
-    
+
     if (n.lte(0)) return D(0);
-    
+
     // Edge case: Due to decimal precision, the computed n might slightly overshoot
     if (this.sumGeometricSeries(n, start, ratio).gt(available)) {
       n = n.sub(1);
@@ -181,10 +198,10 @@ class InfinityIPMultUpgrade extends EffectState {
 const states = new Map();
 export function InfinityUpgrade(id) {
   if (!states.has(id)) {
-    const config = UPGRADE_CONFIGS.find(c => c.id === id);
+    const config = UPGRADE_CONFIGS.find((c) => c.id === id);
     if (!config) throw new Error(`Unknown infinity upgrade: ${id}`);
-    
-    if (id === 'ipMult') {
+
+    if (id === "ipMult") {
       states.set(id, new InfinityIPMultUpgrade(config));
     } else {
       states.set(id, new InfinityUpgradeState(config));
@@ -194,13 +211,15 @@ export function InfinityUpgrade(id) {
 }
 
 export const InfinityUpgrades = {
-  all: UPGRADE_CONFIGS.map(c => InfinityUpgrade(c.id)),
+  all: UPGRADE_CONFIGS.map((c) => InfinityUpgrade(c.id)),
 };
 
-export const INFINITY_UPGRADE_GRID = [0, 1, 2, 3].map(col =>
-  [0, 1, 2, 3].map(row =>
-    InfinityUpgrades.all.find(u => u.config.col === col && u.config.row === row)
-  )
+export const INFINITY_UPGRADE_GRID = [0, 1, 2, 3].map((col) =>
+  [0, 1, 2, 3].map((row) =>
+    InfinityUpgrades.all.find(
+      (u) => u.config.col === col && u.config.row === row,
+    ),
+  ),
 );
 
 export function skipResetsIfPossible() {
@@ -210,7 +229,7 @@ export function skipResetsIfPossible() {
     InfinityUpgrade("skipReset1"),
     InfinityUpgrade("skipReset2"),
     InfinityUpgrade("skipReset3"),
-    InfinityUpgrade("skipResetGalaxy")
+    InfinityUpgrade("skipResetGalaxy"),
   );
   player.galaxies = InfinityUpgrade("skipResetGalaxy").effectOrDefault(D(0));
 }
@@ -220,7 +239,9 @@ export function gainPassivePoints(diff) {
   if (time.eq(Decimal.dLayerSafeMax)) return;
   const gain = InfinityUpgrade("passiveGen").effectOrDefault(D(0));
   if (gain.eq(0)) return;
-  player.infinity.partPoints = player.infinity.partPoints.add(gain.times(diff).div(10000));
+  player.infinity.partPoints = player.infinity.partPoints.add(
+    gain.times(diff).div(10000),
+  );
   const int = player.infinity.partPoints.floor();
   if (int.eq(0)) return;
   Currency.infinityPoints.add(int);

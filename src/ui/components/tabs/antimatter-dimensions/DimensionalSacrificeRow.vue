@@ -1,6 +1,6 @@
 <script setup>
-import { Sacrifice } from '@/core/pre-infinity/sacrifice';
-import { formatX } from '@/core/format';
+import { Sacrifice } from "@/core/pre-infinity/sacrifice";
+import { formatX } from "@/core/format";
 import { computed } from "vue";
 import { t } from "@/i18n";
 
@@ -16,7 +16,9 @@ const buttonText = computed(() => {
   return t("sacrifice_locked_text", disabledReason.value);
 });
 
-function sacrifice() { Sacrifice.sacrifice(); }
+function sacrifice() {
+  Sacrifice.sacrifice();
+}
 </script>
 
 <template>

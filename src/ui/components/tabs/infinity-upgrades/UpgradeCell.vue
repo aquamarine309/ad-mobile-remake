@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from 'vue';
-import { t, tp } from '@/i18n';
-import { format } from '@/core/format';
-import EffectDisplay from '@/ui/components/EffectDisplay';
+import { computed } from "vue";
+import { tp } from "@/i18n";
+import { format } from "@/core/format";
+import EffectDisplay from "@/ui/components/EffectDisplay";
 
 const props = defineProps({
   upgrade: { type: Object, required: true },
@@ -10,20 +10,13 @@ const props = defineProps({
 
 const stateClass = computed(() => {
   const u = props.upgrade;
-  if (u.isBought) return 'upgrade-cell--bought';
-  if (!u.isAvailableForPurchase) return 'upgrade-cell--unavailable';
-  if (!u.canBeBought) return 'upgrade-cell--unaffordable';
-  return 'upgrade-cell--purchasable';
+  if (u.isBought) return "upgrade-cell--bought";
+  if (!u.isAvailableForPurchase) return "upgrade-cell--unavailable";
+  if (!u.canBeBought) return "upgrade-cell--unaffordable";
+  return "upgrade-cell--purchasable";
 });
 
 const desc = computed(() => props.upgrade.config.description);
-
-const effectStr = computed(() => {
-  const c = props.upgrade.config;
-  if (!c.formatEffect) return '';
-  const v = c.effect?.() ?? 0;
-  return c.formatEffect(v);
-});
 
 const cost = computed(() => props.upgrade.cost);
 
@@ -42,7 +35,7 @@ function click() {
     <span class="upgrade-cell__desc">{{ desc }}</span>
     <EffectDisplay :state="upgrade" />
     <span v-if="!upgrade.isBought" class="upgrade-cell__cost">
-      {{ tp('cost_X_infinity_points', cost, format(cost)) }}
+      {{ tp("cost_X_infinity_points", cost, format(cost)) }}
     </span>
   </button>
 </template>
@@ -56,14 +49,14 @@ function click() {
   gap: 0;
   width: 100%;
   height: 10.8rem;
-  padding: 0.5rem;                 /* start_end_padding 5dp */
+  padding: 0.5rem; /* start_end_padding 5dp */
   font-family: inherit;
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
   line-height: 1.2;
-  border-radius: 1rem;             /* corner_radius_big 10dp */
-  border: 0.1rem solid transparent;/* 1dp stroke */
+  border-radius: 1rem; /* corner_radius_big 10dp */
+  border: 0.1rem solid transparent; /* 1dp stroke */
   cursor: pointer;
   touch-action: manipulation;
   overflow: hidden;

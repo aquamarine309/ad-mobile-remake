@@ -1,8 +1,8 @@
-import { createInitialPlayer, applyPlayer } from '@/core/state/player';
-import { parseSave, deepAssign, writeSaveToStorage } from '@/core/storage/save';
-import { dispatch, GAME_EVENT } from '@/core/events';
-import { migrations } from '@/core/storage/migrations';
-import { simulateAfterLoad } from './init';
+import { createInitialPlayer, applyPlayer } from "@/core/state/player";
+import { parseSave, deepAssign, writeSaveToStorage } from "@/core/storage/save";
+import { dispatch, GAME_EVENT } from "@/core/events";
+import { migrations } from "@/core/storage/migrations";
+import { simulateAfterLoad } from "./init";
 
 export async function importGame(text) {
   const loaded = parseSave(text);

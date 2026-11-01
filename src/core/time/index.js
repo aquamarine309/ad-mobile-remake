@@ -1,2 +1,2 @@
-export { DeltaTime } from './delta-time';
-export { GameSpeed } from './game-speed';
+export { DeltaTime } from "./delta-time";
+export { GameSpeed } from "./game-speed";

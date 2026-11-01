@@ -1,7 +1,7 @@
-import { ref } from 'vue';
-import { player } from '@/core/state/player';
-import { tick } from './tick';
-import { simulateTime } from './simulate-time';
+import { ref } from "vue";
+import { player } from "@/core/state/player";
+import { tick } from "./tick";
+import { simulateTime } from "./simulate-time";
 
 const MAX_REAL_DIFF_MS = 8.64e7;
 const HIBERNATION_THRESHOLD_MS = 60000;
@@ -24,7 +24,10 @@ export const GameLoop = {
 
   _step() {
     const now = Date.now();
-    const realDiff = Math.max(1, Math.min(now - player.lastUpdate, MAX_REAL_DIFF_MS));
+    const realDiff = Math.max(
+      1,
+      Math.min(now - player.lastUpdate, MAX_REAL_DIFF_MS),
+    );
     player.lastUpdate = now;
 
     if (realDiff > HIBERNATION_THRESHOLD_MS) {

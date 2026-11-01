@@ -1,11 +1,13 @@
 <script setup>
-import { computed } from 'vue';
-import AchievementGrid from './AchievementGrid.vue';
-import { NormalAchievements } from '@/core/achievements';
-import { formatX } from '@/core/format';
+import { computed } from "vue";
+import AchievementGrid from "./AchievementGrid.vue";
+import { NormalAchievements } from "@/core/achievements";
+import { formatX } from "@/core/format";
 import { t } from "@/i18n";
 
-const multiplierText = computed(() => formatX(NormalAchievements.multiplier, 2, 3));
+const multiplierText = computed(() =>
+  formatX(NormalAchievements.multiplier, 2, 3),
+);
 </script>
 
 <template>

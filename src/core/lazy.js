@@ -1,4 +1,4 @@
-import { logic } from './events';
+import { logic } from "./events";
 
 export class Lazy {
   constructor(getValue) {

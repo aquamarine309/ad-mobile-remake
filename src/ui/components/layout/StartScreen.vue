@@ -1,27 +1,25 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-import { t, ta, tp } from '@/i18n';
-import { player } from '@/core/state/player';
-import { load } from '@/core/storage/save';
-import { GameLoop } from '@/core/loop/game-loop';
-import { simulateTime } from '@/core/loop/simulate-time';
-import { buildAwayReport } from '@/core/loop/away-progress';
-import { dispatch, GAME_EVENT } from '@/core/events';
-import { lockOrientation } from '@/ui/orientation';
-import { offlineController } from '@/ui/offline/state';
-import { formatTimeShort, formatTimeLong } from '@/core/time/timespan';
-import { formatInt } from '@/core/format';
-import { startGameLoop } from '@/game/init';
+import { ref, computed, onMounted } from "vue";
+import { t, ta, tp } from "@/i18n";
+import { player } from "@/core/state/player";
+import { load } from "@/core/storage/save";
+import { simulateTime } from "@/core/loop/simulate-time";
+import { buildAwayReport } from "@/core/loop/away-progress";
+import { lockOrientation } from "@/ui/orientation";
+import { offlineController } from "@/ui/offline/state";
+import { formatTimeShort, formatTimeLong } from "@/core/time/timespan";
+import { formatInt } from "@/core/format";
+import { startGameLoop } from "@/game/init";
 
 function finishSetup() {
   startGameLoop();
-  status.value = 'ready';
+  status.value = "ready";
 }
 
-const emit = defineEmits(['started']);
+const emit = defineEmits(["started"]);
 
 // State machine: 'loading' | 'simulating' | 'report' | 'ready'
-const status = ref('loading');
+const status = ref("loading");
 
 // Offline progress data
 const progress = ref({ done: 0, total: 0, seconds: 0 });
@@ -29,14 +27,15 @@ const reportLines = ref([]);
 
 // Loading tips
 const tips = computed(() => {
-  const arr = ta('loading_tips');
+  const arr = ta("loading_tips");
   return arr && arr.length > 0 ? arr : ["Welcome to Antimatter Dimensions!"];
 });
 const currentTipIndex = ref(0);
 const currentTip = computed(() => tips.value[currentTipIndex.value] || "");
 
 function prevTip() {
-  currentTipIndex.value = (currentTipIndex.value - 1 + tips.value.length) % tips.value.length;
+  currentTipIndex.value =
+    (currentTipIndex.value - 1 + tips.value.length) % tips.value.length;
 }
 function nextTip() {
   currentTipIndex.value = (currentTipIndex.value + 1) % tips.value.length;
@@ -46,40 +45,40 @@ function nextTip() {
 onMounted(async () => {
   // 1. Load save data from localStorage
   const offlineMs = load();
-  
+
   // 2. Check if offline simulation is needed
-  const shouldSimulate = player.options.offlineProgress !== 'disable' && offlineMs > 10000;
+  const shouldSimulate =
+    player.options.offlineProgress !== "disable" && offlineMs > 10000;
 
   if (shouldSimulate) {
-    status.value = 'simulating';
+    status.value = "simulating";
     const seconds = offlineMs / 1000;
-    
+
     // 3. Run offline simulation in batches
     const result = await simulateTime(seconds, {
       fast: offlineMs < 50000,
       controller: offlineController,
       onProgress: (done, total) => {
         progress.value = { done, total, seconds };
-      }
+      },
     });
-    
+
     // 4. Simulation finished, generate report
     reportLines.value = buildAwayReport(result.before, result.after);
-    status.value = 'report';
+    status.value = "report";
   } else {
     // No offline progress, skip to ready
     finishSetup();
   }
 });
 
-
 // Player clicks "Start Game"
 async function handleStart() {
-  if (player.options.orientation !== 'system') {
+  if (player.options.orientation !== "system") {
     // Use the user gesture to request fullscreen and orientation lock
     await lockOrientation(player.options.orientation).catch(() => {});
   }
-  emit('started');
+  emit("started");
 }
 </script>
 
@@ -90,73 +89,105 @@ async function handleStart() {
 
     <!-- Logo area -->
     <div class="start-screen__logo-wrap">
-      <img src="@/assets/loading_reality_banner_transparent.webp" class="start-screen__logo" alt="Antimatter Dimensions" />
+      <img
+        src="@/assets/loading_reality_banner_transparent.webp"
+        class="start-screen__logo"
+        alt="Antimatter Dimensions"
+      />
     </div>
 
     <!-- Center UI area -->
     <div class="start-screen__center">
-      
       <!-- State 1: Initial loading -->
       <div v-if="status === 'loading'" class="status-box loading-box">
-        <div class="loading-text">{{ t('initial_startup_tip') || "This shouldn't take longer than a second..." }}</div>
+        <div class="loading-text">
+          {{
+            t("initial_startup_tip") ||
+            "This shouldn't take longer than a second..."
+          }}
+        </div>
       </div>
 
       <!-- State 2: Simulating offline progress -->
       <div v-else-if="status === 'simulating'" class="status-box offline-box">
-        <h3 class="box-title">{{ t('calculating_offline_progress') }}</h3>
-        
+        <h3 class="box-title">{{ t("calculating_offline_progress") }}</h3>
+
         <div class="offline-info">
-          <div>{{ formatTimeShort(progress.done * 20 * 1000) }} / {{ formatTimeShort(progress.seconds * 1000) }}</div>
-          <div>{{ tp('ticks_done', progress.done, formatInt(progress.done), formatInt(progress.total)) }}</div>
-          <div>{{ t('time_left_unknown') }}</div>
+          <div>
+            {{ formatTimeShort(progress.done * 20 * 1000) }} /
+            {{ formatTimeShort(progress.seconds * 1000) }}
+          </div>
+          <div>
+            {{
+              tp(
+                "ticks_done",
+                progress.done,
+                formatInt(progress.done),
+                formatInt(progress.total),
+              )
+            }}
+          </div>
+          <div>{{ t("time_left_unknown") }}</div>
         </div>
 
         <div class="progress-bar">
-          <div 
-            class="progress-bar__fill" 
-            :style="{ width: (progress.done / progress.total * 100) + '%' }"
+          <div
+            class="progress-bar__fill"
+            :style="{ width: (progress.done / progress.total) * 100 + '%' }"
           ></div>
         </div>
 
         <div class="offline-actions">
-          <button 
+          <button
             v-if="offlineController?.remaining > 500"
-            class="action-btn" 
+            class="action-btn"
             @click="offlineController.speedUp()"
           >
-            {{ t('speed_up') }}
+            {{ t("speed_up") }}
           </button>
-          <button 
+          <button
             v-if="offlineController?.remaining > 10"
-            class="action-btn" 
+            class="action-btn"
             @click="offlineController.skip()"
           >
-            {{ t('skip') }}
+            {{ t("skip") }}
           </button>
         </div>
       </div>
 
       <!-- State 3: Offline report -->
       <div v-else-if="status === 'report'" class="status-box offline-box">
-        <h3 class="box-title">{{ t('while_you_were_away_for_X', formatTimeLong(progress.seconds * 1000)) }}</h3>
-        
+        <h3 class="box-title">
+          {{
+            t(
+              "while_you_were_away_for_X",
+              formatTimeLong(progress.seconds * 1000),
+            )
+          }}
+        </h3>
+
         <div class="offline-report-list">
           <div v-for="line in reportLines" :key="line.key" class="report-item">
-            <div class="report-item__title" :style="{ color: `var(${line.colorVar})` }">
+            <div
+              class="report-item__title"
+              :style="{ color: `var(${line.colorVar})` }"
+            >
               {{ t(line.labelKey, line.from, line.to) }}
             </div>
           </div>
         </div>
-        
+
         <div class="offline-actions">
-          <button class="start-btn" @click="finishSetup">{{ t('confirm') }}</button>
+          <button class="start-btn" @click="finishSetup">
+            {{ t("confirm") }}
+          </button>
         </div>
       </div>
 
       <!-- State 4: Ready to start -->
       <div v-else-if="status === 'ready'" class="status-box ready-box">
         <button class="start-btn" @click="handleStart">
-          {{ t('start_game') }}
+          {{ t("start_game") }}
         </button>
       </div>
     </div>
@@ -165,7 +196,9 @@ async function handleStart() {
     <div class="start-screen__tips">
       <button class="tips__arrow" @click="prevTip"></button>
       <div class="tips__content">
-        <div class="tips__counter">{{ currentTipIndex + 1 }} / {{ tips.length }}</div>
+        <div class="tips__counter">
+          {{ currentTipIndex + 1 }} / {{ tips.length }}
+        </div>
         <div class="tips__text">{{ currentTip }}</div>
       </div>
       <button class="tips__arrow" @click="nextTip"></button>
@@ -189,7 +222,7 @@ async function handleStart() {
 .start-screen__bg {
   position: absolute;
   inset: 0;
-  background: url('@/assets/loading_stars.webp') center / cover no-repeat;
+  background: url("@/assets/loading_stars.webp") center / cover no-repeat;
   z-index: -1;
 }
 

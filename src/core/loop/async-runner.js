@@ -8,19 +8,19 @@
  * null when done. Its fields (`done`, `maxIter`, `remaining`) are updated
  * after each batch so Vue can track them.
  */
-export async function runBatched(fn, initialIter, {
-  batchSize = 1,
-  maxTime = 30,
-  sleepTime = 1,
-  onProgress,
-  controller,
-} = {}) {
+export async function runBatched(
+  fn,
+  initialIter,
+  { batchSize = 1, maxTime = 30, sleepTime = 1, onProgress, controller } = {},
+) {
   let done = 0;
   let maxIter = initialIter;
   let remaining = initialIter;
 
   const ctl = {
-    done, maxIter, remaining,
+    done,
+    maxIter,
+    remaining,
     speedUp() {
       const next = Math.max(500, Math.floor(remaining / 2));
       maxIter -= remaining - next;
@@ -47,7 +47,7 @@ export async function runBatched(fn, initialIter, {
     ctl.remaining = remaining;
     onProgress?.(done, maxIter);
     if (remaining > 0) {
-      await new Promise(r => setTimeout(r, sleepTime));
+      await new Promise((r) => setTimeout(r, sleepTime));
     }
   }
 

@@ -1,12 +1,13 @@
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
 import { visibleTabs, currentTabKey, showTab } from "@/ui/tabs/state";
-import { player } from '@/core/state/player';
-import { t } from '@/i18n';
+import { player } from "@/core/state/player";
+import { t } from "@/i18n";
 
-const useSymbol = computed(() =>
-  player.options.bottomNavSymbols === 'all' ||
-  player.options.bottomNavSymbols === 'mainOnly'
+const useSymbol = computed(
+  () =>
+    player.options.bottomNavSymbols === "all" ||
+    player.options.bottomNavSymbols === "mainOnly",
 );
 
 function label(tab) {

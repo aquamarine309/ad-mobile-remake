@@ -1,8 +1,7 @@
 <script setup>
-import { computed } from 'vue';
-import { t, tp } from '@/i18n';
-import { formatInt } from '@/core/format';
-import { formatTimeShort } from '@/core/time/timespan';
+import { computed } from "vue";
+import { t, tp } from "@/i18n";
+import { formatInt } from "@/core/format";
 import EffectDisplay from "@/ui/components/EffectDisplay";
 
 const props = defineProps({
@@ -12,16 +11,20 @@ const props = defineProps({
 // 'locked' | 'start' | 'running' | 'completed'
 const state = computed(() => {
   const c = props.challenge;
-  if (c.isRunning) return 'running';
-  if (c.isCompleted) return 'completed';
-  if (c.isUnlocked) return 'start';
-  return 'locked';
+  if (c.isRunning) return "running";
+  if (c.isCompleted) return "completed";
+  if (c.isUnlocked) return "start";
+  return "locked";
 });
 
 const description = computed(() => {
   const c = props.challenge;
   if (c.isUnlocked) return c.config.description;
-  return tp('infinity_X_times_to_unlock', c.config.lockedAt, formatInt(c.config.lockedAt));
+  return tp(
+    "infinity_X_times_to_unlock",
+    c.config.lockedAt,
+    formatInt(c.config.lockedAt),
+  );
 });
 
 const bottomText = computed(() => {
@@ -31,16 +34,20 @@ const bottomText = computed(() => {
 
 const label = computed(() => {
   switch (state.value) {
-    case 'running':   return t('running');
-    case 'completed': return t('completed');
-    case 'locked':    return t('locked');
-    default:          return t('start');
+    case "running":
+      return t("running");
+    case "completed":
+      return t("completed");
+    case "locked":
+      return t("locked");
+    default:
+      return t("start");
   }
 });
 
 function onClick() {
-  console.log(state.value)
-  if (state.value !== 'start' && state.value !== "completed") return;
+  console.log(state.value);
+  if (state.value !== "start" && state.value !== "completed") return;
   props.challenge.start();
 }
 </script>
@@ -51,10 +58,7 @@ function onClick() {
     <div class="nc-box" :class="`nc-box--${state}`">
       <div class="nc-box__desc">
         <div>{{ description }}</div>
-        <EffectDisplay
-          v-if="state === 'running'"
-          :state="challenge"
-        />
+        <EffectDisplay v-if="state === 'running'" :state="challenge" />
       </div>
       <button
         class="nc-box__btn"

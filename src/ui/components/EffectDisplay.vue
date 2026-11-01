@@ -1,6 +1,6 @@
 <script setup>
-import { computed } from 'vue';
-import { t } from '@/i18n';
+import { computed } from "vue";
+import { t } from "@/i18n";
 
 const { state } = defineProps({
   state: { type: Object, required: true },
@@ -19,7 +19,7 @@ const effectStr = computed(() => {
   return format(value);
 });
 
-const label = computed(() => t(isCapped.value ? 'capped' : 'currently'));
+const label = computed(() => t(isCapped.value ? "capped" : "currently"));
 </script>
 
 <template>

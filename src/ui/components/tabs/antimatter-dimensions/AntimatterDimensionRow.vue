@@ -9,40 +9,50 @@ import { DimBoost } from "@/core/pre-infinity/dimension-boost";
 import { isInfinityUnlocked } from "@/core/progress";
 
 const { tier } = defineProps({
-  tier: { type: Number, required: true }
+  tier: { type: Number, required: true },
 });
 const dimension = computed(() => AntimatterDimension(tier));
 const name = computed(() => dimension.value.name);
 const amount = computed(() => dimension.value.amount);
 const multiplier = computed(() => dimension.value.multiplier);
-const boughtBefore10 = computed(() => dimension.value.boughtBefore10);
 const howManyCanBuy = computed(() => dimension.value.howManyCanBuy);
-const cost = computed(() => dimension.value.cost.times(Math.max(1, howManyCanBuy.value)));
-const canBuy = computed(() =>
-  dimension.value.isAvailableForPurchase && dimension.value.isAffordable
+const cost = computed(() =>
+  dimension.value.cost.times(Math.max(1, howManyCanBuy.value)),
+);
+const canBuy = computed(
+  () => dimension.value.isAvailableForPurchase && dimension.value.isAffordable,
 );
 const rate = computed(() => dimension.value.rateOfChange);
 
 const purchasedPercent = computed(() => dimension.value.boughtBefore10 * 10);
-const possiblePercent = computed(() =>
-  (dimension.value.boughtBefore10 + dimension.value.howManyCanBuy) * 10
+const possiblePercent = computed(
+  () => (dimension.value.boughtBefore10 + dimension.value.howManyCanBuy) * 10,
 );
 
 const c6Running = computed(() => NormalChallenge(6).isRunning);
 const dimBoostReached = computed(() => DimBoost.purchasedBoosts.gte(tier - 4));
 const infUnlocked = computed(() => isInfinityUnlocked());
-const isVisible = computed(() => (dimBoostReached.value || infUnlocked.value) && DimBoost.maxDimensionsUnlockable >= tier);
+const isVisible = computed(
+  () =>
+    (dimBoostReached.value || infUnlocked.value) &&
+    DimBoost.maxDimensionsUnlockable >= tier,
+);
 
 const costThreshold = D("ee7");
 const buttonText = computed(() => {
   const lastDimension = AntimatterDimension(tier - 1);
-  if (!dimBoostReached.value) return t("dimension_locked_dimboost", formatInt(tier - 4));
+  if (!dimBoostReached.value)
+    return t("dimension_locked_dimboost", formatInt(tier - 4));
   if (tier >= 2 && lastDimension.totalAmount.eq(0)) {
-    return t("dimension_locked_buy_previous_dimension", lastDimension.shortName);
+    return t(
+      "dimension_locked_buy_previous_dimension",
+      lastDimension.shortName,
+    );
   }
   const text = format(cost.value);
   if (cost.value.gte(costThreshold)) return text;
-  if (tier >= 3 && c6Running.value) return `${text} ${AntimatterDimension(tier - 2).shortName}`;
+  if (tier >= 3 && c6Running.value)
+    return `${text} ${AntimatterDimension(tier - 2).shortName}`;
   return t("cost_X", text);
 });
 
@@ -70,14 +80,10 @@ function buy() {
       <div class="dim-row__amount-value">{{ formatAmount(amount, 2) }}</div>
       <div class="dim-row__rate">(+{{ format(rate.times(100), 2, 2) }}%)</div>
     </div>
-    <button
-      class="dim-row__buy"
-      :disabled="!canBuy"
-      @click="buy"
-    >
+    <button class="dim-row__buy" :disabled="!canBuy" @click="buy">
       <div
-        class="dim-row__fill-possible"
         v-if="canBuy"
+        class="dim-row__fill-possible"
         :style="{ width: possiblePercent + '%' }"
       />
       <div

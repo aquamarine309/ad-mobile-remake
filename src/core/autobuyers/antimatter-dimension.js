@@ -1,10 +1,10 @@
-import { D } from '@/core/decimal';
-import { player } from '@/core/state/player';
-import { AntimatterDimension } from '@/core/dimensions/antimatter-dimension';
-import { Achievement } from '@/core/achievements';
-import { UpgradeableAutobuyerState, PRESTIGE_EVENT } from './autobuyer';
-import { NormalChallenge } from '@/core/challenges/normal';
-import { Currency } from '@/core/currency';
+import { D, Decimal } from "@/core/decimal";
+import { player } from "@/core/state/player";
+import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
+import { Achievement } from "@/core/achievements";
+import { UpgradeableAutobuyerState, PRESTIGE_EVENT } from "./autobuyer";
+import { NormalChallenge } from "@/core/challenges/normal";
+import { Currency } from "@/core/currency";
 
 const BASE_INTERVALS = [500, 600, 700, 800, 900, 1000, 1100, 1200];
 const COST_BASE = D(1e40);
@@ -16,19 +16,31 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
     this.tier = tier;
   }
 
-  get data() { return player.auto.antimatterDims[this.tier - 1]; }
-  get baseInterval() { return BASE_INTERVALS[this.tier - 1]; }
-  get antimatterCost() { return COST_BASE.times(COST_MULT.pow(this.tier - 1)); }
+  get data() {
+    return player.auto.antimatterDims[this.tier - 1];
+  }
+  get baseInterval() {
+    return BASE_INTERVALS[this.tier - 1];
+  }
+  get antimatterCost() {
+    return COST_BASE.times(COST_MULT.pow(this.tier - 1));
+  }
 
   get isUnlocked() {
-    return this.data.isBought
-      || player.records.thisInfinity.maxAM.gte(this.antimatterCost);
+    return (
+      this.data.isBought ||
+      player.records.thisInfinity.maxAM.gte(this.antimatterCost)
+    );
   }
-  get isBought() { return this.data.isBought; }
+  get isBought() {
+    return this.data.isBought;
+  }
 
   get canBeBought() {
-    return !this.data.isBought
-      && player.records.thisInfinity.maxAM.gte(this.antimatterCost);
+    return (
+      !this.data.isBought &&
+      player.records.thisInfinity.maxAM.gte(this.antimatterCost)
+    );
   }
 
   purchase() {
@@ -37,9 +49,15 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
     return true;
   }
 
-  get mode() { return this.data.mode; }
-  set mode(v) { this.data.mode = v; }
-  toggleMode() { this.mode = this.mode === '10' ? '1' : '10'; }
+  get mode() {
+    return this.data.mode;
+  }
+  set mode(v) {
+    this.data.mode = v;
+  }
+  toggleMode() {
+    this.mode = this.mode === "10" ? "1" : "10";
+  }
 
   get canTick() {
     if (!super.canTick) return false;
@@ -51,21 +69,25 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
   get resetTickOn() {
     return PRESTIGE_EVENT.DIMENSION_BOOST;
   }
-  
+
   get bulk() {
-    return this.hasUnlimitedBulk ? Decimal.dLayerSafeMax : Math.min(this.data.bulk, this.bulkCap);
+    return this.hasUnlimitedBulk
+      ? Decimal.dLayerSafeMax
+      : Math.min(this.data.bulk, this.bulkCap);
   }
-  
+
   get hasUnlimitedBulk() {
     return Achievement(61).isUnlocked;
   }
-    
-  get bulkCap() { return 512; }
-    
+
+  get bulkCap() {
+    return 512;
+  }
+
   get hasMaxedBulk() {
     return this.data.bulk >= this.bulkCap;
   }
-  
+
   upgradeBulk() {
     if (this.hasMaxedBulk) return false;
     if (!Currency.infinityPoints.gte(this.cost)) return false;
@@ -75,15 +97,15 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
     Achievement(61).tryUnlock();
     return true;
   }
-  
+
   get canBeUpgraded() {
     return NormalChallenge(this.tier).isCompleted;
   }
-    
+
   tick() {
     super.tick();
     const dim = AntimatterDimension(this.tier);
-    if (this.mode === '10') dim.buyMax(this.bulk);
+    if (this.mode === "10") dim.buyMax(this.bulk);
     else dim.buy();
   }
 }

@@ -1,6 +1,6 @@
 <script setup>
-import AchievementGrid from './AchievementGrid.vue';
-import { SecretAchievements } from '@/core/achievements';
+import AchievementGrid from "./AchievementGrid.vue";
+import { SecretAchievements } from "@/core/achievements";
 </script>
 
 <template>
@@ -13,6 +13,4 @@ import { SecretAchievements } from '@/core/achievements';
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

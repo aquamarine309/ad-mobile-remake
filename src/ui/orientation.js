@@ -1,5 +1,5 @@
 export async function lockOrientation(mode) {
-  const target = mode === 'landscape' ? 'landscape' : 'portrait';
+  const target = mode === "landscape" ? "landscape" : "portrait";
   try {
     if (!document.fullscreenElement) {
       await document.documentElement.requestFullscreen();

@@ -1,4 +1,4 @@
-import { D } from '../decimal';
+import { D } from "../decimal";
 
 export const DeltaTime = {
   real: 0,

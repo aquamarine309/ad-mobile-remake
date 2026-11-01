@@ -15,13 +15,13 @@ export class EventHub {
   off(event, fn) {
     const handlers = this._handlers.get(event);
     if (!handlers) return;
-    const i = handlers.findIndex(h => h.fn === fn);
+    const i = handlers.findIndex((h) => h.fn === fn);
     if (i >= 0) handlers.splice(i, 1);
   }
 
   offAll(target) {
     for (const handlers of this._handlers.values()) {
-      const kept = handlers.filter(h => h.target !== target);
+      const kept = handlers.filter((h) => h.target !== target);
       handlers.length = 0;
       handlers.push(...kept);
     }

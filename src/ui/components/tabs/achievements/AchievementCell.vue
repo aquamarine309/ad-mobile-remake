@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref } from "vue";
 
 const props = defineProps({
   achievement: { type: Object, required: true },
@@ -8,13 +8,13 @@ const props = defineProps({
   isSecret: { type: Boolean, default: false },
 });
 
-const emit = defineEmits(['cell-click']);
+const emit = defineEmits(["cell-click"]);
 
 const failed = ref(false);
 
 const iconUrl = computed(() => {
   if (props.isSecret && !props.achievement.isUnlocked) {
-    return '/achievements/achhidden.webp';
+    return "/achievements/achhidden.webp";
   }
   return `/achievements/${props.iconPrefix}${props.achievement.id}.webp`;
 });
@@ -34,7 +34,7 @@ function onClick(event) {
       else if (s12ClickCount > 2) return;
     }
   }
-  emit('cell-click', { ach: props.achievement, event });
+  emit("cell-click", { ach: props.achievement, event });
 }
 </script>
 

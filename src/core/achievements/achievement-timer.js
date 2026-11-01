@@ -1,4 +1,4 @@
-import { DeltaTime } from '@/core/time/delta-time';
+import { DeltaTime } from "@/core/time/delta-time";
 
 class AchievementTimer {
   constructor(isRealTime) {
@@ -30,5 +30,5 @@ class AchievementTimer {
 
 export const AchievementTimers = {
   landscape: new AchievementTimer(true),
-  achievement44: new AchievementTimer(true)
+  achievement44: new AchievementTimer(true),
 };

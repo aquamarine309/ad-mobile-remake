@@ -1,13 +1,12 @@
-import { player } from '@/core/state/player';
-import { D } from '@/core/decimal';
-import { GAME_EVENT, logic, dispatch } from '@/core/events';
-import { bigCrunchReset } from '@/core/prestige/big-crunch';
-import { NORMAL_CHALLENGE_CONFIGS } from './normal-configs';
+import { player } from "@/core/state/player";
+import { GAME_EVENT, dispatch } from "@/core/events";
+import { bigCrunchReset } from "@/core/prestige/big-crunch";
+import { NORMAL_CHALLENGE_CONFIGS } from "./normal-configs";
 import { resetChallengeTransient } from "./index";
 import { Currency } from "@/core/currency";
 
-import { Decimal } from '@/core/decimal';
-import { EffectState } from '@/core/mechanic';
+import { Decimal } from "@/core/decimal";
+import { EffectState } from "@/core/mechanic";
 
 class NormalChallengeState extends EffectState {
   constructor(config) {
@@ -40,7 +39,9 @@ class NormalChallengeState extends EffectState {
 
   // C1 has no best time entry
   get bestTime() {
-    return this.id === 1 ? null : player.challenge.normal.bestTimes[this.id - 2];
+    return this.id === 1
+      ? null
+      : player.challenge.normal.bestTimes[this.id - 2];
   }
 
   // Completion goal. All normal challenges use the antimatter cap.
@@ -54,7 +55,7 @@ class NormalChallengeState extends EffectState {
 
   start() {
     if (this.isRunning) return;
-    if (this.id === 1) return;   // C1 auto-completes on first crunch
+    if (this.id === 1) return; // C1 auto-completes on first crunch
     bigCrunchReset({ force: true, enteringChallenge: true });
     player.challenge.normal.current = this.id;
     resetChallengeTransient();
@@ -79,8 +80,10 @@ class NormalChallengeState extends EffectState {
   }
 }
 
-const ALL = NORMAL_CHALLENGE_CONFIGS.map(config => new NormalChallengeState(config));
-const BY_ID = new Map(ALL.map(c => [c.id, c]));
+const ALL = NORMAL_CHALLENGE_CONFIGS.map(
+  (config) => new NormalChallengeState(config),
+);
+const BY_ID = new Map(ALL.map((c) => [c.id, c]));
 
 export function NormalChallenge(id) {
   return BY_ID.get(id);
@@ -92,5 +95,7 @@ export const NormalChallenges = {
     const id = player.challenge.normal.current;
     return id === 0 ? null : BY_ID.get(id);
   },
-  get isRunning() { return player.challenge.normal.current !== 0; },
+  get isRunning() {
+    return player.challenge.normal.current !== 0;
+  },
 };

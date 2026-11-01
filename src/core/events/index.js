@@ -1,5 +1,5 @@
-import { EventHub } from './hub';
-import { GAME_EVENT } from './events';
+import { EventHub } from "./hub";
+import { GAME_EVENT } from "./events";
 
 export const logic = new EventHub();
 export const ui = new EventHub();

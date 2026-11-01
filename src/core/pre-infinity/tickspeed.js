@@ -1,8 +1,7 @@
-import { D, Decimal } from '@/core/decimal';
-import { player } from '@/core/state/player';
-import { Currency } from '@/core/currency';
-import { ExponentialCostScaling } from '@/core/math';
-import { Galaxy } from "./galaxy";
+import { D, Decimal } from "@/core/decimal";
+import { player } from "@/core/state/player";
+import { Currency } from "@/core/currency";
+import { ExponentialCostScaling } from "@/core/math";
 
 import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { canBigCrunch } from "@/core/prestige/big-crunch";
@@ -26,7 +25,9 @@ export const Tickspeed = {
   },
 
   get cost() {
-    return this.costScale.calculateCost(player.tickspeed.bought.add(player.challenge.normal.c9TickspeedCostBumps));
+    return this.costScale.calculateCost(
+      player.tickspeed.bought.add(player.challenge.normal.c9TickspeedCostBumps),
+    );
   },
 
   get costScale() {
@@ -41,25 +42,21 @@ export const Tickspeed = {
   get totalUpgrades() {
     return player.tickspeed.bought.add(player.tickspeed.gained);
   },
-  
+
   get base() {
     const effects = timesEffectsOf(D(1), InfinityUpgrade("galaxyBoost"));
-    const BASE_AT_ZERO = NormalChallenge(5).isRunning ? [
-      D(1 / 1.08),
-      D(1 / 1.072),
-      D(1 / 1.07632),
-    ] : [
-      D(1 / 1.1245),
-      D(1 / 1.11888888),
-      D(1 / 1.11267177),
-    ];
+    const BASE_AT_ZERO = NormalChallenge(5).isRunning
+      ? [D(1 / 1.08), D(1 / 1.072), D(1 / 1.07632)]
+      : [D(1 / 1.1245), D(1 / 1.11888888), D(1 / 1.11267177)];
     const g = player.galaxies;
-  
+
     if (g.lt(3)) {
-      const interval = BASE_AT_ZERO[g.toNumber()].sub(g.times(0.02).times(effects)).clampMin(0.01);
+      const interval = BASE_AT_ZERO[g.toNumber()]
+        .sub(g.times(0.02).times(effects))
+        .clampMin(0.01);
       return interval.recip();
     }
-  
+
     const interval = D(0.8).times(D(0.965).pow(g.sub(2).times(effects).sub(2)));
     return interval.recip();
   },
@@ -84,7 +81,7 @@ export const Tickspeed = {
     const purchases = this.costScale.getMaxBought(
       player.tickspeed.bought.add(player.challenge.normal.c9TickspeedCostBumps),
       Currency.antimatter.value,
-      D(1)
+      D(1),
     );
     if (purchases === null) return;
     this.multiplySameCosts();
@@ -92,7 +89,7 @@ export const Tickspeed = {
     player.tickspeed.bought = player.tickspeed.bought.add(purchases.quantity);
     player.challenge.normal.c2Pow = 0;
   },
-  
+
   multiplySameCosts() {
     if (!NormalChallenge(9).isRunning) return;
     for (let tier = 1; tier <= 8; tier++) {
@@ -102,9 +99,9 @@ export const Tickspeed = {
       }
     }
   },
-  
+
   reset() {
     player.tickspeed.bought = D(0);
     player.challenge.normal.c9TickspeedCostBumps = D(0);
-  }
+  },
 };

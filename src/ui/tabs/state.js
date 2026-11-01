@@ -1,12 +1,11 @@
-import { computed, ref } from 'vue';
-import { TABS } from './config';
-import { player } from '@/core/state/player';
+import { computed, ref } from "vue";
+import { TABS } from "./config";
+import { player } from "@/core/state/player";
 
 const DEFAULT_TAB_KEY = TABS[0].key;
-const DEFAULT_SUBTAB_KEY = TABS[0].subtabs[0].key;
 
 function findTab(key) {
-  return TABS.find(t => t.key === key);
+  return TABS.find((t) => t.key === key);
 }
 
 function isVisible(entry) {
@@ -25,37 +24,37 @@ export const currentTabKey = computed({
   },
 });
 
-export const currentTab = computed(() =>
-  findTab(currentTabKey.value) ?? TABS[0]
+export const currentTab = computed(
+  () => findTab(currentTabKey.value) ?? TABS[0],
 );
 
 export const currentSubtabKey = computed({
   get() {
     const tab = currentTab.value;
     const stored = player.options.lastSubtabs?.[tab.key];
-    if (tab.subtabs.some(s => s.key === stored && isVisible(s))) return stored;
+    if (tab.subtabs.some((s) => s.key === stored && isVisible(s)))
+      return stored;
     return tab.subtabs.find(isVisible)?.key ?? tab.subtabs[0].key;
   },
   set(key) {
     const tab = currentTab.value;
-    if (tab.subtabs.some(s => s.key === key && isVisible(s))) {
+    if (tab.subtabs.some((s) => s.key === key && isVisible(s))) {
       player.options.lastSubtabs ??= {};
       player.options.lastSubtabs[tab.key] = key;
     }
   },
 });
 
-export const visibleTabs = computed(() =>
-  TABS.filter(isVisible)
-);
+export const visibleTabs = computed(() => TABS.filter(isVisible));
 
 export const visibleSubtabs = computed(() =>
-  currentTab.value.subtabs.filter(isVisible)
+  currentTab.value.subtabs.filter(isVisible),
 );
 
-export const currentSubtab = computed(() =>
-  currentTab.value.subtabs.find(s => s.key === currentSubtabKey.value)
-  ?? currentTab.value.subtabs[0]
+export const currentSubtab = computed(
+  () =>
+    currentTab.value.subtabs.find((s) => s.key === currentSubtabKey.value) ??
+    currentTab.value.subtabs[0],
 );
 
 export function showTab(key, subtabKey) {

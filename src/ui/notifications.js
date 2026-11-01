@@ -1,6 +1,6 @@
-import { reactive } from 'vue';
-import { logic, GAME_EVENT } from '@/core/events';
-import { showTab, focusedAchievementId } from '@/ui/tabs/state';
+import { reactive } from "vue";
+import { logic, GAME_EVENT } from "@/core/events";
+import { showTab, focusedAchievementId } from "@/ui/tabs/state";
 
 let _nextId = 0;
 const DEFAULT_DURATION_MS = 2000;
@@ -24,6 +24,9 @@ function processQueue() {
 
   hideTimer = setTimeout(() => {
     state.current = null;
+    if (showTimer !== null) {
+      clearTimeout(showTimer);
+    }
     showTimer = setTimeout(processQueue, LEAVE_ANIMATION_MS);
   }, next.duration);
 }
@@ -38,8 +41,14 @@ function show(message, type, { duration = DEFAULT_DURATION_MS, onClick } = {}) {
 
 export function dismiss(id) {
   if (state.current && state.current.id === id) {
-    if (hideTimer !== null) { clearTimeout(hideTimer); hideTimer = null; }
+    if (hideTimer !== null) {
+      clearTimeout(hideTimer);
+      hideTimer = null;
+    }
     state.current = null;
+    if (showTimer !== null) {
+      clearTimeout(showTimer);
+    }
     showTimer = setTimeout(processQueue, LEAVE_ANIMATION_MS);
   }
 }
@@ -55,17 +64,20 @@ export function runOnClick(id) {
 export const notifications = state;
 
 export const notify = {
-  success: (text, opts) => show(text, 'success', opts),
-  error:   (text, opts) => show(text, 'error', opts),
-  info:    (text, opts) => show(text, 'info', opts),
+  success: (text, opts) => show(text, "success", opts),
+  error: (text, opts) => show(text, "error", opts),
+  info: (text, opts) => show(text, "info", opts),
 };
 
 // --- Subscriptions ---
 
-logic.on(GAME_EVENT.ACHIEVEMENT_UNLOCKED, ach => {
+logic.on(GAME_EVENT.ACHIEVEMENT_UNLOCKED, (ach) => {
   notify.success(ach.name, {
     onClick: () => {
-      showTab('achievements', ach.isSecret ? 'secret_achievements' : 'normal_achievements');
+      showTab(
+        "achievements",
+        ach.isSecret ? "secret_achievements" : "normal_achievements",
+      );
       focusedAchievementId.value = ach.id;
     },
   });

@@ -5,7 +5,6 @@ import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { Currency } from "@/core/currency";
 import { canBigCrunch } from "@/core/prestige/big-crunch";
 import { softReset, DimBoost } from "@/core/pre-infinity/dimension-boost";
-import { Galaxy } from "@/core/pre-infinity/galaxy";
 
 /**
  * Resets challenge-specific transient state. Called when entering or leaving a challenge.

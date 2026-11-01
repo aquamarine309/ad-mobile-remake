@@ -1,0 +1,371 @@
+{
+  "X_color_schemes": {
+    "other": "{1} 個の配色"
+  },
+  "X_completions": {
+    "other": "完了数 {1}"
+  },
+  "X_completions_on_eternity": {
+    "other": "永遠実行で {1} 回分完了"
+  },
+  "X_levels_higher_than_your_best": {
+    "other": "過去最高レベルより {1} 高い"
+  },
+  "X_levels_lower_than_your_best": {
+    "other": "過去最高レベルより {1} 低い"
+  },
+  "X_perk_points": {
+    "other": "{1} 特権ポイント"
+  },
+  "X_realities": {
+    "other": "{1} 現実周回数"
+  },
+  "X_reality_machines": {
+    "other": "{1} 現実機械"
+  },
+  "X_relic_shards": {
+    "other": "{1} 遺物の欠片"
+  },
+  "X_symbols": {
+    "other": "{1} 個のシンボル"
+  },
+  "armageddon_for_X_remnants": {
+    "other": "終末で残骸 {1} 個を入手\n現実の欠片 {2}/秒 ➜ {3}/秒"
+  },
+  "automator_X_errors": {
+    "other": "このスクリプトには {1} 個のエラーがあります:"
+  },
+  "automator_speed": {
+    "other": "自動処理は実毎秒 {1} コマンドを実行。"
+  },
+  "bh2_will_activate_2": {
+    "other": "後 {1} 回の第1ブラックホール発動サイクルの後に、第2ブラックホールが発動する。"
+  },
+  "black_hole_X_activated_Y_times": {
+    "other": "{1} が {2} 回発動"
+  },
+  "black_holes_automatically_inverted": {
+    "other": "ブラックホールが自動的に反転しました"
+  },
+  "black_holes_automatically_paused": {
+    "other": "ブラックホールが自動的に一時停止しました"
+  },
+  "black_holes_automatically_unpaused": {
+    "other": "ブラックホールが自動的に再開しました"
+  },
+  "black_holes_inverted": {
+    "other": "ブラックホールが反転しました"
+  },
+  "black_holes_paused": {
+    "other": "ブラックホールが一時停止しました"
+  },
+  "black_holes_unpaused": {
+    "other": "ブラックホールが再開しました"
+  },
+  "blobflakes_X": {
+    "other": "ブロブ密度: {1}"
+  },
+  "break_infinity_upgrade_5_effect": {
+    "other": "{2}毎に無限周回数 {1}"
+  },
+  "condense_X_times": {
+    "other": "凝縮 {1} 回"
+  },
+  "condense_de_to_singularity": {
+    "other": "全てのDEを {1} 個の特異点に凝縮"
+  },
+  "cost_X_eternity_points": {
+    "other": "コスト: {1} 永遠ポイント"
+  },
+  "cost_X_galaxies": {
+    "other": "コスト: {1} 銀河"
+  },
+  "cost_X_imaginary_machines": {
+    "other": "コスト: {1} 虚空機械"
+  },
+  "cost_X_infinity_points": {
+    "other": "コスト: {1} 無限ポイント"
+  },
+  "cost_X_perk_points": {
+    "other": "コスト: {1} 特権ポイント"
+  },
+  "cost_X_reality_machines": {
+    "other": "コスト: {1} 現実機械"
+  },
+  "cost_X_reality_shards": {
+    "other": "コスト: {1} 現実の欠片"
+  },
+  "cost_X_relic_shards": {
+    "other": "コスト: {1} 遺物の欠片"
+  },
+  "cost_X_time_theorems": {
+    "other": "コスト: {1} 時間定理"
+  },
+  "current_interval": {
+    "other": "稼働間隔: {1}秒"
+  },
+  "day": {
+    "other": "日"
+  },
+  "ec12_eternity_button_restriction": {
+    "other": "\n経過秒数 {1}/{2}"
+  },
+  "ec12_restriction": {
+    "other": "{1} 秒以内"
+  },
+  "ec4_restriction": {
+    "other": "無限周回数 {1} 回以内"
+  },
+  "ec_completed_times": {
+    "other": "{1}回完了済み"
+  },
+  "eternities": {
+    "other": "周回数"
+  },
+  "eternity_confirmation_2": {
+    "other": "永遠を実行すると、実績、チャレンジ記録、統計の全般項目以外の全てがリセットされます。代わりに {1} の永遠ポイントを入手します。"
+  },
+  "gain_X_completions": {
+    "other": "{1} 回分完了"
+  },
+  "gain_X_eternity_points": {
+    "other": "{1}\n永遠ポイントを入手"
+  },
+  "gain_X_infinity_points": {
+    "other": "{1}\n無限ポイントを入手"
+  },
+  "gain_X_reality_machines": {
+    "other": "{1}\n現実機械を入手"
+  },
+  "gain_X_tachyon_particles_eternity_button": {
+    "other": "{1}\nタキオン粒子を入手"
+  },
+  "graph_window_days": {
+    "other": "過去{1}日"
+  },
+  "graph_window_hours": {
+    "other": "過去{1}時間"
+  },
+  "graph_window_minutes": {
+    "other": "過去{1}分"
+  },
+  "hour": {
+    "other": "時間"
+  },
+  "in_X_singularities": {
+    "other": "特異点 {1} 個"
+  },
+  "infinities": {
+    "other": "周回数"
+  },
+  "infinity_X_times_to_unlock": {
+    "other": "無限に {1} 回達することでアンロック。"
+  },
+  "memories": {
+    "other": "{1} 記憶"
+  },
+  "memory_chunks": {
+    "other": "{1} 記憶の塊"
+  },
+  "milestone_eternity_display": {
+    "other": "永遠周回数 {1}:"
+  },
+  "minute": {
+    "other": "分"
+  },
+  "nameless_have_X_memories": {
+    "other": "{1}の記憶を {2} 所有"
+  },
+  "pet_has_X_memories": {
+    "other": "{1}の記憶を {2} 所有"
+  },
+  "protected_slots": {
+    "other": "保護スロット:\n({1} 行)"
+  },
+  "purchases_left_ec8": {
+    "other": "残り購入回数 {1} 回"
+  },
+  "reach_X_antimatter": {
+    "other": "{1}\n反物質に達する"
+  },
+  "reach_X_de_to_condense": {
+    "other": "{1} DEに達することで、全てのDEを {2} 個の特異点に凝縮"
+  },
+  "reach_X_infinity_points": {
+    "other": "{1}\n無限ポイントに達する"
+  },
+  "realities": {
+    "other": "周回数"
+  },
+  "references_X_constants": {
+    "other": "{1} 個の定義済み定数を参照しています。"
+  },
+  "references_X_presets": {
+    "other": "{1} 個の研究プリセットを参照しています。"
+  },
+  "second": {
+    "other": "秒"
+  },
+  "simulated_realities": {
+    "other": "このグリフを選択した後、残りの現実がシミュレートされます。グリフフィルターの設定に従い、後 {1} 個のグリフが自動選択されます。"
+  },
+  "statistics_banked_infinities": {
+    "other": "これまでに恒久保存した無限周回数は {1}。"
+  },
+  "statistics_banked_infinities_gain": {
+    "other": "永遠で恒久保存できる無限周回数は {1} ({2}/分)。"
+  },
+  "statistics_best_laitela_destabilization": {
+    "other": "ライ'テラの最速不安定化: {1}、{2} 次元 ({3} DM)"
+  },
+  "statistics_eternities": {
+    "other": "現在の永遠周回数は {1}。"
+  },
+  "statistics_game_completed": {
+    "other": "これまでにこのゲームをクリアした回数は {1}。"
+  },
+  "statistics_infinities": {
+    "other": "現在の無限周回数は {1}。"
+  },
+  "statistics_infinities_gain": {
+    "other": "宇宙大収縮で入手できる無限周回数は {1} ({2}/分)。"
+  },
+  "statistics_news_seen": {
+    "other": "これまでに見たニュース記事の個数は {1}。"
+  },
+  "statistics_realities": {
+    "other": "現在の現実周回数は {1}。"
+  },
+  "statistics_secret_achievements": {
+    "other": "これまでにアンロックした隠し実績の個数は {1}。"
+  },
+  "statistics_total_antimatter": {
+    "other": "これまでの合計反物質生産量は {1}。"
+  },
+  "stored_game_time_X_real_time_Y_hours": {
+    "other": "保存されたゲーム時間 {1}、実時間 +{2} 時間。"
+  },
+  "tachyon_galaxies_1": {
+    "other": "タキオン銀河は {1} DTに達すると入手"
+  },
+  "tachyon_galaxies_1_multiple": {
+    "other": "タキオン銀河は {2} DTに達すると {1} 個入手"
+  },
+  "tachyon_galaxies_2": {
+    "other": "タキオン銀河(TG)を {1} 個所有"
+  },
+  "there_is_X_matter": {
+    "other": "物質が {1} 存在"
+  },
+  "ticks_done": {
+    "other": "{1}/{2} のティックを完了"
+  },
+  "timestudy_224": {
+    "other": "遠方銀河のコスト上昇適用を {1} 個分遅らせる (次元加速 {3} 個毎に {2} 個分)"
+  },
+  "timestudy_225_226_effect": {
+    "other": "+{1} RG"
+  },
+  "will_unlock_X_sets": {
+    "other": "{1} セットがアンロックされます"
+  },
+  "year": {
+    "other": "年"
+  },
+  "you_are_gaining_X_galaxies_per_second": {
+    "other": "銀河を毎秒 {1} 個入手"
+  },
+  "you_are_gaining_a_galaxy_every_X_seconds": {
+    "other": "銀河を {1} 秒毎に入手"
+  },
+  "you_are_getting_X_7th_dimensions_per_second": {
+    "other": "第7次元を毎秒 {1} 個生産"
+  },
+  "you_are_getting_X_8th_inf_dimensions_per_second": {
+    "other": "第8無限次元を毎秒 {1} 個生産"
+  },
+  "you_are_getting_X_antimatter_per_second": {
+    "other": "反物質を毎秒 {1} 生産"
+  },
+  "you_are_getting_X_infinity_power_per_second": {
+    "other": "無限パワーを毎秒 {1} 生産"
+  },
+  "you_are_getting_X_time_shards_per_second": {
+    "other": "時の欠片を毎秒 {1} 個生産"
+  },
+  "you_can_charge_X_upgrades": {
+    "other": "無限アップグレードを {1} 個帯電可能。"
+  },
+  "you_have_X_antimatter": {
+    "other": "反物質(AM)を {1} 所有"
+  },
+  "you_have_X_dark_energy": {
+    "other": "暗黒エネルギーを {1} 所有"
+  },
+  "you_have_X_dark_matter": {
+    "other": "暗黒物質を {1} 所有"
+  },
+  "you_have_X_dilated_time": {
+    "other": "膨張した時間(DT)を {1} 所有 "
+  },
+  "you_have_X_eternity_points": {
+    "other": "永遠ポイント(EP)を {1} 所有"
+  },
+  "you_have_X_galaxies": {
+    "other": "銀河を合計 {1} 個所有 +{2}/秒"
+  },
+  "you_have_X_infinity_points": {
+    "other": "無限ポイント(IP)を {1} 所有"
+  },
+  "you_have_X_infinity_power": {
+    "other": "無限パワーを {1} 所有し、"
+  },
+  "you_have_X_perk_points": {
+    "other": "特権ポイント(PP)を {1} 所有"
+  },
+  "you_have_X_reality_machines": {
+    "other": "現実機械(RM)を {1} 個所有"
+  },
+  "you_have_X_reality_shards": {
+    "other": "現実の欠片を {1} 個所有"
+  },
+  "you_have_X_relic_shards": {
+    "other": "遺物の欠片を {1} 個所有"
+  },
+  "you_have_X_remnants": {
+    "other": "残骸を {1} 個所有"
+  },
+  "you_have_X_replicanti": {
+    "other": "複製を {1} 個所有し、"
+  },
+  "you_have_X_replicanti_galaxies": {
+    "other": "複製銀河(RG)を {1} 個所有"
+  },
+  "you_have_X_singularities": {
+    "other": "特異点を {1} 個所有"
+  },
+  "you_have_X_space_theorems": {
+    "other": "宇宙定理(ST)を {1} 個所有"
+  },
+  "you_have_X_tachyon_particles": {
+    "other": "タキオン粒子(TP)を {1} 個所有"
+  },
+  "you_have_X_time_shards": {
+    "other": "時の欠片を {1} 個所有"
+  },
+  "you_have_X_time_theorems": {
+    "other": "時間定理(TT)を {1} 個所有"
+  },
+  "you_have_unlocked_X_resources": {
+    "other": "錬金素材を {1} 個アンロック済み。"
+  },
+  "you_have_unlocked_X_triad_studies": {
+    "other": "三連の研究を {1} 個アンロック済み。"
+  },
+  "youve_gained_X_tickspeed_upgrades": {
+    "other": "ティック数アップグレードを {1} 個入手済み"
+  },
+  "youve_purchased_X_tickspeed_upgrades": {
+    "other": "ティック数アップグレードを {1} 個購入済み"
+  }
+}

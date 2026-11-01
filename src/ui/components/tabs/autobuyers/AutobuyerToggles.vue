@@ -10,17 +10,30 @@ const enabledLabel = computed(() =>
 );
 
 const adModeLabel = computed(() => t('toggle_buy_until_10', formatInt(10)));
+
+const allMax = computed(() => Autobuyer.antimatterDimensions.every(a => a.mode === '10'));
 </script>
 
 <template>
   <div class="autobuyer-toggles">
-    <button class="autobuyer-toggles__btn" @click="player.auto.autobuyersOn = !player.auto.autobuyersOn">
+    <button
+      class="autobuyer-toggles__btn"
+      :class="{'autobuyer-toggles__btn--disabled': !player.auto.autobuyersOn }"
+      @click="player.auto.autobuyersOn = !player.auto.autobuyersOn"
+    >
       {{ enabledLabel }}
     </button>
-    <button class="autobuyer-toggles__btn" @click="Autobuyers.toggleAll()">
+    <button
+      class="autobuyer-toggles__btn"
+      @click="Autobuyers.toggleAll()"
+    >
       {{ t('toggle_all_autobuyers') }}
     </button>
-    <button class="autobuyer-toggles__btn" @click="Autobuyers.toggleADMode()">
+    <button
+      class="autobuyer-toggles__btn"
+      :class="{'autobuyer-toggles__btn--disabled': !allMax }"
+      @click="Autobuyers.toggleADMode()"
+    >
       {{ adModeLabel }}
     </button>
   </div>
@@ -48,7 +61,12 @@ const adModeLabel = computed(() => t('toggle_buy_until_10', formatInt(10)));
   text-align: center;
 }
 
+.autobuyer-toggles__btn--disabled {
+  border-color: var(--color-card-border);
+}
+
 .autobuyer-toggles__btn:active {
-  background: var(--color-good-light);
+  background: var(--color-btn-bg-disabled);
+  border-color: var(--color-unlockable);
 }
 </style>

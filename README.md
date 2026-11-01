@@ -16,6 +16,7 @@ A mobile-first web remake of Antimatter Dimensions.
 - Vite
 - break_eternity.js (supports larger numbers than break_infinity.js)
 - Pure frontend, saved to localStorage
+- i18n extracted from the Android `strings.xml`
 
 ## Development
 
@@ -35,26 +36,35 @@ src/
 ├── core/                    # pure logic, no Vue component imports
 │   ├── events/              # event hub (logic / ui dual channels)
 │   ├── time/                # time system (DeltaTime / GameSpeed)
-│   ├── state/               # persistent state (reactive player)
+│   ├── state/               # persistent state (reactive player) & migrations
 │   ├── storage/             # save system (save / serialize separated)
-│   ├── loop/                # game loop (game-loop / tick / simulate-time)
-│   ├── pre-infinity/        # pre-Infinity mechanics
+│   ├── loop/                # game loop (game-loop / tick / simulate-time / input-hold)
+│   ├── pre-infinity/        # pre-Infinity mechanics (tickspeed, dim boost, galaxy, sacrifice)
+│   ├── prestige/            # prestige resets (Big Crunch)
+│   ├── challenges/          # challenge state and rule injection (Normal/Infinity)
+│   ├── infinity/            # Infinity Upgrades, Break Infinity logic
 │   ├── dimensions/          # dimension base class and antimatter dimensions
+│   ├── autobuyers/          # AD, Tickspeed, DimBoost, Galaxy, BigCrunch autobuyers
+│   ├── achievements/        # achievement state and check logic
+│   ├── statistics/          # stats tracking (matter scale, etc.)
+│   ├── mechanic.js          # EffectState base class & helpers
 │   ├── currency.js          # currency wrapper
 │   ├── decimal.js           # Decimal re-export
 │   ├── format.js            # number formatting
+│   ├── lazy.js              # Lazy wrapper with global invalidation registry
 │   ├── math.js              # math utilities (ExponentialCostScaling, etc.)
-│   ├── utils.js
-│   └── dev-expose.js        # window.ad debug entry (DEV only)
+│   └── utils.js
 │
 ├── ui/                      # UI layer
 │   ├── components/          # all Vue components
-│   │   ├── layout/          # global layout (AppBar, TabBar, etc.)
+│   │   ├── layout/          # global layout (AppBar, TabBar, FabRow, StartScreen, etc.)
+│   │   ├── modal/           # modal host (BaseModal.vue + index.js)
 │   │   └── tabs/            # per-tab content components
 │   ├── tabs/                # tab config and state
-│   └── fab-buttons.js       # floating action button config
+│   ├── fab-buttons.js       # floating action button config
+│   └── notifications.js
 │
-├── game/init.js             # startup flow
+├── game/init.js             # startup flow (load, simulate offline, start loop)
 ├── App.vue
 └── main.js
 ```
@@ -72,8 +82,18 @@ src/
 | Type | Location | Persisted | Reactive |
 |---|---|---|---|
 | Persistent | `core/state/player.js` | yes | yes |
-| UI state | `ui/state.js` (future) | no | yes |
+| UI state | `ui/state.js` | no | yes |
 | Runtime | module-level vars in `core/*` | no | no |
+
+### EffectState Pattern
+Mechanics that provide multipliers or effects (Achievements, Infinity Upgrades, Challenges) inherit from `EffectState` in `core/mechanic.js`. This provides shared methods like `effectOrDefault`, `timesEffect`, `addEffect`, etc.
+
+### Decimal
+
+Use `Decimal.dNumberMax` for the pre-Infinity antimatter cap. b_e does not expose
+`Decimal.MAX_VALUE` (that's a b_i / break_infinity name). `Decimal.dNumberMax`
+equals `Number.MAX_VALUE` and is the value the original Web version uses before
+Break Infinity.
 
 ### Time System
 
@@ -88,8 +108,6 @@ The game has two time scales:
 DeltaTime.real   // number, real ms for this tick
 DeltaTime.game   // Decimal, game ms for this tick
 ```
-
-`GameSpeed.total` returns a `Decimal`, including all speed multipliers (dev speed, future black hole, etc.).
 
 ### Events
 
@@ -108,16 +126,9 @@ dispatch(GAME_EVENT.GALAXY_RESET_AFTER);
 
 **When to use events**: if module A needs to react to something module B does, use `EventHub` instead of importing B. This avoids circular dependencies.
 
-**Events currently dispatched**:
-
-- `DIMBOOST_BEFORE` / `DIMBOOST_AFTER`
-- `SACRIFICE_RESET_BEFORE` / `SACRIFICE_RESET_AFTER`
-- `GALAXY_RESET_BEFORE` / `GALAXY_RESET_AFTER`
-- `GAME_LOAD`
-
 ### Save System
 
-`storage/save.js` handles localStorage; `storage/serialize.js` converts between Decimal and plain values.
+`storage/save.js` handles localStorage; `storage/serialize.js` converts between Decimal / Set and plain values. `storage/migrations.js` handles save versioning.
 
 Save format:
 
@@ -125,32 +136,37 @@ Save format:
 {
   "antimatter": { "__d": "1e100" },
   "dimensions": { ... },
+  "infinity": {
+    "points": { "__d": "0" },
+    "upgrades": { "__s": [] }
+  },
   "lastUpdate": 1234567890123
 }
 ```
 
-`__d` marks a Decimal. `load()` returns offline time in milliseconds; the caller decides whether to simulate.
+- `__d` marks a Decimal
+- `__s` marks a Set (serialized as an array)
 
-### Game Loop
+### Start Screen & Offline Progress
 
-- `loop/game-loop.js`: timer-driven, handles `setInterval` and computing realDiff
-- `loop/tick.js`: single-step advance, calls all mechanic ticks
-- `loop/simulate-time.js`: bulk advance (offline progress, hibernation recovery)
+The game boots into a `StartScreen.vue`. It loads the save, calculates offline time, and runs the simulation via `simulate-time.js` using `runBatched` (yielding periodically to the UI thread) before the game loop officially starts.
 
-If a single tick exceeds 60 seconds, `game-loop.js` routes through `simulateTime` instead of updating directly.
+### Autobuyers
 
-## Debugging
+Autobuyers inherit from `AutobuyerState` / `UpgradeableAutobuyerState` in `core/autobuyers/`.
+- **AD & Tickspeed**: Unlockable with antimatter, upgradeable intervals.
+- **DimBoost, Galaxy, BigCrunch**: Unlocked by completing NC 10, 11, and 12 respectively.
+- Intervals reset based on the `resetTickOn` property (e.g. DimBoost resets on Galaxy).
 
-In DEV mode, `window.ad` exposes common objects:
+## Themes
 
-```js
-ad.player.antimatter.toString()
-ad.DeltaTime.game.toString()
-ad.setAM('1e100')         // set antimatter
-ad.setD8('1e50')          // set 8th dimension
-ad.save()
-ad.events.logic.on(ad.events.GAME_EVENT.GALAXY_RESET_AFTER, () => console.log('galaxy'))
-```
+Two-layer theme system, mirroring the Android palette + Metro overlay approach
+(colors and shape split) but simplified:
+
+- Base palette: `light` / `dark` / `amoled` / `lightInverted` / `darkInverted`
+- Applied as `theme-*` classes on `<html>` via `watchEffect` in `App.vue`
+- Inverted themes use `filter: invert(100%)` on the app root
+- All colors are CSS variables; see `styles/variables.css`
 
 ## Roadmap
 
@@ -159,25 +175,28 @@ ad.events.logic.on(ad.events.GAME_EVENT.GALAXY_RESET_AFTER, () => console.log('g
 - [x] Vue 3 + Vite base architecture
 - [x] Mobile layout (safe area, bottom nav, FabRow)
 - [x] pre-Infinity core mechanics (dimensions, tickspeed, dim boost, galaxy, sacrifice)
-- [x] Save and offline progress
+- [x] Save and offline progress (integrated into StartScreen)
 - [x] Event hub
 - [x] Time system (real / game split)
-- [x] Options page
+- [x] Options page (Themes, Orientation, Import/Export)
 - [x] Directory layering (core / ui / game)
 - [x] CSS variables (styles/variables.css)
-- [x] Safe area support (notch, bottom bar)
-- [x] Achievements
+- [x] Achievements (Normal & Secret UI)
+- [x] Statistics tab (General & Infinity stats, matter scale)
+- [x] Modal system (alert / confirm / prompt)
+- [x] Big Crunch entry & logic
+- [x] Normal Challenges (C1-C12) with rule injection
+- [x] Infinity Upgrades
+- [x] Autobuyers (AD x8, Tickspeed, DimBoost, Galaxy, BigCrunch)
 
 ### In Progress / TODO
 
-- [ ] News ticker
-- [ ] Big Crunch entry
-- [ ] Infinity content
+- [ ] Break Infinity (IP formula, UI, autobuyer upgrades)
+- [ ] Infinity Dimensions
+- [ ] Infinity Challenges
 
 ### Future
 
-- [ ] Infinity Dimensions
-- [ ] Infinity Challenges
 - [ ] Replicanti
 - [ ] Eternity
 - [ ] Time Dimensions / Time Studies
@@ -185,7 +204,7 @@ ad.events.logic.on(ad.events.GAME_EVENT.GALAXY_RESET_AFTER, () => console.log('g
 - [ ] Reality / Glyphs / Perks
 - [ ] Black Hole
 - [ ] Automator
-- [ ] Celestials (Teresa / Effarig / Enslaved / V / Ra / Lai'tela / Pelle)
+- [ ] Celestials (Teresa / Effarig / Nameless / V / Ra / Lai'tela / Pelle)
 
 ## Notes
 

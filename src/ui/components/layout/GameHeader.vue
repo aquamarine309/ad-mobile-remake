@@ -1,17 +1,36 @@
 <script setup>
+import HeaderChallengeDisplay from "./HeaderChallengeDisplay";
+
 import { computed } from 'vue';
 import { Currency } from '@/core/currency';
+import { isInfinityUnlocked } from '@/core/progress';
 import { format } from '@/core/format';
 import { tpHtml } from '@/i18n';
 
 const rawAM = computed(() => Currency.antimatter.value);
 const formattedAM = computed(() => format(rawAM.value, 2, 1));
+
+const infinityUnlocked = computed(() => isInfinityUnlocked());
+const rawIP = computed(() => Currency.infinityPoints.value);
+const formattedIP = computed(() => format(rawIP.value, 2));
 </script>
 
 <template>
   <header class="header">
+    <HeaderChallengeDisplay />
     <div
-      class="header__main"
+      v-if="infinityUnlocked"
+      class="header__line header__line--cp"
+    >
+      你拥有 <span class="i18n-num">1</span> 天界点数。
+    </div>
+    <div
+      v-if="infinityUnlocked"
+      class="header__line header__line--ip"
+      v-html="tpHtml('you_have_X_infinity_points', rawIP, formattedIP)"
+    />
+    <div
+      class="header__line header__line--am"
       v-html="tpHtml('you_have_X_antimatter', rawAM, formattedAM)"
     />
   </header>
@@ -23,14 +42,32 @@ const formattedAM = computed(() => format(rawAM.value, 2, 1));
   padding: 1rem 0.7rem 0.6rem;
 }
 
-.header__main {
-  font-size: 1.5rem;
-  color: var(--color-text-muted)
+.header__line {
+  font-size: 1.4rem;
+  color: var(--color-text-muted);
 }
 
-.header__main :deep(.i18n-amt) {
-  font-size: 1.65em;
+.header__line--ip,
+.header__line--cp {
+  margin-bottom: 0.5rem;
+}
+
+.header__line :deep(.i18n-num) {
   font-weight: bold;
-  color: var(--color-antimatter)
+}
+
+.header__line--am :deep(.i18n-num) {
+  font-size: 1.65em;
+  color: var(--color-antimatter);
+}
+
+.header__line--ip :deep(.i18n-num) {
+  font-size: 1.25em;
+  color: var(--color-infinity);
+}
+
+.header__line--cp :deep(.i18n-num) {
+  font-size: 1.25em;
+  color: #ffee00;
 }
 </style>

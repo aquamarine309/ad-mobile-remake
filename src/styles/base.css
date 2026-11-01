@@ -17,7 +17,7 @@ html, body {
 }
 
 body {
-  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-family: "Roboto", serif;
   font-size: 1.3rem;
   color: var(--color-text);
   background: var(--color-bg);
@@ -29,6 +29,14 @@ body {
   font-weight: 900;
   font-display: block;
   src: url("/fonts/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("/Roboto-Bold.ttf") format("woff2");
 }
 
 .fas, .fa-solid {

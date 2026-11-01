@@ -65,7 +65,7 @@ function onClick(event) {
   aspect-ratio: 1;
   position: relative;
   padding: 0;
-  background: #6ad477;
+  background: var(--color-achievement-unlocked);
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -75,7 +75,7 @@ function onClick(event) {
 }
 
 .achievement-cell--locked {
-  background: #c3c3c3;
+  background: var(--color-achievement-locked);
 }
 
 .achievement-cell--selected {
@@ -83,7 +83,7 @@ function onClick(event) {
 }
 
 .achievement-cell--locked-secret {
-  background: #878787;
+  background: var(--color-achievement-secret-locked);
 }
 
 .achievement-cell__icon {

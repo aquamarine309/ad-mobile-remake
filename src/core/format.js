@@ -1,10 +1,12 @@
 import { D, Decimal } from './decimal';
+import { player } from "@/core/state/player";
+import { t } from "@/i18n";
 
 const SMALL = D('1e-300');
 const SCI_UPPER = D('1e1e9');
 const THREE_LAYER_UPPER = D('1e9e15');
 
-export function format(value, places = 0, placesUnder1000 = 0) {
+export function formatPostBreak(value, places = 0, placesUnder1000 = 0) {
   const num = D(value);
 
   if (!num.isFinite()) return 'Infinite';
@@ -15,7 +17,7 @@ export function format(value, places = 0, placesUnder1000 = 0) {
   if (num.lt(SMALL)) return formatVerySmall(num, placesUnder1000);
   if (num.lt(1000)) return num.toNumber().toFixed(placesUnder1000);
 
-  if (value.layer >= 5) {
+  if (num.layer >= 5) {
     let mag = value.mag;
     let layer = value.layer;
     while (parseFloat(mag.toFixed(places)) >= 10) {
@@ -44,6 +46,11 @@ export function format(value, places = 0, placesUnder1000 = 0) {
   }
 
   return formatScientific(num, places);
+}
+
+export function format(value, places = 0, placesUnder1000 = 0) {
+  if (Decimal.abs(value).gte(Decimal.dNumberMax) && !player.break) return t("infinite");
+  return formatPostBreak(value, places, placesUnder1000);
 }
 
 function formatScientific(num, places) {

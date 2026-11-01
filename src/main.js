@@ -3,9 +3,6 @@ import "@/styles/index.css";
 import { createApp } from 'vue';
 import App from './App.vue';
 import { exposeDevTools } from './core/dev-expose';
-import { initGame } from '@/game/init';
-
-initGame();
 createApp(App).mount('#app');
 
 if (import.meta.env.DEV) {

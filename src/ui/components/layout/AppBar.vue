@@ -7,7 +7,7 @@
     <button class="app-bar__drawer-btn" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <div class="app-bar__title"></div>
+    <div class="app-bar__title">Antimatter Dimensions</div>
   </div>
 </template>
 
@@ -17,17 +17,17 @@
   align-items: center;
   min-height: var(--appbar-height);
   padding: var(--safe-top) var(--gap-md) 0;
-  background: var(--color-primary);
+  background: var(--color-appbar-bg);
   color: var(--color-appbar-fg);
-  box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.2rem 0.4rem var(--color-appbar-shadow);
 }
 
 .app-bar__drawer-btn {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 2rem;
-  height: 1.4rem;
+  width: 2.4rem;      /* Android 24dp */
+  height: 1.8rem;
   padding: 0;
   background: transparent;
   border: none;
@@ -36,14 +36,17 @@
 .app-bar__drawer-btn > span {
   display: block;
   height: 0.2rem;
-  background: var(--color-bg);
+  background: var(--color-appbar-fg);   /* was --color-bg */
   border-radius: 0.1rem;
 }
 
 .app-bar__title {
   flex: 1;
-  margin-left: 1rem;
+  margin-left: 1.6rem;   /* Android navigation icon → title gap */
   font-size: 1.4rem;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

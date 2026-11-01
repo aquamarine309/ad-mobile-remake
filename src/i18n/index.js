@@ -3,25 +3,30 @@ import zhStrings from './zh-CN.json';
 import zhPlurals from './zh-CN.plurals.json';
 import enStrings from './en.json';
 import enPlurals from './en.plurals.json';
-import zhCustom from './custom/zh-CN.js';
-import enCustom from './custom/en.js';
+import jaStrings from './ja-JP.json';
+import jaPlurals from './ja-JP.plurals.json';
 import { Decimal } from '@/core/decimal';
 import { player } from '@/core/state/player';
 
 const locales = {
   'zh-CN': {
-    strings: { ...zhStrings, ...zhCustom },
+    strings: { ...zhStrings },
     plurals: zhPlurals,
   },
   en: {
-    strings: { ...enStrings, ...enCustom },
+    strings: { ...enStrings },
     plurals: enPlurals,
   },
+  "ja-JP": {
+    strings: { ...jaStrings },
+    plurals: jaPlurals
+  }
 };
 
 export const LANGUAGES = [
   { code: 'en',    name: 'English' },
   { code: 'zh-CN', name: '简体中文' },
+  { code: "ja-JP", name: "日本語" }
 ];
 
 export const i18nState = {
@@ -49,7 +54,7 @@ function format(s, args) {
 }
 
 export function t(key, ...args) {
-  const s = locales[i18nState.current]?.strings?.[key];
+  const s = locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
   if (typeof s !== 'string') {
     console.warn(`[i18n] Missing string key: ${key}`);
     return key;
@@ -58,7 +63,7 @@ export function t(key, ...args) {
 }
 
 export function ta(key, ...args) {
-  const s = locales[i18nState.current]?.strings?.[key];
+  const s = locales[i18nState.current]?.strings?.[key] || locales.en.strings[key];
   if (typeof s !== 'string') {
     console.warn(`[i18n] Missing array key: ${key}`);
     return [];
@@ -78,7 +83,7 @@ function pickForm(n) {
 }
 
 export function tp(key, count, ...args) {
-  const forms = locales[i18nState.current]?.plurals?.[key];
+  const forms = locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
   if (!forms) {
     console.warn(`[i18n] Missing plurals key: ${key}`);
     return key;
@@ -88,7 +93,7 @@ export function tp(key, count, ...args) {
 }
 
 export function tpHtml(key, count, ...args) {
-  const forms = locales[i18nState.current]?.plurals?.[key];
+  const forms = locales[i18nState.current]?.plurals?.[key] || locales.en.plurals[key];
   if (!forms) {
     console.warn(`[i18n] Missing plurals key: ${key}`);
     return key;
@@ -96,6 +101,6 @@ export function tpHtml(key, count, ...args) {
   const s = forms[pickForm(count)] ?? forms.other;
   return s.replace(/\{(\d+)\}/g, (_, n) => {
     const v = args[Number(n) - 1];
-    return `<span class="i18n-amt">${v ?? ''}</span>`;
+    return `<span class="i18n-num">${v ?? ''}</span>`;
   });
 }

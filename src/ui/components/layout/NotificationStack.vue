@@ -27,12 +27,16 @@ function onNotificationClick() {
 
 <style scoped>
 .notification-stack {
-  position: absolute;
-  bottom: var(--bottom-nav-height, 9rem);
+  position: fixed;
+  bottom: calc(var(--bottom-nav-height, 9rem) + 5.6rem);
   left: 0;
   right: 0;
-  z-index: var(--z-notification);
+  z-index: 50;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
 }
 
 .notification {

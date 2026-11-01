@@ -2,6 +2,7 @@ import { Decimal } from '../decimal';
 import { player, createInitialPlayer, applyPlayer } from '../state/player';
 import { serialize, deserialize } from './serialize';
 import { encodeSave, decodeSave } from './serializer';
+import { migrations } from "./migrations";
 
 const SAVE_KEY = 'ad-save';
 
@@ -27,11 +28,13 @@ export function load() {
   try {
     const json = decodeSave(raw);
     const loaded = deserialize(JSON.parse(json));
-    const offlineMs = Math.max(0, Date.now() - (loaded.lastUpdate ?? Date.now()));
-
+    loaded.version ??= 0;              // missing version means pre-versioning
+    
     const fresh = createInitialPlayer();
-    deepAssign(fresh, loaded);
+    deepAssign(fresh, loaded);          // defaults fill in missing fields
+    migrations.apply(fresh);             // then migrate forward
     applyPlayer(fresh);
+    const offlineMs = Math.max(0, Date.now() - (loaded.lastUpdate ?? Date.now()));
 
     return offlineMs;
   } catch (e) {
@@ -62,7 +65,13 @@ export function parseSave(text) {
 export function deepAssign(dst, src) {
   for (const k of Object.keys(src)) {
     const sv = src[k];
-    if (sv !== null && typeof sv === 'object' && !Array.isArray(sv) && !(sv instanceof Decimal)) {
+    if (
+      sv !== null
+      && typeof sv === 'object'
+      && !Array.isArray(sv)
+      && !(sv instanceof Decimal)
+      && !(sv instanceof Set)
+    ) {
       if (dst[k] === null || typeof dst[k] !== 'object') dst[k] = {};
       deepAssign(dst[k], sv);
     } else {

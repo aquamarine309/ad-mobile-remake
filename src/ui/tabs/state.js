@@ -9,28 +9,19 @@ function findTab(key) {
   return TABS.find(t => t.key === key);
 }
 
+function isVisible(entry) {
+  return entry !== undefined && (entry.condition?.() ?? true);
+}
+
+// currentTab is declared before currentSubtabKey because the latter reads it.
 export const currentTabKey = computed({
   get() {
     const key = player.options.lastTab;
-    return findTab(key) ? key : DEFAULT_TAB_KEY;
+    const tab = findTab(key);
+    return isVisible(tab) ? key : DEFAULT_TAB_KEY;
   },
   set(key) {
-    if (findTab(key)) player.options.lastTab = key;
-  },
-});
-
-export const currentSubtabKey = computed({
-  get() {
-    const tab = currentTab.value;
-    const stored = player.options.lastSubtabs[tab.key];
-    if (tab.subtabs.some(s => s.key === stored)) return stored;
-    return tab.subtabs[0].key;
-  },
-  set(key) {
-    const tab = currentTab.value;
-    if (tab.subtabs.some(s => s.key === key)) {
-      player.options.lastSubtabs[tab.key] = key;
-    }
+    if (isVisible(findTab(key))) player.options.lastTab = key;
   },
 });
 
@@ -38,12 +29,28 @@ export const currentTab = computed(() =>
   findTab(currentTabKey.value) ?? TABS[0]
 );
 
+export const currentSubtabKey = computed({
+  get() {
+    const tab = currentTab.value;
+    const stored = player.options.lastSubtabs?.[tab.key];
+    if (tab.subtabs.some(s => s.key === stored && isVisible(s))) return stored;
+    return tab.subtabs.find(isVisible)?.key ?? tab.subtabs[0].key;
+  },
+  set(key) {
+    const tab = currentTab.value;
+    if (tab.subtabs.some(s => s.key === key && isVisible(s))) {
+      player.options.lastSubtabs ??= {};
+      player.options.lastSubtabs[tab.key] = key;
+    }
+  },
+});
+
 export const visibleTabs = computed(() =>
-  TABS.filter(t => t.condition?.() ?? true)
+  TABS.filter(isVisible)
 );
 
 export const visibleSubtabs = computed(() =>
-  currentTab.value.subtabs.filter(s => s.condition?.() ?? true)
+  currentTab.value.subtabs.filter(isVisible)
 );
 
 export const currentSubtab = computed(() =>

@@ -4,6 +4,9 @@ import NormalAchievementsTab from "@/ui/components/tabs/achievements/NormalAchie
 import SecretAchievementsTab from "@/ui/components/tabs/achievements/SecretAchievementsTab";
 import StatsTab from "@/ui/components/tabs/stats/StatsTab";
 import AutobuyersTab from "@/ui/components/tabs/autobuyers/AutobuyersTab";
+import InfinityUpgradesTab from '@/ui/components/tabs/infinity-upgrades/InfinityUpgradesTab';
+import NormalChallengesTab from "@/ui/components/tabs/normal-challenges/NormalChallengesTab";
+import { isInfinityUnlocked } from '@/core/progress';
 
 export const TABS = [
   {
@@ -27,6 +30,33 @@ export const TABS = [
         symbol: '\uf013',
         nameKey: 'tab_autobuyers',
         component: AutobuyersTab,
+      },
+    ],
+  },
+  {
+    key: "challenges",
+    symbol: "\uf6fc",   // fa-mountain
+    condition: () => isInfinityUnlocked(),
+    subtabs: [
+      {
+        key: 'normal_challenges',
+        symbol: 'Ω',
+        nameKey: 'tab_normal_challenges_short',
+        component: NormalChallengesTab,
+      },
+    ],
+  },
+  {
+    key: 'infinity',
+    symbol: '∞',
+    condition: () => isInfinityUnlocked(),
+    color: "var(--color-infinity)",
+    subtabs: [
+      {
+        key: 'infinity_upgrades',
+        symbol: '\uf062',   // fa-arrow-up
+        nameKey: 'tab_infinity_upgrades_short',
+        component: InfinityUpgradesTab,
       },
     ],
   },

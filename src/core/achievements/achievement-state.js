@@ -1,9 +1,11 @@
 import { logic, dispatch, GAME_EVENT } from '@/core/events';
 
 import { t } from "@/i18n";
+import { EffectState } from '@/core/mechanic';
 
-export class AchievementState {
+export class AchievementState extends EffectState {
   constructor(config) {
+    super();
     this.config = config;
     this._row = Math.floor(config.id / 10);
     this._column = config.id % 10;
@@ -13,6 +15,19 @@ export class AchievementState {
       const events = Array.isArray(config.checkEvent) ? config.checkEvent : [config.checkEvent];
       for (const e of events) logic.on(e, () => this.tryUnlock());
     }
+  }
+  
+  get isEffectActive() {
+    return this.isUnlocked;
+  }
+  
+  effect() {
+    return this.config.effect();
+  }
+  
+  effects(key) {
+    if (!this.isUnlocked) return undefined;
+    return this.config.effects?.[key]?.();
   }
 
   get id() { return this.config.id; }
@@ -28,6 +43,8 @@ export class AchievementState {
     const prefix = this.isSecret ? 'secret_achievement' : 'achievement';
     return t(`${prefix}_${this.id}_tooltip`);
   }
+  
+  get reward() { return this.config.reward; }
   
   get row() { return this._row; }
   get column() { return this._column; }

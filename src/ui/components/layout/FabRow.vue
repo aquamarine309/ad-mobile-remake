@@ -1,6 +1,6 @@
 <script setup>
 import { FAB_BUTTONS } from '@/ui/fab-buttons';
-import { InputHold } from '@/core/loop/input-hold';
+import { InputHold, stickyKey } from '@/core/loop/input-hold';
 import { onUnmounted, computed } from 'vue';
 import { t } from '@/i18n';
 
@@ -12,16 +12,11 @@ function isEnabled(btn) {
   return btn.isEnabled ? btn.isEnabled() : true;
 }
 
-function onPointerDown(btn, event) {
-  try {
-    event.currentTarget.setPointerCapture?.(event.pointerId);
-  } catch { /* ignore */ }
 
+function onPointerDown(btn, event) {
+  try { event.currentTarget.setPointerCapture?.(event.pointerId); } catch {}
   btn.action();
-  InputHold.begin(btn.key, {
-    action: btn.action,
-    isEnabled: btn.isEnabled,
-  });
+  InputHold.begin(btn.key, { action: btn.action });
 }
 
 function onPointerStop(btn) {
@@ -39,7 +34,10 @@ onUnmounted(() => {
       v-for="btn in visibleButtons"
       :key="btn.key"
       class="fab-row__btn"
-      :class="{ 'fab-row__btn--enabled': isEnabled(btn) }"
+      :class="{
+        'fab-row__btn--enabled': isEnabled(btn),
+        'fab-row__btn--sticky': stickyKey === btn.key,
+      }"
       @pointerdown="onPointerDown(btn, $event)"
       @pointerup="onPointerStop(btn)"
       @pointercancel="onPointerStop(btn)"
@@ -69,7 +67,7 @@ onUnmounted(() => {
   font-size: 1.6rem;
   font-weight: bold;
   color: var(--color-text);
-  background: #C5DCD9;
+  background: var(--color-fab-bg);
   border: none;
   border-radius: 50%;
   box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
@@ -78,13 +76,20 @@ onUnmounted(() => {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   pointer-events: auto;
+  position: relative;
 }
 
 .fab-row__btn--enabled {
   text-decoration: underline;
 }
 
-.fab-row__btn:not(.fab-row__btn--enabled):active {
-  transform: none;
+.fab-row__btn--sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);   /* Android setToggled alpha 0.3 */
+  pointer-events: none;
+  border: 0.1rem solid var(--color-text);
 }
 </style>

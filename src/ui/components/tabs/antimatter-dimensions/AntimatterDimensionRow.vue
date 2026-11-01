@@ -4,6 +4,9 @@ import { AntimatterDimension } from "@/core/dimensions/antimatter-dimension";
 import { format, formatX, formatInt } from "@/core/format";
 import { D } from "@/core/decimal";
 import { t } from "@/i18n";
+import { NormalChallenge } from "@/core/challenges/normal";
+import { DimBoost } from "@/core/pre-infinity/dimension-boost";
+import { isInfinityUnlocked } from "@/core/progress";
 
 const { tier } = defineProps({
   tier: { type: Number, required: true }
@@ -25,11 +28,21 @@ const possiblePercent = computed(() =>
   (dimension.value.boughtBefore10 + dimension.value.howManyCanBuy) * 10
 );
 
+const c6Running = computed(() => NormalChallenge(6).isRunning);
+const dimBoostReached = computed(() => DimBoost.purchasedBoosts.gte(tier - 4));
+const infUnlocked = computed(() => isInfinityUnlocked());
+const isVisible = computed(() => (dimBoostReached.value || infUnlocked.value) && DimBoost.maxDimensionsUnlockable >= tier);
 
 const costThreshold = D("ee7");
-const costText = computed(() => {
+const buttonText = computed(() => {
+  const lastDimension = AntimatterDimension(tier - 1);
+  if (!dimBoostReached.value) return t("dimension_locked_dimboost", formatInt(tier - 4));
+  if (tier >= 2 && lastDimension.totalAmount.eq(0)) {
+    return t("dimension_locked_buy_previous_dimension", lastDimension.shortName);
+  }
   const text = format(cost.value);
   if (cost.value.gte(costThreshold)) return text;
+  if (tier >= 3 && c6Running.value) return `${text} ${AntimatterDimension(tier - 2).shortName}`;
   return t("cost_X", text);
 });
 
@@ -45,6 +58,7 @@ function buy() {
 
 <template>
   <div
+    v-if="isVisible"
     class="dim-row"
     :class="{ 'dim-row--even': tier % 2 === 0 }"
   >
@@ -70,7 +84,7 @@ function buy() {
         class="dim-row__fill-purchased"
         :style="{ width: purchasedPercent + '%' }"
       />
-      <span class="dim-row__buy-text">{{ costText }}</span>
+      <span class="dim-row__buy-text">{{ buttonText }}</span>
     </button>
   </div>
 </template>
@@ -154,12 +168,12 @@ function buy() {
 }
 
 .dim-row__fill-possible {
-  background: #c8e6c9;
+  background: var(--color-dim-fill-possible);
   z-index: 0;
 }
 
 .dim-row__fill-purchased {
-  background: #5ac467;
+  background: var(--color-dim-fill-purchased);
   z-index: 1;
 }
 

@@ -1,9 +1,16 @@
 <script setup>
+import { t } from "@/i18n";
+import EffectDisplay from '@/ui/components/EffectDisplay';
+
 defineProps({
   achievement: { type: Object, required: true },
   position: { type: Object, required: true },
   arrowOffset: { type: Number, default: 0 },
   isSecret: { type: Boolean, default: false }
+});
+
+const formattedEffect = (() => {
+  return achievement.config.formatEffect(achievement.effectValue);
 });
 </script>
 
@@ -27,6 +34,10 @@ defineProps({
     >
       {{ achievement.description }}
     </div>
+    <template v-if="achievement.reward">
+      <div class="achievement-tooltip__desc">{{ t("reward")}}: {{ achievement.reward }}</div>
+      <EffectDisplay :state="achievement" />
+    </template>
   </div>
 </template>
 
@@ -38,7 +49,7 @@ defineProps({
   width: 24rem;
   max-width: 85vw;
   padding: var(--gap-sm) var(--gap-md);
-  background: #e0e0e0;
+  background: var(--color-tooltip-bg);
   border-radius: var(--radius-sm);
   box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.4);
   transform: var(--base-transform);
@@ -75,13 +86,13 @@ defineProps({
 .achievement-tooltip--below::before {
   bottom: 100%;
   border-width: 0 0.7rem 0.7rem;
-  border-color: transparent transparent #e0e0e0;
+  border-color: transparent transparent var(--color-tooltip-bg);
 }
 
 .achievement-tooltip--above::before {
   top: 100%;
   border-width: 0.7rem 0.7rem 0;
-  border-color: #e0e0e0 transparent transparent;
+  border-color: var(--color-tooltip-bg) transparent transparent;
 }
 
 .achievement-tooltip--middle::before {

@@ -21,6 +21,7 @@ function label(tab) {
       :key="tab.key"
       class="nav-bar__btn tab-bar__btn"
       :class="{ 'nav-bar__btn--active': currentTabKey === tab.key }"
+      :style="{ color: tab.color }"
       @click="showTab(tab.key)"
     >
       {{ label(tab) }}

@@ -5,6 +5,7 @@ import TickspeedRow from "./TickspeedRow";
 import DimensionalSacrificeRow from "./DimensionalSacrificeRow";
 import DimensionBoostRow from "./DimensionBoostRow";
 import AntimatterGalaxyRow from "./AntimatterGalaxyRow";
+import ChallengeEffects from "./ChallengeEffects";
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 import { Sacrifice } from '@/core/pre-infinity/sacrifice';
 import { format, formatX } from '@/core/format';
@@ -24,6 +25,7 @@ const sacrificeTotal = computed(() => Sacrifice.totalBoost);
       {{ tp('you_are_getting_X_antimatter_per_second', rawPerSecond, formattedPerSecond) }}
     </div>
     <TickspeedRow />
+    <ChallengeEffects />
     <DimensionalSacrificeRow />
     <div class="mult-row">
       {{ t('buy_ten_multiplier', formatX(buyTen, 1, 1)) }}<template

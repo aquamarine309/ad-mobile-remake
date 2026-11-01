@@ -3,14 +3,14 @@ import { player } from '@/core/state/player';
 import { Lazy } from '@/core/lazy';
 import { GAME_EVENT } from '@/core/events';
 import { AchievementState } from './achievement-state';
-import { ACHIEVEMENT_DATA } from '@/content/achievements';
+import { NORMAL_ACHIEVEMENT_CONFIGS } from './normal-configs';
 
 class NormalAchievementState extends AchievementState {
   get _bits() { return player.achievements.normal; }
   get isSecret() { return false; }
 }
 
-const ALL = ACHIEVEMENT_DATA.map(c => new NormalAchievementState(c));
+const ALL = NORMAL_ACHIEVEMENT_CONFIGS.map(c => new NormalAchievementState(c));
 const BY_ID = new Map(ALL.map(a => [a.id, a]));
 
 function computeCompletedRows() {

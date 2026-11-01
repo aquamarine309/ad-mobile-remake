@@ -8,7 +8,7 @@ import { t } from "@/i18n";
 const count = computed(() => DimBoost.purchasedBoosts);
 const tier = computed(() => DimBoost.requirement.tier);
 const amount = computed(() => DimBoost.requirement.amount);
-const satisfied = computed(() => DimBoost.requirement.isSatisfied);
+const satisfied = computed(() => DimBoost.canBeBought && DimBoost.requirement.isSatisfied);
 const tierName = computed(() => AntimatterDimension(tier.value).shortName);
 const buttonText = computed(() => DimBoost.unlockedByBoost);
 

@@ -1,10 +1,14 @@
-import { D } from '@/core/decimal';
+import { D, Decimal } from '@/core/decimal';
 import { player } from '@/core/state/player';
 import { AntimatterDimension, AntimatterDimensions } from '@/core/dimensions/antimatter-dimension';
 import { dispatch, GAME_EVENT } from '@/core/events';
 import { ta } from "@/i18n";
 import { formatInt } from "@/core/format";
 import { Currency } from "@/core/currency";
+import { InfinityUpgrade } from "@/core/infinity/upgrades";
+import { canBigCrunch } from "@/core/prestige/big-crunch";
+import { resetChallengeTransient } from "@/core/challenges";
+import { NormalChallenge } from '@/core/challenges/normal';
 
 export const GALAXY_TYPE = {
   NORMAL: 0,
@@ -25,15 +29,15 @@ class GalaxyRequirement {
 
 export const Galaxy = {
   get baseCost() {
-    return D(80);
+    return NormalChallenge(10).isRunning ? D(99) : D(80);
   },
 
   get costMult() {
-    return D(60);
+    return NormalChallenge(10).isRunning ? D(90) : D(60);
   },
 
   get requiredTier() {
-    return 8;
+    return NormalChallenge(10).isRunning ? 6 : 8;
   },
 
   get costScalingStart() {
@@ -79,9 +83,10 @@ export const Galaxy = {
     const tier = this.requiredTier;
     const distantStart = this.costScalingStart;
     const remoteStart = this.remoteStart;
+    const discount = InfinityUpgrade("resetBoost").effectOrDefault(D(0));
 
     if (galaxies.lt(distantStart)) {
-      const amount = this.baseCost.add(galaxies.times(this.costMult)).floor();
+      const amount = this.baseCost.add(galaxies.times(this.costMult)).minus(discount).floor();
       return new GalaxyRequirement(tier, amount);
     }
 
@@ -91,12 +96,13 @@ export const Galaxy = {
         .add(galaxies.times(this.costMult))
         .add(beforeDistant.pow(2))
         .add(beforeDistant)
+        .minus(discount)
         .floor();
       return new GalaxyRequirement(tier, amount);
     }
 
     const exp = galaxies.sub(remoteStart).add(1);
-    const amount = this.remoteC.times(this.remoteBase.pow(exp)).floor();
+    const amount = this.remoteC.times(this.remoteBase.pow(exp)).minus(discount).floor();
     return new GalaxyRequirement(tier, amount);
   },
 
@@ -108,7 +114,7 @@ export const Galaxy = {
     );
 
     if (target.lt(distantStartAmount)) {
-      return target.sub(this.baseCost).div(this.costMult).floor().clampMin(0);
+      return target.sub(this.baseCost).div(this.costMult).floor().add(1).clampMin(0);
     }
 
     const remoteC = this.remoteC;
@@ -128,6 +134,8 @@ export const Galaxy = {
   },
 
   get canBeBought() {
+    if (NormalChallenge(8).isRunning) return false;
+    if (!player.break && canBigCrunch()) return false;
     return true;
   },
 
@@ -138,11 +146,14 @@ export const Galaxy = {
     return true;
   },
 
-  buyMax() {
+  buyMax(limit = Decimal.dLayerSafeMax) {
     if (!this.canBeBought) return false;
     const current = player.galaxies;
-    const maxG = this.galaxyAtAmount(AntimatterDimension(8).totalAmount);
+    if (current.gte(limit)) return false; // Already reached limit
+  
+    const maxG = this.galaxyAtAmount(AntimatterDimension(this.requiredTier).totalAmount).clampMax(limit);
     if (maxG.lte(current)) return false;
+    
     player.galaxies = maxG.sub(1);
     this.reset();
     return true;
@@ -156,7 +167,9 @@ export const Galaxy = {
     player.sacrificed = D(0);
     player.tickspeed.bought = D(0);
     AntimatterDimensions.reset();
-    Currency.antimatter.value = D(10);
+    Currency.antimatter.reset();
+    
+    resetChallengeTransient();
   
     dispatch(GAME_EVENT.GALAXY_RESET_AFTER);
   },

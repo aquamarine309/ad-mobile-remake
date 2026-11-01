@@ -1,67 +1,241 @@
 :root {
+  /* Base text and background */
   --color-text: #000;
   --color-text-muted: #666;
   --color-bg: #fff;
   --color-primary: #008577;
   --color-primary-dark: #00574b;
+
+  /* State colors */
   --color-good: #127a20;
   --color-good-light: #8bc599;
   --color-bad: #b82b3f;
   --color-btn-bg: #f6f6f6;
   --color-btn-bg-disabled: #e3e3e3;
 
-  /* resource colors */
+  /* FAB */
+  --color-fab-bg: #d1e9e6; /* FAB_LIGHT_BACKGROUND */
+
+  /* Resource colors */
   --color-antimatter: #2196f3;
   --color-infinity: #ef9000;
   --color-eternity: #a331d0;
   --color-reality: #1bc01e;
 
-  /* nav bar */
+  /* Nav bar */
   --color-nav-bg: var(--color-primary);
   --color-nav-inactive: rgba(255, 255, 255, 0.6);
   --color-nav-active: #ffffff;
   --color-nav-underline: #e91e63;
 
-  /* z-index layer */
+  /* Z-index layers */
   --z-content: 1;
   --z-nav: 10;
   --z-fab: 20;
   --z-modal: 100;
 
-  /* safe zone */
+  /* Safe zone */
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 
-  /* gaps */
+  /* Gaps */
   --gap-xs: 0.3rem;
   --gap-sm: 0.5rem;
   --gap-md: 1rem;
   --gap-lg: 1.5rem;
-  
+
+  /* App bar */
   --color-appbar-fg: #ffffff;
+  --color-appbar-bg: var(--color-primary);
+  --color-appbar-shadow: rgba(0, 0, 0, 0.25);
+
+  /* Row */
   --color-row-even: rgba(33, 150, 243, 0.27);
 
-  /* border radius */
+  /* Border radius */
   --radius-sm: 0.4rem;
   --radius-md: 0.6rem;
-  
+  --radius-lg: 1rem;
+
   /* Layout */
-  --appbar-height: 4.8rem;
-  
+  --appbar-height: 5.6rem;
+
+  /* Achievements */
   --color-achievement-unlocked: #6ad477;
   --color-achievement-locked: #c3c3c3;
   --color-achievement-secret-locked: #878787;
   --color-tooltip-bg: #e0e0e0;
   --color-tooltip-overlay: rgba(0, 0, 0, 0.6);
-  
+
+  /* Sliders / checkboxes */
   --color-slider-track: #e0e0e0;
   --color-slider-fill: #d81b60;
   --color-checkbox-border: rgba(0, 0, 0, 0.54);
   --color-checkbox-border-disabled: rgba(0, 0, 0, 0.3);
-  
+
+  /* Cards */
   --color-unlockable: #ff9800;
   --color-card-fill: rgba(0, 0, 0, 0.04);
   --color-card-fill-active: rgba(0, 0, 0, 0.10);
   --color-card-border: rgba(0, 0, 0, 0.10);
   --color-card-border-active: rgba(0, 0, 0, 0.30);
+
+  /* Autobuyer card (Android: AUTOBUYERS_TEXT / AUTOBUYER_SECONDARY_TEXT / AUTOBUYER_BUTTON_*) */
+  --color-autobuyer-text: #000;
+  --color-autobuyer-text-secondary: rgba(0, 0, 0, 0.60);
+  --color-autobuyer-mode-btn-bg: #f2f2f2;
+  --color-autobuyer-mode-btn-text: #000;
+
+  /* Antimatter dimension buy progress (Android: BORDER_ENABLED / CAN_BUY_DIMENSION_GREEN, alpha 100) */
+  --color-dim-fill-purchased: rgba(18, 122, 32, 0.39);
+  --color-dim-fill-possible: rgba(90, 196, 103, 0.39);
+  
+  /* Normal Challenges */
+  --color-challenge-btn-color: #000;
+  --color-challenge-btn-color-disabled: #bbb;
+  --color-challenge-btn-color-completed: #000;
+  --color-challenge-btn-default: #f2f2f2;
+  --color-challenge-btn-border: #329a40;
+  --color-challenge-completed: #bbf5c9;
+  --color-challenge-locked-bg: #cccccc;
+  --color-challenge-locked-border: #b84d4d;
+  --color-challenge-running-bg: #ffffff;
+  --color-challenge-border: #000000;
+
+  /* Modal */
+  --color-modal-bg: #e0e0e0;              /* DIALOG_BACKGROUND */
+  --color-modal-text: #000;               /* MAIN_TEXT_COLOR */
+  --color-modal-scrim: rgba(0, 0, 0, 0.32);
+  --color-modal-btn-fg: var(--color-text);
+  --color-modal-border: #000;
+  --color-modal-input-underline: #d81b60; /* colorAccent */
+
+  /* Offline report */
+  --color-away-antimatter: #b82b3f;
+  --color-away-dimboosts: #b43c38;
+  --color-away-galaxies: #af4d31;
+
+  /* Misc */
+  --color-infinity-border: #ff9800;       /* INFINITY_BORDER */
+  --color-top-button-bg: #f6f6f6;         /* TOP_BUTTON_BACKGROUND */
+  --color-teresa: #5151ec;
+  --color-upgrade-purchasable-bg: #1f1f1f;
+  --color-upgrade-unavailable-bg: #d6d6d6; /* UPGRADE_UNAVAILABLE light */
+  --color-pelle-disabled: #d26a7e;
+  --color-border-disabled: #b82b3f;
+}
+
+.theme-dark {
+  /* Text */
+  --color-text: #bbbbbb;                  /* MAIN_TEXT_COLOR night */
+  --color-text-muted: #888888;
+
+  /* Background */
+  --color-bg: #1b1a1e;                    /* APP_BACKGROUND night */
+  --color-primary: #000000;
+  --color-fab-bg: #000000;                /* BOTTOM_BUTTON_BACKGROUND night = BLACK */
+
+  /* State */
+  --color-good: #025a10;                  /* PROGRESS_BAR_GREEN night */
+  --color-good-light: #336633;            /* BUTTON_ENABLED_PRESSED night */
+  --color-bad: #b82b3f;
+  --color-btn-bg: #181818;                /* BUTTON_ENABLED_BACKGROUND night */
+  --color-btn-bg-disabled: #272727;       /* BUTTON_DISABLED_BACKGROUND night */
+
+  /* Resources */
+  --color-antimatter: #a64650;            /* ANTIMATTER_ACTIVE night */
+  --color-infinity: #b67f33;              /* INFINITY night */
+  --color-eternity: #a047cf;              /* ETERNITY night */
+  --color-reality: #058007;               /* REALITY night */
+
+  /* Navbar */
+  --color-nav-bg: #0e0d0f;                /* NAV_BAR_CENTER night */
+  --color-nav-inactive: rgba(255, 255, 255, 0.6);
+  --color-nav-active: #ffffff;
+  --color-nav-underline: #e91e63;
+
+  /* App bar */
+  --color-appbar-fg: #bbbbbb;             /* appBarTextColor night */
+  --color-appbar-bg: #000000;             /* colorPrimary night */
+  --color-appbar-shadow: rgba(0, 0, 0, 0.6);
+
+  /* Row */
+  --color-row-even: rgba(223, 80, 80, 0.30); /* NORMAL_DIM_ROW_EVEN night */
+
+  /* Achievements */
+  --color-achievement-unlocked: rgba(43, 149, 57, 0.87); /* ACHIEVED_NIGHT */
+  --color-achievement-locked: #666666;                   /* NOT_ACHIEVED_NIGHT */
+  --color-achievement-secret-locked: #555555;            /* SECRET_NOT_ACHIEVED_NIGHT */
+  --color-tooltip-bg: #1e1e1e;                           /* ACHIEVEMENT_BALLOON_BACKGROUND_NIGHT */
+  --color-tooltip-overlay: rgba(0, 0, 0, 0.6);
+
+  /* Sliders / checkboxes */
+  --color-slider-track: #393939;                         /* PROGRESS_BAR_GRAY night */
+  --color-slider-fill: #d81b60;
+  --color-checkbox-border: #ffffff;                      /* AUTOBUYER_CHECKBOX_BORDER night */
+  --color-checkbox-border-disabled: rgba(255, 255, 255, 0.38);
+
+  /* Cards / autobuyer */
+  --color-unlockable: #b67f33;                           /* INFINITY_BORDER night */
+  --color-card-fill: rgba(0, 0, 0, 0.12);                /* AUTOBUYER_CARD_FILL night */
+  --color-card-fill-active: rgba(0, 0, 0, 0.26);         /* AUTOBUYER_CARD_FILL_ACTIVE night */
+  --color-card-border: rgba(255, 255, 255, 0.24);        /* AUTOBUYER_CARD_BORDER night */
+  --color-card-border-active: rgba(255, 255, 255, 0.55); /* AUTOBUYER_CARD_BORDER_ACTIVE night */
+  --color-autobuyer-text: #bbbbbb;                       /* AUTOBUYERS_TEXT night */
+  --color-autobuyer-text-secondary: rgba(187, 187, 187, 0.70); /* AUTOBUYER_SECONDARY_TEXT night */
+  --color-autobuyer-mode-btn-bg: #1f1f1f;                /* AUTOBUYER_BUTTON_BACKGROUND night */
+  --color-autobuyer-mode-btn-text: #bbbbbb;              /* AUTOBUYER_BUTTON_TEXT night */
+
+  /* Dimension progress */
+  --color-dim-fill-purchased: rgba(18, 122, 32, 0.39);   /* BORDER_ENABLED */
+  --color-dim-fill-possible: rgba(58, 164, 71, 0.39);    /* CAN_BUY_DIMENSION_GREEN night = #3aa447 */
+  
+  /* Normal Challenges */
+  --color-challenge-btn-default: #989898;
+  --color-challenge-btn-border: #024a08;
+  --color-challenge-btn-color-completed: #bbb;
+  --color-challenge-completed: #3b7549;
+  --color-challenge-locked-bg: #666666;
+  --color-challenge-locked-border: #881d1d;
+  --color-challenge-running-bg: #000000;
+  --color-challenge-border: #df5050cc;
+
+  /* Modal */
+  --color-modal-bg: #222222;              /* DIALOG_BACKGROUND night */
+  --color-modal-text: #bbbbbb;            /* MAIN_TEXT_COLOR night */
+  --color-modal-scrim: rgba(0, 0, 0, 0.32);
+  --color-modal-btn-fg: var(--color-text);
+  --color-modal-border: #000;
+
+  /* Misc */
+  --color-infinity-border: #b67f33;
+  --color-top-button-bg: #000000;
+  --color-upgrade-purchasable-bg: #1f1f1f;
+  --color-upgrade-unavailable-bg: #545a5b;
+  --color-pelle-disabled: #8f2b3f;
+  --color-border-disabled: #b84b5f;
+}
+
+/* Amoled: pure black background, overrides theme-dark */
+.theme-amoled {
+  --color-bg: #000000;
+  --color-card-fill: rgba(255, 255, 255, 0.06);
+  --color-card-fill-active: rgba(255, 255, 255, 0.12);
+  --color-card-border: rgba(255, 255, 255, 0.16);
+  --color-card-border-active: rgba(255, 255, 255, 0.32);
+  --color-btn-bg: #0d0d0d;
+  --color-btn-bg-disabled: #1a1a1a;
+  --color-modal-bg: #000000;
+  --color-appbar-bg: #000000;
+  --color-nav-bg: #000000;
+  /* Other variables inherit theme-dark */
+}
+
+/* Inverted: filter-invert the whole app shell */
+.theme-inverted body {
+  background: #000;
+}
+
+.theme-inverted .app {
+  filter: invert(100%);
 }

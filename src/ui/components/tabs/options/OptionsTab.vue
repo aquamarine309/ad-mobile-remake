@@ -10,32 +10,36 @@ import { formatInt } from '@/core/format';
 import { GameLoop } from '@/core/loop/game-loop';
 import { importGame } from '@/game/import';
 import { t, ta, LANGUAGES } from "@/i18n";
+import { SecretAchievement } from "@/core/achievements";
+import { Modal } from '@/ui/components/modal';
+import { lockOrientation, unlockOrientation } from '@/ui/orientation';
 
 // --- Save & Load ---
 
-function doExport() {
+async function doExport() {
   try {
-    prompt('Copy your save below:', exportSave());
+    await Modal.alert(exportSave(), { title: t('export_to_mobile') });
   } catch (e) {
-    alert(`Export failed: ${e.message}`);
+    await Modal.alert(`Export failed: ${e.message}`);
   }
 }
 
-function doImport() {
-  const text = prompt('Paste your save string:');
+async function doImport() {
+  const text = await Modal.prompt(t('import_string'), '');
   if (!text) return;
-  if (!confirm('Import this save? Your current save will be overwritten.')) return;
+  const ok = await Modal.confirm(t('import_warning') ?? 'Import this save? Your current save will be overwritten.');
+  if (!ok) return;
   try {
-    importGame(text);
-    alert('Save imported.');
+    await importGame(text);
+    await Modal.alert('Save imported.');
   } catch (e) {
-    alert(`Import failed: ${e.message}`);
+    await Modal.alert(`Import failed: ${e.message}`);
   }
 }
 
-function doReset() {
-  if (!confirm('Reset your save? This cannot be undone.')) return;
-  if (!confirm('Are you really sure? All progress will be lost.')) return;
+async function doReset() {
+  if (!await Modal.confirm('Reset your save? This cannot be undone.')) return;
+  if (!await Modal.confirm('Are you really sure? All progress will be lost.')) return;
   resetGame();
 }
 
@@ -88,10 +92,46 @@ const updateRateLabel = computed(() =>
   t('ui_update_rate', formatInt(player.options.updateRate))
 );
 
-watch(() => player.options.updateRate, () => {
+watch(() => player.options.updateRate, value => {
   GameLoop.stop();
   GameLoop.start();
+  if (value === 200) SecretAchievement(31).unlock();
 });
+
+// --- Theme ---
+
+const THEMES = ['light', 'dark', 'amoled', 'lightInverted', 'darkInverted'];
+
+const themeLabel = computed(() => {
+  return player.options.theme;
+});
+
+function cycleTheme() {
+  const i = THEMES.indexOf(player.options.theme);
+  player.options.theme = THEMES[(i + 1) % THEMES.length];
+}
+
+const ORIENTATION_MODES = ['system', 'portrait', 'landscape'];
+
+const orientationLabel = computed(() => {
+  const modes = ta('orientations');
+  const i = ORIENTATION_MODES.indexOf(player.options.orientation);
+  return `${t("orientation")}：\n${modes[i >= 0 ? i : 0]}`;
+});
+
+async function cycleOrientation() {
+  const current = player.options.orientation;
+  const nextIndex = (ORIENTATION_MODES.indexOf(current) + 1) % ORIENTATION_MODES.length;
+  const nextMode = ORIENTATION_MODES[nextIndex];
+  
+  player.options.orientation = nextMode;
+  
+  if (nextMode === 'system') {
+    await unlockOrientation();
+  } else {
+    await lockOrientation(nextMode);
+  }
+}
 </script>
 
 <template>
@@ -104,8 +144,18 @@ watch(() => player.options.updateRate, () => {
         :options="languageOptions"
       />
       <OptionCard
+        :label="themeLabel"
+        @click="cycleTheme"
+      />
+      <OptionCard
         :label="bottomNavSymbolsLabel"
         @click="cycleBottomNavSymbols"
+      />
+    </div>
+    <div class="options__grid">
+      <OptionCard
+        :label="orientationLabel"
+        @click="cycleOrientation"
       />
     </div>
     <h2 class="options__title">{{ t("options_save_and_load") }}</h2>
@@ -121,17 +171,11 @@ watch(() => player.options.updateRate, () => {
       <OptionCard
         :label="t('reset_current_save')"
         @click="doReset"
-        bad
       />
     </div>
 
     <h2 class="options__title">{{ t("options_other") }}</h2>
-    <div class="options__grid">
-      <OptionCard
-        :label="offlineProgressLabel"
-        @click="cycleOfflineProgress"
-        :bad="player.options.offlineProgress === 'disable'"
-      />
+    <div class="options__grid--two">
       <OptionSlider
         :label="offlineTicksLabel"
         v-model="player.options.offlineTicks"
@@ -143,6 +187,13 @@ watch(() => player.options.updateRate, () => {
         :min="50"
         :max="200"
         :step="10"
+      />
+    </div>
+    <div class="options__grid">
+      <OptionCard
+        :label="offlineProgressLabel"
+        @click="cycleOfflineProgress"
+        :bad="player.options.offlineProgress === 'disable'"
       />
     </div>
   </div>
@@ -167,5 +218,13 @@ watch(() => player.options.updateRate, () => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
+  margin: 1rem 0 0.5rem;
+}
+
+.options__grid--two {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin: 0.5rem 0;
 }
 </style>

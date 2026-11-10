@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { t, tp } from "@/i18n";
 import { offlineModal, offlineController, dismissOfflineModal } from "./state";
 import { formatTimeLong } from "@/core/time/timespan";
+import { format } from "@/core/format";
 
 const visible = computed(() => offlineModal.value !== null);
 const phase = computed(() => offlineModal.value?.phase);
@@ -19,7 +20,7 @@ const progressValue = computed(() => {
 const elapsedStr = computed(() => {
   const m = offlineModal.value;
   if (m?.phase !== "progress") return "00:00";
-  const s = Math.floor((Date.now() - m.startedAt) / 1000);
+  const s = Math.floor(m.seconds * m.doneTicks / m.totalTicks);
   return `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 });
 
@@ -33,7 +34,7 @@ const totalStr = computed(() => {
 const progressText = computed(() => {
   const m = offlineModal.value;
   if (m?.phase !== "progress") return "";
-  return `${tp("ticks_done", m.doneTicks, m.doneTicks, m.totalTicks)}`;
+  return `${tp("ticks_done", m.doneTicks, formatInt(m.doneTicks), formatInt(m.totalTicks))}`;
 });
 
 function onScrimClick() {

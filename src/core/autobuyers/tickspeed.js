@@ -71,6 +71,6 @@ export class TickspeedAutobuyerState extends UpgradeableAutobuyerState {
 
   toggleMode() {
     if (!this.canBeUpgraded) return;
-    super.toggleMode();
+    this.mode = this.mode === "max" ? "single" : "max";
   }
 }

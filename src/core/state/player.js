@@ -39,7 +39,7 @@ export function createInitialPlayer() {
         isBought: false,
         isActive: true,
         lastTick: 0,
-        mode: "max",
+        mode: "single",
         interval: 500,
         cost: 1,
       },

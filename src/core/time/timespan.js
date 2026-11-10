@@ -44,17 +44,17 @@ export function formatTime(ms) {
 export function formatTimeLong(ms) {
   const years = Math.floor(ms / 31536e6);
   if (years > 1e6) return `${format(years)} ${t("year_short")}`;
-  const days = formatInt(Math.floor(ms / 864e5) % 365);
-  const hours = formatInt(Math.floor(ms / 36e5) % 24);
-  const minutes = formatInt(Math.floor(ms / 6e4) % 60);
-  const seconds = formatInt(Math.floor(ms / 1000) % 60);
+  const days = Math.floor(ms / 864e5) % 365;
+  const hours = Math.floor(ms / 36e5) % 24;
+  const minutes = Math.floor(ms / 6e4) % 60;
+  const seconds = Math.floor(ms / 1000) % 60;
 
   const parts = [];
-  if (years) parts.push(`${years} ${t("year_short")}`);
-  if (days) parts.push(`${days} ${t("day_short")}`);
-  if (hours) parts.push(`${hours} ${t("hour_short")}`);
-  if (minutes) parts.push(`${minutes} ${t("minute_short")}`);
-  if (seconds) parts.push(`${seconds} ${t("second_short")}`);
+  if (years) parts.push(`${formatInt(years)} ${t("year_short")}`);
+  if (days) parts.push(`${formatInt(days)} ${t("day_short")}`);
+  if (hours) parts.push(`${formatInt(hours)} ${t("hour_short")}`);
+  if (minutes) parts.push(`${formatInt(minutes)} ${t("minute_short")}`);
+  if (seconds) parts.push(`${formatInt(seconds)} ${t("second_short")}`);
   if (parts.length === 0) return `0 ${t("second_short")}`;
   if (parts.length === 1) return parts[0];
   const sep = t("time_unit_separator");

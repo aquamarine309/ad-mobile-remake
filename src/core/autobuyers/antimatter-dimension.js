@@ -72,7 +72,7 @@ export class AntimatterDimensionAutobuyerState extends UpgradeableAutobuyerState
 
   get bulk() {
     return this.hasUnlimitedBulk
-      ? Decimal.dLayerSafeMax
+      ? Number.MAX_VALUE
       : Math.min(this.data.bulk, this.bulkCap);
   }
 

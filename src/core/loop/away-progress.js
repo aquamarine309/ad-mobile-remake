@@ -30,7 +30,7 @@ export const AWAY_PROGRESS_FIELDS = [
   {
     key: "infinityPoints",
     labelKey: "infinity_points_increased_from_X_to_Y",
-    colorVar: "--color-away-infinity-points",
+    colorVar: "--color-away-ip",
     get: (p) => p.infinity.points,
     format: (v) => format(v, 2),
   },

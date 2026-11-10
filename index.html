@@ -13,7 +13,9 @@
       window.errorMessages = [];
       window.addEventListener("error", function(e) {
         const errorMessage = `${e.message}\n(at: ${e.filename}:${e.lineno}:${e.colno})`;
-        setTimeout(() => alert(errorMessage), 1000);
+        if (location.href.includes("localhost") && !window.ad) {
+          setTimeout(() => alert(errorMessage), 1000);
+        }
         window.errorMessages.push(errorMessage);
       });
     </script>

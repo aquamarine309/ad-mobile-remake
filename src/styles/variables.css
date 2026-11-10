@@ -114,6 +114,16 @@
   --color-away-antimatter: #b82b3f;
   --color-away-dimboosts: #b43c38;
   --color-away-galaxies: #af4d31;
+  --color-away-ip: #a66f23;
+  --color-away-infinities: #ba5d1e;
+  --color-away-replicanti: #0389d4;
+  --color-away-replicanti-galaxies: #4399b4;
+  --color-away-ep: #773ab7;
+  --color-away-eternities: #a01ca1;
+  --color-away-dt: #74ad10;
+  --color-away-rm: #1bc01e;
+  --color-away-realities: #3ba01e;
+  --color-away-relic-shards: #d13737;
 
   /* Misc */
   --color-infinity-border: #ff9800;       /* INFINITY_BORDER */
@@ -206,6 +216,21 @@
   --color-modal-scrim: rgba(0, 0, 0, 0.32);
   --color-modal-btn-fg: var(--color-text);
   --color-modal-border: #000;
+  
+  /* Offline report */
+  --color-away-antimatter: #a64650;
+  --color-away-dimboosts: #aa5449;
+  --color-away-galaxies: #ae6342;
+  --color-away-ip: #b67f33;
+  --color-away-infinities: #ca6d2e;
+  --color-away-replicanti: #0399e4;
+  --color-away-replicanti-galaxies: #53a9c4;
+  --color-away-ep: #974ac7;
+  --color-away-eternities: #b02cb1;
+  --color-away-dt: #8ebd10;
+  --color-away-rm: #15a007;
+  --color-away-realities: #358037;
+  --color-away-relic-shards: #d13737;
 
   /* Misc */
   --color-infinity-border: #b67f33;

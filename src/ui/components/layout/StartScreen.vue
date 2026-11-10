@@ -102,8 +102,7 @@ async function handleStart() {
       <div v-if="status === 'loading'" class="status-box loading-box">
         <div class="loading-text">
           {{
-            t("initial_startup_tip") ||
-            "This shouldn't take longer than a second..."
+            t("initial_startup_tip")
           }}
         </div>
       </div>
@@ -114,7 +113,7 @@ async function handleStart() {
 
         <div class="offline-info">
           <div>
-            {{ formatTimeShort(progress.done * 20 * 1000) }} /
+            {{ formatTimeShort(progress.done / progress.total * progress.seconds * 1000) }} /
             {{ formatTimeShort(progress.seconds * 1000) }}
           </div>
           <div>
@@ -194,14 +193,14 @@ async function handleStart() {
 
     <!-- Bottom tips carousel -->
     <div class="start-screen__tips">
-      <button class="tips__arrow" @click="prevTip"></button>
+      <button class="tips__arrow" @click="prevTip"><i class="fas fa-arrow-left" /></button>
       <div class="tips__content">
         <div class="tips__counter">
           {{ currentTipIndex + 1 }} / {{ tips.length }}
         </div>
         <div class="tips__text">{{ currentTip }}</div>
       </div>
-      <button class="tips__arrow" @click="nextTip"></button>
+      <button class="tips__arrow" @click="nextTip"><i class="fas fa-arrow-right" /></button>
     </div>
   </div>
 </template>
